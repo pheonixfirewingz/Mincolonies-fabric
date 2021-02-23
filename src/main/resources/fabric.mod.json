@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "minecolonies",
+  "version": "${version}",
+  "name": "Minecolonies",
+  "description": "this is a fabric recreation of the forge mod Minecolonis",
+  "authors": [
+    "Coder: Phoenixfirewingz",
+    "Coder: OliviaTheVampire",
+    "assets & base code: ldtteam"
+  ],
+  "contributors": [],
+  "contact": {
+    "homepage": "http://phoenixfirewingz.cf/"
+  },
+  "license": "GNU GENERAL PUBLIC LICENSE",
+  "icon": "assets/minecolonies/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "cf.pheonixfirewingz.minecolonies.Minecolonies"
+    ],
+    "client": [
+
+    ],
+    "server": [
+
+    ]
+  },
+  "mixins": [
+    "minecolonies.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.11.1",
+    "fabric": "*"
+  }
+}
