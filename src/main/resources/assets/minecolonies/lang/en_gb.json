@@ -1,5 +1,6 @@
 {
   "itemGroup.minecolonies.minecolonies": "MineColonies",
+
   "item.minecolonies.bread_dough": "Bread Dough",
   "item.minecolonies.cookie_dough": "Cookie Dough",
   "item.minecolonies.cake_batter": "Cake Batter",
@@ -8,5 +9,16 @@
   "item.minecolonies.sugary_bread": "Sweet Bread",
   "item.minecolonies.golden_bread": "Golden Bread",
   "item.minecolonies.chorus_bread": "Chorus Fruit Bread",
+
+  "item.minecolonies.pirate_hat": "Pirate Hat",
+  "item.minecolonies.pirate_top": "Pirate Top",
+  "item.minecolonies.pirate_legs": "Pirate Pants",
+  "item.minecolonies.pirate_boots": "Pirate Boots",
+
+  "item.minecolonies.pirate_cap": "Pirate Cap",
+  "item.minecolonies.pirate_chest": "Pirate Shirt",
+  "item.minecolonies.pirate_leggins": "Pirate Leggings",
+  "item.minecolonies.pirate_shoes": "Pirate Shoes",
+
   "item.minecolonies.septergold": "Builders Wand"
 }

@@ -115,6 +115,13 @@ public class FabricWrapper
 		Registry.register(Registry.ITEM,new ModIdentifier(name), new BlockItem(block, new MineColoniesItemSettings()));
 	}
 
+	public static Block regBlockWithRet(Block block, String name)
+	{
+		Registry.register(Registry.BLOCK,new ModIdentifier(name), block);
+		Registry.register(Registry.ITEM,new ModIdentifier(name), new BlockItem(block, new MineColoniesItemSettings()));
+		return block;
+	}
+
 	public static BlockEntityType<?> regBlockEntity(BlockEntityType<?> type, String name)
 	{
 		return Registry.register(Registry.BLOCK_ENTITY_TYPE, new ModIdentifier(name), type);
@@ -126,6 +133,12 @@ public class FabricWrapper
 	public static void regItem(Item item, String name)
 	{
 		Registry.register(Registry.ITEM,new ModIdentifier(name),item);
+	}
+
+	public static Item regItemWithRet(Item item, String name)
+	{
+		Registry.register(Registry.ITEM,new ModIdentifier(name),item);
+		return item;
 	}
 
 	public static void regItemAsBurnable(Item item,int cook_time)

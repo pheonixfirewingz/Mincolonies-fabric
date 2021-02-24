@@ -28,18 +28,6 @@ public class MinecoloniesItems
 	public static Item compost;
 	public static Item resourceScroll;
 
-	public static Item pirateHelmet_1;
-	public static Item pirateChest_1;
-	public static Item pirateLegs_1;
-	public static Item pirateBoots_1;
-
-	public static Item pirateHelmet_2;
-	public static Item pirateChest_2;
-	public static Item pirateLegs_2;
-	public static Item pirateBoots_2;
-
-	public static Item santaHat;
-
 	public static Item flagBanner;
 	public static Item irongate;
 	public static Item woodgate;
@@ -50,8 +38,12 @@ public class MinecoloniesItems
 	public static Item scrollGuardHelp;
 	public static Item scrollHighLight;
 
+
+	public static Item builders_wand;
+
 	public static void registerItems()
 	{
+		FabricWrapper.regItem(new ArmorItem(pirate, EquipmentSlot.HEAD,new MineColoniesItemSettings()),"santa_hat");
 		FabricWrapper.regItem(new ArmorItem(pirate, EquipmentSlot.HEAD,new MineColoniesItemSettings()),"pirate_hat");
 		FabricWrapper.regItem(new ArmorItem(pirate, EquipmentSlot.HEAD,new MineColoniesItemSettings()),"pirate_cap");
 		FabricWrapper.regItem(new ArmorItem(pirate, EquipmentSlot.CHEST,new MineColoniesItemSettings()),"pirate_chest");
@@ -61,12 +53,12 @@ public class MinecoloniesItems
 		FabricWrapper.regItem(new ArmorItem(pirate, EquipmentSlot.FEET,new MineColoniesItemSettings()),"pirate_shoes");
 		FabricWrapper.regItem(new ModItem(),"bread_dough");
 		FabricWrapper.regItem(new ModItem(),"cake_batter");
-		FabricWrapper.regItem(new Food(0,0),"cookie_dough");
-		FabricWrapper.regItem(new Food(0,0),"raw_pumpkin_pie");
-		FabricWrapper.regItem(new Food(0,0),"milky_bread");
-		FabricWrapper.regItem(new Food(0,0),"sugary_bread");
-		FabricWrapper.regItem(new Food(0,0),"golden_bread");
-		FabricWrapper.regItem(new Food(0,0),"chorus_bread");
-		FabricWrapper.regItem(new BuildWand(),"sceptergold");
+		FabricWrapper.regItem(new Food(1,16F),"cookie_dough");
+		FabricWrapper.regItem(new Food(1,1F),"raw_pumpkin_pie");
+		FabricWrapper.regItem(new Food(2,4F),"milky_bread");
+		FabricWrapper.regItem(new Food(4,5F),"sugary_bread");
+		FabricWrapper.regItem(new Food(5,8F),"golden_bread");
+		FabricWrapper.regItem(new Food(20,-0.6f),"chorus_bread");
+		builders_wand = FabricWrapper.regItemWithRet(new BuildWand(),"sceptergold");
 	}
 }

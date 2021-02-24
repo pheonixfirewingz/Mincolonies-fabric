@@ -21,10 +21,10 @@
       "cf.pheonixfirewingz.minecolonies.Minecolonies"
     ],
     "client": [
-
+      "cf.pheonixfirewingz.minecolonies.client.MinecoloniesClient"
     ],
     "server": [
-
+      "cf.pheonixfirewingz.minecolonies.server.MinecoloniesServer"
     ]
   },
   "mixins": [
