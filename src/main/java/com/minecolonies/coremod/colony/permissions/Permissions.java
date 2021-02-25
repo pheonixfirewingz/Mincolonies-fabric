@@ -11,7 +11,7 @@ import com.minecolonies.coremod.colony.Colony;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.nbt.StringNBT;
 import net.minecraft.network.PacketBuffer;
@@ -293,14 +293,14 @@ public class Permissions implements IPermissions
      *
      * @param compound NBT to read from.
      */
-    public void loadPermissions(@NotNull final CompoundNBT compound)
+    public void loadPermissions(@NotNull final CompoundTag compound)
     {
         players.clear();
         //  Owners
         final ListNBT ownerTagList = compound.getList(TAG_OWNERS, net.minecraftforge.common.util.Constants.NBT.TAG_COMPOUND);
         for (int i = 0; i < ownerTagList.size(); ++i)
         {
-            final CompoundNBT ownerCompound = ownerTagList.getCompound(i);
+            final CompoundTag ownerCompound = ownerTagList.getCompound(i);
             @NotNull final UUID id = UUID.fromString(ownerCompound.getString(TAG_ID));
             String name = "";
             if (ownerCompound.keySet().contains(TAG_NAME))
@@ -329,7 +329,7 @@ public class Permissions implements IPermissions
             final ListNBT permissionsTagList = compound.getList(TAG_PERMISSIONS, net.minecraftforge.common.util.Constants.NBT.TAG_COMPOUND);
             for (int i = 0; i < permissionsTagList.size(); ++i)
             {
-                final CompoundNBT permissionsCompound = permissionsTagList.getCompound(i);
+                final CompoundTag permissionsCompound = permissionsTagList.getCompound(i);
                 final Rank rank = Rank.valueOf(permissionsCompound.getString(TAG_RANK));
 
                 final ListNBT flagsTagList = permissionsCompound.getList(TAG_FLAGS, net.minecraftforge.common.util.Constants.NBT.TAG_STRING);
@@ -469,13 +469,13 @@ public class Permissions implements IPermissions
      *
      * @param compound NBT to write to.
      */
-    public void savePermissions(@NotNull final CompoundNBT compound)
+    public void savePermissions(@NotNull final CompoundTag compound)
     {
         //  Owners
         @NotNull final ListNBT ownerTagList = new ListNBT();
         for (@NotNull final Player player : players.values())
         {
-            @NotNull final CompoundNBT ownersCompound = new CompoundNBT();
+            @NotNull final CompoundTag ownersCompound = new CompoundTag();
             ownersCompound.putString(TAG_ID, player.getID().toString());
             ownersCompound.putString(TAG_NAME, player.getName());
             ownersCompound.putString(TAG_RANK, player.getRank().name());
@@ -487,7 +487,7 @@ public class Permissions implements IPermissions
         @NotNull final ListNBT permissionsTagList = new ListNBT();
         for (@NotNull final Map.Entry<Rank, Integer> entry : permissionMap.entrySet())
         {
-            @NotNull final CompoundNBT permissionsCompound = new CompoundNBT();
+            @NotNull final CompoundTag permissionsCompound = new CompoundTag();
             permissionsCompound.putString(TAG_RANK, entry.getKey().name());
 
             @NotNull final ListNBT flagsTagList = new ListNBT();

@@ -5,7 +5,6 @@ import com.minecolonies.api.colony.buildings.IBuilding;
 import com.minecolonies.api.colony.buildings.registry.IBuildingDataManager;
 import com.minecolonies.api.colony.buildings.views.IBuildingView;
 import com.minecolonies.api.colony.buildings.workerbuildings.ITownHallView;
-import com.minecolonies.api.colony.managers.interfaces.*;
 import com.minecolonies.api.colony.permissions.Action;
 import com.minecolonies.api.colony.permissions.IPermissions;
 import com.minecolonies.api.colony.permissions.Player;
@@ -61,7 +60,7 @@ import static com.minecolonies.coremod.MineColonies.CLOSE_COLONY_CAP;
  * Client side representation of the Colony.
  */
 @SuppressWarnings("PMD.ExcessiveClassLength")
-public final class ColonyView implements IColonyView
+public final class ColonyView
 {
     /**
      * Max allowed CompoundNBT in bytes
@@ -75,11 +74,11 @@ public final class ColonyView implements IColonyView
     @NotNull
     private final PermissionsView                permissions = new PermissionsView();
     @NotNull
-    private final Map<BlockPos, IBuildingView>   buildings   = new HashMap<>();
+    private final Map<BlockPos, BuildingView>   buildings   = new HashMap<>();
     //  Citizenry
     @NotNull
-    private final Map<Integer, ICitizenDataView> citizens    = new HashMap<>();
-    private       Map<Integer, IVisitorViewData> visitors    = new HashMap<>();
+    private final Map<nteger, CitizenDataView> citizens    = new HashMap<>();
+    private       Map<Integer, VisitorViewData> visitors    = new HashMap<>();
     private       String                         name        = "Unknown";
     private       RegistryKey<World>                            dimensionId;
 
@@ -204,7 +203,7 @@ public final class ColonyView implements IColonyView
     /**
      * The research effects of the colony.
      */
-    private final IResearchManager manager = new ResearchManager();
+    private final ResearchManager manager = new ResearchManager();
 
     /**
      * Whether spies are active and highlight enemy positions.
@@ -377,7 +376,7 @@ public final class ColonyView implements IColonyView
      *
      * @return the list of free to interact positions.
      */
-    @Override
+    
     public List<BlockPos> getFreePositions()
     {
         return new ArrayList<>(freePositions);
@@ -388,7 +387,7 @@ public final class ColonyView implements IColonyView
      *
      * @return the list of free to interact blocks.
      */
-    @Override
+    
     public List<Block> getFreeBlocks()
     {
         return new ArrayList<>(freeBlocks);
@@ -399,7 +398,7 @@ public final class ColonyView implements IColonyView
      *
      * @param pos position to add.
      */
-    @Override
+    
     public void addFreePosition(@NotNull final BlockPos pos)
     {
         freePositions.add(pos);
@@ -410,7 +409,7 @@ public final class ColonyView implements IColonyView
      *
      * @param block block to add.
      */
-    @Override
+    
     public void addFreeBlock(@NotNull final Block block)
     {
         freeBlocks.add(block);
@@ -421,7 +420,7 @@ public final class ColonyView implements IColonyView
      *
      * @param pos position to remove.
      */
-    @Override
+    
     public void removeFreePosition(@NotNull final BlockPos pos)
     {
         freePositions.remove(pos);
@@ -432,13 +431,13 @@ public final class ColonyView implements IColonyView
      *
      * @param block state to remove.
      */
-    @Override
+    
     public void removeFreeBlock(@NotNull final Block block)
     {
         freeBlocks.remove(block);
     }
 
-    @Override
+    
     public void setCanBeAutoDeleted(final boolean canBeDeleted)
     {
 
@@ -449,7 +448,7 @@ public final class ColonyView implements IColonyView
      *
      * @return dimension ID of the view.
      */
-    @Override
+    
     public RegistryKey<World> getDimension()
     {
         return dimensionId;
@@ -460,7 +459,7 @@ public final class ColonyView implements IColonyView
      *
      * @return the boolean true or false.
      */
-    @Override
+    
     public boolean isManualHiring()
     {
         return manualHiring;
@@ -471,19 +470,19 @@ public final class ColonyView implements IColonyView
      *
      * @param manualHiring true if manually.
      */
-    @Override
+    
     public void setManualHiring(final boolean manualHiring)
     {
         this.manualHiring = manualHiring;
     }
 
-    @Override
+    
     public CompoundNBT write(final CompoundNBT colonyCompound)
     {
         return new CompoundNBT();
     }
 
-    @Override
+    
     public void read(final CompoundNBT compound)
     {
         //Noop
@@ -494,7 +493,7 @@ public final class ColonyView implements IColonyView
      *
      * @return the boolean true or false.
      */
-    @Override
+    
     public boolean isManualHousing()
     {
         return manualHousing;
@@ -505,19 +504,19 @@ public final class ColonyView implements IColonyView
      *
      * @param manualHousing true if manually.
      */
-    @Override
+    
     public void setManualHousing(final boolean manualHousing)
     {
         this.manualHousing = manualHousing;
     }
 
-    @Override
+    
     public void addWayPoint(final BlockPos pos, final BlockState newWayPointState)
     {
 
     }
 
-    @Override
+    
     public boolean isValidAttackingGuard(final AbstractEntityCitizen entity)
     {
         return false;
@@ -528,7 +527,7 @@ public final class ColonyView implements IColonyView
      *
      * @return the boolean true or false.
      */
-    @Override
+    
     public boolean canMoveIn()
     {
         return moveIn;
@@ -540,42 +539,42 @@ public final class ColonyView implements IColonyView
      * @param amount amount to use
      * @return true if used up.
      */
-    @Override
+    
     public boolean useAdditionalChildTime(final int amount)
     {
         return false;
     }
 
-    @Override
+    
     public void updateHasChilds()
     {
     }
 
-    @Override
+    
     public void addLoadedChunk(final long chunkPos)
     {
 
     }
 
-    @Override
+    
     public void removeLoadedChunk(final long chunkPos)
     {
 
     }
 
-    @Override
+    
     public int getLoadedChunkCount()
     {
         return 0;
     }
 
-    @Override
+    
     public ColonyState getState()
     {
         return null;
     }
 
-    @Override
+    
     public boolean isActive()
     {
         return true;
@@ -586,7 +585,7 @@ public final class ColonyView implements IColonyView
      *
      * @param newMoveIn true if citizens can move in.
      */
-    @Override
+    
     public void setMoveIn(final boolean newMoveIn) { this.moveIn = newMoveIn; }
 
     /**
@@ -594,7 +593,7 @@ public final class ColonyView implements IColonyView
      *
      * @return {@link BuildingTownHall.View} of the colony.
      */
-    @Override
+    
     @Nullable
     public ITownHallView getTownHall()
     {
@@ -609,7 +608,7 @@ public final class ColonyView implements IColonyView
      * @param z z-coordinate.
      * @return {@link AbstractBuildingView} of a AbstractBuilding for the given Coordinates/ID, or null.
      */
-    @Override
+    
     public IBuildingView getBuilding(final int x, final int y, final int z)
     {
         return getBuilding(new BlockPos(x, y, z));
@@ -621,7 +620,7 @@ public final class ColonyView implements IColonyView
      * @param buildingId Coordinates/ID of the AbstractBuilding.
      * @return {@link AbstractBuildingView} of a AbstractBuilding for the given Coordinates/ID, or null.
      */
-    @Override
+    
     public IBuildingView getBuilding(final BlockPos buildingId)
     {
         return buildings.get(buildingId);
@@ -632,7 +631,7 @@ public final class ColonyView implements IColonyView
      *
      * @return Map of UUID's and {@link Player}
      */
-    @Override
+    
     @NotNull
     public Map<UUID, Player> getPlayers()
     {
@@ -645,7 +644,7 @@ public final class ColonyView implements IColonyView
      * @param rank   Rank to get the permission.
      * @param action Permission to get.
      */
-    @Override
+    
     public void setPermission(final Rank rank, @NotNull final Action action)
     {
         if (permissions.setPermission(rank, action))
@@ -660,7 +659,7 @@ public final class ColonyView implements IColonyView
      * @param rank   Rank to remove permission from.
      * @param action Action to remove permission of.
      */
-    @Override
+    
     public void removePermission(final Rank rank, @NotNull final Action action)
     {
         if (permissions.removePermission(rank, action))
@@ -675,7 +674,7 @@ public final class ColonyView implements IColonyView
      * @param rank   Rank to toggle permission of.
      * @param action Action to toggle permission of.
      */
-    @Override
+    
     public void togglePermission(final Rank rank, @NotNull final Action action)
     {
         permissions.togglePermission(rank, action);
@@ -687,13 +686,13 @@ public final class ColonyView implements IColonyView
      *
      * @return maximum amount of citizens.
      */
-    @Override
+    
     public int getCitizenCount()
     {
         return citizenCount;
     }
 
-    @Override
+    
     public int getCitizenCountLimit()
     {
         return citizenCountWithEmptyGuardTowers;
@@ -704,7 +703,7 @@ public final class ColonyView implements IColonyView
      *
      * @return a unmodifiable Map of the citizen.
      */
-    @Override
+    
     public Map<Integer, ICitizenDataView> getCitizens()
     {
         return Collections.unmodifiableMap(citizens);
@@ -715,7 +714,7 @@ public final class ColonyView implements IColonyView
      *
      * @return a unmodifiable Collection of the workOrders.
      */
-    @Override
+    
     public Collection<WorkOrderView> getWorkOrders()
     {
         return Collections.unmodifiableCollection(workOrders.values());
@@ -727,7 +726,7 @@ public final class ColonyView implements IColonyView
      * @param id the citizen id.
      * @return CitizenDataView for the citizen.
      */
-    @Override
+    
     public ICitizenDataView getCitizen(final int id)
     {
         if (id > 0)
@@ -747,7 +746,7 @@ public final class ColonyView implements IColonyView
      * @param isNewSubscription Whether this is a new subscription of not.
      * @return null == no response.
      */
-    @Override
+    
     @Nullable
     public IMessage handleColonyViewMessage(@NotNull final PacketBuffer buf, @NotNull final World world, final boolean isNewSubscription)
     {
@@ -850,7 +849,7 @@ public final class ColonyView implements IColonyView
      * @param buf buffer containing permissions.
      * @return null == no response
      */
-    @Override
+    
     @Nullable
     public IMessage handlePermissionsViewMessage(@NotNull final PacketBuffer buf)
     {
@@ -864,7 +863,7 @@ public final class ColonyView implements IColonyView
      * @param buf Network data.
      * @return null == no response.
      */
-    @Override
+    
     @Nullable
     public IMessage handleColonyViewWorkOrderMessage(final PacketBuffer buf)
     {
@@ -889,7 +888,7 @@ public final class ColonyView implements IColonyView
      * @param buf Network data.
      * @return null == no response.
      */
-    @Override
+    
     @Nullable
     public IMessage handleColonyViewCitizensMessage(final int id, final PacketBuffer buf)
     {
@@ -902,7 +901,7 @@ public final class ColonyView implements IColonyView
         return null;
     }
 
-    @Override
+    
     public void handleColonyViewVisitorMessage(final boolean refresh, final Set<IVisitorViewData> visitorViewData)
     {
         if (refresh)
@@ -922,7 +921,7 @@ public final class ColonyView implements IColonyView
      * @param citizen citizen ID.
      * @return null == no response.
      */
-    @Override
+    
     @Nullable
     public IMessage handleColonyViewRemoveCitizenMessage(final int citizen)
     {
@@ -936,7 +935,7 @@ public final class ColonyView implements IColonyView
      * @param buildingId location of the building.
      * @return null == no response.
      */
-    @Override
+    
     @Nullable
     public IMessage handleColonyViewRemoveBuildingMessage(final BlockPos buildingId)
     {
@@ -954,7 +953,7 @@ public final class ColonyView implements IColonyView
      * @param workOrderId id of the workOrder.
      * @return null == no response
      */
-    @Override
+    
     @Nullable
     public IMessage handleColonyViewRemoveWorkOrderMessage(final int workOrderId)
     {
@@ -969,7 +968,7 @@ public final class ColonyView implements IColonyView
      * @param buf        buffer containing ColonyBuilding information.
      * @return null == no response.
      */
-    @Override
+    
     @Nullable
     public IMessage handleColonyBuildingViewMessage(final BlockPos buildingId, @NotNull final PacketBuffer buf)
     {
@@ -1001,7 +1000,7 @@ public final class ColonyView implements IColonyView
      *
      * @param player player username.
      */
-    @Override
+    
     public void addPlayer(final String player)
     {
         Network.getNetwork().sendToServer(new PermissionsMessage.AddPlayer(this, player));
@@ -1012,7 +1011,7 @@ public final class ColonyView implements IColonyView
      *
      * @param player the UUID of the player to remove.
      */
-    @Override
+    
     public void removePlayer(final UUID player)
     {
         Network.getNetwork().sendToServer(new PermissionsMessage.RemovePlayer(this, player));
@@ -1023,19 +1022,19 @@ public final class ColonyView implements IColonyView
      *
      * @return the happiness, a double.
      */
-    @Override
+    
     public double getOverallHappiness()
     {
         return overallHappiness;
     }
 
-    @Override
+    
     public BlockPos getCenter()
     {
         return center;
     }
 
-    @Override
+    
     public String getName()
     {
         return name;
@@ -1046,7 +1045,7 @@ public final class ColonyView implements IColonyView
      *
      * @return the color.
      */
-    @Override
+    
     public TextFormatting getTeamColonyColor()
     {
         return teamColonyColor;
@@ -1057,7 +1056,7 @@ public final class ColonyView implements IColonyView
      *
      * @return the ListNBT of flag (banner) patterns
      */
-    @Override
+    
     public ListNBT getColonyFlag() { return colonyFlag; }
 
     /**
@@ -1065,7 +1064,7 @@ public final class ColonyView implements IColonyView
      *
      * @param name Name of the view.
      */
-    @Override
+    
     public void setName(final String name)
     {
         this.name = name;
@@ -1073,13 +1072,13 @@ public final class ColonyView implements IColonyView
     }
 
     @NotNull
-    @Override
+    
     public IPermissions getPermissions()
     {
         return permissions;
     }
 
-    @Override
+    
     public boolean isCoordInColony(@NotNull final World w, @NotNull final BlockPos pos)
     {
         final Chunk chunk = w.getChunkAt(pos);
@@ -1087,13 +1086,13 @@ public final class ColonyView implements IColonyView
         return cap.getOwningColony() == this.getID();
     }
 
-    @Override
+    
     public long getDistanceSquared(@NotNull final BlockPos pos)
     {
         return BlockPosUtil.getDistanceSquared2D(center, pos);
     }
 
-    @Override
+    
     public boolean hasTownHall()
     {
         return townHall != null;
@@ -1104,44 +1103,44 @@ public final class ColonyView implements IColonyView
      *
      * @return ID of the view.
      */
-    @Override
+    
     public int getID()
     {
         return id;
     }
 
-    @Override
+    
     public boolean hasWarehouse()
     {
         return hasColonyWarehouse;
     }
 
-    @Override
+    
     public boolean isDay()
     {
         return false;
     }
 
-    @Override
+    
     public ScorePlayerTeam getTeam()
     {
         return world.getScoreboard().getTeam(getTeamName());
     }
 
-    @Override
+    
     public int getLastContactInHours()
     {
         return lastContactInHours;
     }
 
-    @Override
+    
     public World getWorld()
     {
         return world;
     }
 
     @NotNull
-    @Override
+    
     public IRequestManager getRequestManager()
     {
         //No request system on the client side.
@@ -1149,7 +1148,7 @@ public final class ColonyView implements IColonyView
         return requestManager;
     }
 
-    @Override
+    
     public void markDirty()
     {
         /*
@@ -1157,20 +1156,20 @@ public final class ColonyView implements IColonyView
          */
     }
 
-    @Override
+    
     public boolean canBeAutoDeleted()
     {
         return false;
     }
 
     @Nullable
-    @Override
+    
     public IRequester getRequesterBuildingForPosition(@NotNull final BlockPos pos)
     {
         return getBuilding(pos);
     }
 
-    @Override
+    
     public void removeVisitingPlayer(final PlayerEntity player)
     {
         /*
@@ -1179,19 +1178,19 @@ public final class ColonyView implements IColonyView
     }
 
     @NotNull
-    @Override
+    
     public List<PlayerEntity> getMessagePlayerEntities()
     {
         return new ArrayList<>();
     }
 
-    @Override
+    
     public void onBuildingUpgradeComplete(@Nullable final IBuilding building, final int level)
     {
 
     }
 
-    @Override
+    
     public void addVisitingPlayer(final PlayerEntity player)
     {
         /*
@@ -1199,38 +1198,38 @@ public final class ColonyView implements IColonyView
          */
     }
 
-    @Override
+    
     public void onWorldLoad(@NotNull final World w)
     {
 
     }
 
-    @Override
+    
     public void onWorldUnload(@NotNull final World w)
     {
 
     }
 
-    @Override
+    
     public void onServerTick(@NotNull final TickEvent.ServerTickEvent event)
     {
 
     }
 
     @NotNull
-    @Override
+    
     public IWorkManager getWorkManager()
     {
         return null;
     }
 
-    @Override
+    
     public void onWorldTick(@NotNull final TickEvent.WorldTickEvent event)
     {
 
     }
 
-    @Override
+    
     public Map<BlockPos, BlockState> getWayPoints()
     {
         return wayPoints;
@@ -1241,7 +1240,7 @@ public final class ColonyView implements IColonyView
      *
      * @return a copy of the list.
      */
-    @Override
+    
     public List<BlockPos> getLastSpawnPoints()
     {
         return new ArrayList<>(lastSpawnPoints);
@@ -1252,67 +1251,67 @@ public final class ColonyView implements IColonyView
      *
      * @return true if so.
      */
-    @Override
+    
     public boolean isPrintingProgress()
     {
         return printProgress;
     }
 
-    @Override
+    
     public boolean isRemote()
     {
         return true;
     }
 
-    @Override
+    
     public CompoundNBT getColonyTag()
     {
         return null;
     }
 
-    @Override
+    
     public boolean isNeedToMourn()
     {
         return false;
     }
 
-    @Override
+    
     public void setNeedToMourn(final boolean needToMourn, final String name)
     {
 
     }
 
-    @Override
+    
     public boolean isMourning()
     {
         return false;
     }
 
-    @Override
+    
     public boolean isColonyUnderAttack()
     {
         return false;
     }
 
-    @Override
+    
     public boolean isValidAttackingPlayer(final PlayerEntity entity)
     {
         return false;
     }
 
-    @Override
+    
     public void addGuardToAttackers(final AbstractEntityCitizen entityCitizen, final PlayerEntity followPlayer)
     {
 
     }
 
-    @Override
+    
     public void setColonyColor(final TextFormatting color)
     {
 
     }
 
-    @Override
+    
     public void setColonyFlag(ListNBT colonyFlag)
     {
         this.colonyFlag = colonyFlag;
@@ -1324,14 +1323,14 @@ public final class ColonyView implements IColonyView
      *
      * @return a list of their views.
      */
-    @Override
+    
     public List<IBuildingView> getBuildings()
     {
         return new ArrayList<>(buildings.values());
     }
 
     @NotNull
-    @Override
+    
     public List<PlayerEntity> getImportantMessageEntityPlayers()
     {
         return new ArrayList<>();
@@ -1342,109 +1341,109 @@ public final class ColonyView implements IColonyView
      *
      * @return the current default style.
      */
-    @Override
+    
     public String getStyle()
     {
         return style;
     }
 
-    @Override
+    
     public void setStyle(final String style)
     {
         // Not needed.
     }
 
-    @Override
+    
     public IBuildingManager getBuildingManager()
     {
         return null;
     }
 
-    @Override
+    
     public ICitizenManager getCitizenManager()
     {
         return null;
     }
 
-    @Override
+    
     public IVisitorManager getVisitorManager()
     {
         return null;
     }
 
-    @Override
+    
     public IRaiderManager getRaiderManager()
     {
         return null;
     }
 
-    @Override
+    
     public IEventManager getEventManager()
     {
         return null;
     }
 
-    @Override
+    
     public IEventDescriptionManager getEventDescriptionManager()
     {
         return null;
     }
 
-    @Override
+    
     public IColonyPackageManager getPackageManager()
     {
         return null;
     }
 
-    @Override
+    
     public IProgressManager getProgressManager()
     {
         return null;
     }
 
-    @Override
+    
     public boolean isRaiding()
     {
         return this.isUnderRaid;
     }
 
-    @Override
+    
     public long getMercenaryUseTime()
     {
         return mercenaryLastUseTime;
     }
 
-    @Override
+    
     public void usedMercenaries()
     {
         mercenaryLastUseTime = world.getGameTime();
     }
 
-    @Override
+    
     public List<CompactColonyReference> getAllies()
     {
         return allies;
     }
 
-    @Override
+    
     public List<CompactColonyReference> getFeuds()
     {
         return feuds;
     }
 
-    @Override
+    
     public IResearchManager getResearchManager()
     {
         return manager;
     }
 
-    @Override
+    
     public boolean areSpiesEnabled()
     {
         return spiesEnabled;
     }
 
-    @Override
+    
     public ICitizenDataView getVisitor(final int citizenId)
     {
         return visitors.get(citizenId);

@@ -1,10 +1,11 @@
 package com.minecolonies.coremod.items;
 
-import com.minecolonies.api.creativetab.ModCreativeTabs;
 import com.minecolonies.api.entity.ModEntities;
+import com.minecolonies.coremod.MinecoloniesEntitys;
+import com.minecolonies.coremod.util.MineColoniesItemSettings;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.projectile.AbstractArrowEntity;
+import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ArrowItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -22,31 +23,16 @@ public class ItemFireArrow extends ArrowItem
      *
      * @param properties the properties.
      */
-    public ItemFireArrow(final Properties properties)
+    public ItemFireArrow()
     {
-        super(properties.group(ModCreativeTabs.MINECOLONIES));
-        setRegistryName("firearrow");
-    }
-
-    @Override
-    public boolean hasCustomEntity(final ItemStack stack)
-    {
-        return true;
+        super(new MineColoniesItemSettings());
     }
 
     @NotNull
     @Override
-    public AbstractArrowEntity createArrow(@NotNull final World worldIn, @NotNull final ItemStack stack, final LivingEntity shooter)
+    public PersistentProjectileEntity createArrow(@NotNull final World worldIn, @NotNull final ItemStack stack, final LivingEntity shooter)
     {
-        AbstractArrowEntity entity = ModEntities.FIREARROW.create(worldIn);
-        entity.setShooter(shooter);
-        return entity;
-    }
-
-    @Nullable
-    @Override
-    public Entity createEntity(final World world, final Entity location, final ItemStack itemstack)
-    {
-        return ModEntities.FIREARROW.create(world);
+        //fixme: need entity code
+        return null;
     }
 }

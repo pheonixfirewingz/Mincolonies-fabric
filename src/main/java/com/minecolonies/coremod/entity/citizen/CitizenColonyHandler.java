@@ -6,6 +6,7 @@ import com.minecolonies.api.colony.buildings.IBuildingWorker;
 import com.minecolonies.api.entity.citizen.AbstractEntityCitizen;
 import com.minecolonies.api.entity.citizen.citizenhandlers.ICitizenColonyHandler;
 import com.minecolonies.api.util.Log;
+import com.minecolonies.coremod.colony.*;
 import org.jetbrains.annotations.Nullable;
 
 import static com.minecolonies.api.entity.citizen.AbstractEntityCitizen.*;
@@ -30,7 +31,7 @@ public class CitizenColonyHandler implements ICitizenColonyHandler
      * The colony reference.
      */
     @Nullable
-    protected IColony colony;
+    protected Colony colony;
 
     /**
      * Whether the entity is registered to the colony yet.
@@ -89,7 +90,7 @@ public class CitizenColonyHandler implements ICitizenColonyHandler
             return;
         }
 
-        final IColony colony = IColonyManager.getInstance().getColonyByWorld(colonyId, citizen.world);
+        final Colony colony = ColonyManager.getInstance().getColonyByWorld(colonyId, citizen.world);
 
         if (colony == null)
         {
@@ -151,7 +152,7 @@ public class CitizenColonyHandler implements ICitizenColonyHandler
      */
     @Override
     @Nullable
-    public IColony getColony()
+    public Colony getColony()
     {
         if (colony == null && !citizen.world.isRemote)
         {

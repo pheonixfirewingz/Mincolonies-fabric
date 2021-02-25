@@ -8,7 +8,7 @@ import com.minecolonies.api.network.PacketUtils;
 import com.minecolonies.api.util.Utils;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.network.PacketBuffer;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -225,7 +225,7 @@ public class PermissionsView implements IPermissions
      *
      * @param buf the buffer.
      */
-    public void deserialize(@NotNull final PacketBuffer buf)
+    public void deserialize(@NotNull final PacketByteBuf buf)
     {
         userRank = Rank.valueOf(buf.readString(32767));
 
