@@ -4,6 +4,7 @@ import com.minecolonies.api.blocks.AbstractBlockHut;
 import com.minecolonies.api.colony.buildings.IBuilding;
 import com.minecolonies.api.colony.buildings.modules.IBuildingModule;
 import com.minecolonies.api.colony.buildings.views.IBuildingView;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.registries.ForgeRegistryEntry;
@@ -19,7 +20,7 @@ import java.util.function.Supplier;
  * IBuildingView}. Also links a given {@link IBuilding} to a given {@link AbstractBlockHut}.
  */
 @SuppressWarnings("PMD.MissingStaticMethodInNonInstantiatableClass") //Use the builder to create one.
-public class BuildingEntry extends ForgeRegistryEntry<BuildingEntry>
+public class BuildingEntry
 {
     private final AbstractBlockHut<?> buildingBlock;
 
@@ -36,7 +37,7 @@ public class BuildingEntry extends ForgeRegistryEntry<BuildingEntry>
         private BiFunction<IColony, BlockPos, IBuilding>                   buildingProducer;
         private Supplier<BiFunction<IColonyView, BlockPos, IBuildingView>> buildingViewProducer;
         private final List<Supplier<IBuildingModule>>                            buildingModules = new ArrayList<>();
-        private ResourceLocation                                           registryName;
+        private Identifier registryName;
 
         /**
          * Sets the block that represents this building.
@@ -80,7 +81,7 @@ public class BuildingEntry extends ForgeRegistryEntry<BuildingEntry>
          * @param registryName The name for the registry entry.
          * @return The builder.
          */
-        public Builder setRegistryName(final ResourceLocation registryName)
+        public Builder setRegistryName(final Identifier registryName)
         {
             this.registryName = registryName;
             return this;

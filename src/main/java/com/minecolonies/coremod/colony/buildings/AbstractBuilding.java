@@ -62,6 +62,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.text.Text;
 import net.minecraft.tileentity.ChestTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Tuple;
@@ -1959,9 +1960,8 @@ public abstract class AbstractBuilding extends AbstractBuildingContainer
         markDirty();
     }
 
-    @NotNull
     @Override
-    public IFormattableTextComponent getRequesterDisplayName(@NotNull final IRequestManager manager, @NotNull final IRequest<?> request)
+    public @NotNull Text getRequesterDisplayName(@NotNull final IRequestManager manager, @NotNull final IRequest<?> request)
     {
         if (!getCitizensByRequest().containsKey(request.getId()))
         {

@@ -2,7 +2,6 @@ package com.minecolonies.coremod.colony.buildings.views;
 
 import com.google.common.collect.ImmutableCollection;
 import com.google.common.collect.ImmutableList;
-import com.ldtteam.blockout.views.Window;
 import com.minecolonies.api.colony.ICitizenDataView;
 import com.minecolonies.api.colony.buildings.views.IBuildingView;
 import com.minecolonies.api.colony.requestsystem.StandardFactoryController;
@@ -18,14 +17,13 @@ import com.minecolonies.api.util.constant.TypeConstants;
 import com.minecolonies.coremod.Network;
 import com.minecolonies.coremod.network.messages.server.colony.OpenInventoryMessage;
 import com.minecolonies.coremod.network.messages.server.colony.building.HutRenameMessage;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.PacketBuffer;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.IFormattableTextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.function.Predicate;
@@ -337,11 +335,12 @@ public abstract class AbstractBuildingView implements IBuildingView
         }
         else
         {
-            @Nullable final Window window = getWindow();
+            //TODO
+            /*@Nullable final Window window = getWindow();
             if (window != null)
             {
                 window.open();
-            }
+            }*/
         }
     }
 
@@ -350,20 +349,21 @@ public abstract class AbstractBuildingView implements IBuildingView
      *
      * @return BlockOut window.
      */
-    @Override
+    //TODO
+    /*@Override
     @Nullable
     public Window getWindow()
     {
         return null;
-    }
+    }*/
 
     /**
-     * Read this view from a {@link PacketBuffer}.
+     * Read this view from a {@link PacketByteBuf}.
      *
      * @param buf The buffer to read this view from.
      */
     @Override
-    public void deserialize(@NotNull final PacketBuffer buf)
+    public void deserialize(@NotNull final PacketByteBuf buf)
     {
         buildingLevel = buf.readInt();
         buildingMaxLevel = buf.readInt();
@@ -381,7 +381,7 @@ public abstract class AbstractBuildingView implements IBuildingView
         final int resolverSize = buf.readInt();
         for (int i = 0; i < resolverSize; i++)
         {
-            final CompoundNBT compound = buf.readCompoundTag();
+            final CompoundTag compound = buf.readCompoundTag();
             if (compound != null)
             {
                 list.add(StandardFactoryController.getInstance().deserialize(compound));
@@ -389,7 +389,7 @@ public abstract class AbstractBuildingView implements IBuildingView
         }
 
         resolvers = ImmutableList.copyOf(list);
-        final CompoundNBT compound = buf.readCompoundTag();
+        final CompoundTag compound = buf.readCompoundTag();
         if (compound != null)
         {
             requesterId = StandardFactoryController.getInstance().deserialize(compound);
@@ -432,7 +432,7 @@ public abstract class AbstractBuildingView implements IBuildingView
         return reachedLimit;
     }
 
-    private void loadRequestSystemFromNBT(final CompoundNBT compound)
+    private void loadRequestSystemFromNBT(final CompoundTag compound)
     {
         this.rsDataStoreToken = StandardFactoryController.getInstance().deserialize(compound.getCompound(TAG_RS_BUILDING_DATASTORE));
     }
@@ -553,29 +553,28 @@ public abstract class AbstractBuildingView implements IBuildingView
         }
     }
 
-    @NotNull
     @Override
-    public IFormattableTextComponent getRequesterDisplayName(@NotNull final IRequestManager manager, @NotNull final IRequest<?> request)
+    public @NotNull Text getRequesterDisplayName(@NotNull final IRequestManager manager, @NotNull final IRequest<?> request)
     {
         try
         {
             if (getColony() == null || !getCitizensByRequest().containsKey(request.getId()))
             {
-                return new TranslationTextComponent(this.getCustomName().isEmpty() ? this.getSchematicName() : this.getCustomName());
+                return new TranslatableText(this.getCustomName().isEmpty() ? this.getSchematicName() : this.getCustomName());
             }
 
             final int citizenId = getCitizensByRequest().get(request.getId());
             if (citizenId == -1 || getColony().getCitizen(citizenId) == null)
             {
-                return new TranslationTextComponent(this.getCustomName().isEmpty() ? this.getSchematicName() : this.getCustomName());
+                return new TranslatableText(this.getCustomName().isEmpty() ? this.getSchematicName() : this.getCustomName());
             }
 
-            return new StringTextComponent(getColony().getCitizen(getCitizensByRequest().get(request.getId())).getName());
+            return new LiteralText(getColony().getCitizen(getCitizensByRequest().get(request.getId())).getName());
         }
         catch (final Exception ex)
         {
             Log.getLogger().warn(ex);
-            return new StringTextComponent("");
+            return new LiteralText("");
         }
     }
 

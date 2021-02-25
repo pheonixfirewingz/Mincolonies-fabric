@@ -1,10 +1,10 @@
 package com.minecolonies.api.advancements;
 
 import com.google.common.collect.Maps;
-import net.minecraft.advancement.*;
-import net.minecraft.advancement.criterion.*;
-import net.minecraft.client.sound.*;
-import net.minecraft.util.*;
+import net.minecraft.advancement.PlayerAdvancementTracker;
+import net.minecraft.advancement.criterion.Criterion;
+import net.minecraft.advancement.criterion.CriterionConditions;
+import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -47,30 +47,33 @@ public abstract class AbstractCriterionTrigger<T extends CriterionListeners<U>, 
     }
 
     @Override
-    public void addListener(@NotNull PlayerAdvancementTracker playerAdvancements, @NotNull SoundListener<U> listener)
-    {
-        T listeners = this.listeners.get(playerAdvancements);
+    public void beginTrackingCondition(PlayerAdvancementTracker manager, ConditionsContainer<U> conditions) {
+        T listeners = this.listeners.get(manager);
         if (listeners == null)
         {
-            listeners = createNew.apply(playerAdvancements);
-            this.listeners.put(playerAdvancements, listeners);
+            listeners = createNew.apply(manager);
+            this.listeners.put(manager, listeners);
         }
-        listeners.add(listener);
+        listeners.add(conditions);
     }
 
     @Override
-    public void removeListener(@NotNull PlayerAdvancementTracker playerAdvancements, @NotNull SoundListener<U> listener)
-    {
-        final T listeners = this.listeners.get(playerAdvancements);
+    public void endTrackingCondition(PlayerAdvancementTracker manager, ConditionsContainer<U> conditions) {
+        final T listeners = this.listeners.get(manager);
 
         if (listeners != null)
         {
-            listeners.remove(listener);
+            listeners.remove(conditions);
             if (listeners.isEmpty())
             {
-                this.listeners.remove(playerAdvancements);
+                this.listeners.remove(manager);
             }
         }
+    }
+
+    @Override
+    public void endTracking(PlayerAdvancementTracker tracker) {
+        this.listeners.remove(tracker);
     }
 
     @Nullable
@@ -79,9 +82,4 @@ public abstract class AbstractCriterionTrigger<T extends CriterionListeners<U>, 
         return this.listeners.get(playerAdvancements);
     }
 
-    @Override
-    public void removeAllListeners(@NotNull PlayerAdvancementTracker playerAdvancements)
-    {
-        this.listeners.remove(playerAdvancements);
-    }
 }

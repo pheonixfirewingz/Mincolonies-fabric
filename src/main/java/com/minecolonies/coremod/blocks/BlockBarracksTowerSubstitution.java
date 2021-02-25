@@ -3,17 +3,15 @@ package com.minecolonies.coremod.blocks;
 import com.minecolonies.api.blocks.AbstractBlockMinecolonies;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.HorizontalBlock;
-import net.minecraft.block.material.Material;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.state.DirectionProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.Rotation;
+import net.minecraft.block.HorizontalFacingBlock;
+import net.minecraft.block.Material;
+import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.state.StateManager;
+import net.minecraft.state.property.DirectionProperty;
+import net.minecraft.util.BlockMirror;
+import net.minecraft.util.BlockRotation;
+import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nullable;
 
 import static com.minecolonies.api.util.constant.Suppression.DEPRECATION;
 
@@ -23,7 +21,7 @@ public class BlockBarracksTowerSubstitution extends AbstractBlockMinecolonies<Bl
     /**
      * Our Substitution bock's Facing.
      */
-    public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
+    public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
 
     /**
      * The hardness this block has.
@@ -43,10 +41,8 @@ public class BlockBarracksTowerSubstitution extends AbstractBlockMinecolonies<Bl
     /**
      * Constructor for the Substitution block. sets the creative tab, as well as the resistance and the hardness.
      */
-    public BlockBarracksTowerSubstitution()
-    {
-        super(Properties.create(Material.WOOD).hardnessAndResistance(BLOCK_HARDNESS, RESISTANCE));
-        setRegistryName(BLOCK_NAME);
+    public BlockBarracksTowerSubstitution() {
+        super(Settings.of(Material.WOOD).strength(BLOCK_HARDNESS, RESISTANCE));
         this.setDefaultState(this.getDefaultState().with(FACING, Direction.NORTH));
     }
 
@@ -59,7 +55,7 @@ public class BlockBarracksTowerSubstitution extends AbstractBlockMinecolonies<Bl
     @NotNull
     @Override
     @Deprecated
-    public BlockState rotate(@NotNull final BlockState state, final Rotation rot)
+    public BlockState rotate(@NotNull final BlockState state, final BlockRotation rot)
     {
         return state.with(FACING, rot.rotate(state.get(FACING)));
     }
@@ -71,21 +67,20 @@ public class BlockBarracksTowerSubstitution extends AbstractBlockMinecolonies<Bl
     @NotNull
     @Override
     @Deprecated
-    public BlockState mirror(@NotNull final BlockState state, final Mirror mirrorIn)
+    public BlockState mirror(@NotNull final BlockState state, final BlockMirror mirrorIn)
     {
-        return state.rotate(mirrorIn.toRotation(state.get(FACING)));
+        return state.rotate(mirrorIn.getRotation(state.get(FACING)));
     }
 
-    @Nullable
     @Override
-    public BlockState getStateForPlacement(final BlockItemUseContext context)
+    public BlockState getPlacementState(final ItemPlacementContext context)
     {
-        @NotNull final Direction direction = (context.getPlayer() == null) ? Direction.NORTH : Direction.fromAngle(context.getPlayer().rotationYaw);
+        @NotNull final Direction direction = (context.getPlayer() == null) ? Direction.NORTH : Direction.fromRotation(context.getPlayer().yaw);
         return this.getDefaultState().with(FACING, direction);
     }
 
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
+    protected void appendProperties(StateManager.Builder<Block, BlockState> builder)
     {
         builder.add(FACING);
     }

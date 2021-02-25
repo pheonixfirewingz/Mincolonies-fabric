@@ -2,11 +2,13 @@ package com.minecolonies.coremod.entity.citizen.citizenhandlers;
 
 import com.minecolonies.api.IMinecoloniesAPI;
 import com.minecolonies.api.colony.buildings.IBuilding;
+import com.minecolonies.api.configuration.ServerConfiguration;
 import com.minecolonies.api.entity.citizen.AbstractEntityCitizen;
 import com.minecolonies.api.entity.citizen.citizenhandlers.ICitizenDiseaseHandler;
 import com.minecolonies.coremod.colony.jobs.AbstractJobGuard;
 import com.minecolonies.coremod.colony.jobs.JobHealer;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.NotNull;
 
@@ -52,9 +54,7 @@ public class CitizenDiseaseHandler implements ICitizenDiseaseHandler
     /**
      * The initial citizen count
      */
-    private static final int initialCitizenCount = IMinecoloniesAPI.getInstance()
-                                                     .getConfig()
-                                                     .getServer().initialCitizenAmount.get();
+    private static final int initialCitizenCount = ServerConfiguration.Gameplay.initialCitizenAmount;
 
     /**
      * Constructor for the experience handler.
@@ -75,7 +75,7 @@ public class CitizenDiseaseHandler implements ICitizenDiseaseHandler
         if (canBecomeSick())
         {
             final int citizenModifier = citizen.getCitizenJobHandler().getColonyJob() == null ? 1 : citizen.getCitizenJobHandler().getColonyJob().getDiseaseModifier();
-            final int configModifier = MineColonies.getConfig().getServer().diseaseModifier.get();
+            final int configModifier = ServerConfiguration.Gameplay.diseaseModifier;
             if (citizen.getRandom().nextInt(configModifier * DISEASE_FACTOR) < citizenModifier)
             {
                 this.disease = IColonyManager.getInstance().getCompatibilityManager().getRandomDisease();
@@ -119,14 +119,14 @@ public class CitizenDiseaseHandler implements ICitizenDiseaseHandler
     }
 
     @Override
-    public void write(final CompoundNBT compound)
+    public void write(final CompoundTag compound)
     {
         compound.putString(TAG_DISEASE, disease);
         compound.putInt(TAG_IMMUNITY, immunityTicks);
     }
 
     @Override
-    public void read(final CompoundNBT compound)
+    public void read(final CompoundTag compound)
     {
         this.disease = compound.getString(TAG_DISEASE);
         this.immunityTicks = compound.getInt(TAG_IMMUNITY);

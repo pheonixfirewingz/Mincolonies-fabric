@@ -13,6 +13,10 @@ group = project.maven_group
 minecraft {
 }
 
+repositories {
+	maven { url "https://maven.shedaniel.me/" }
+}
+
 dependencies {
 	//to change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
@@ -20,6 +24,13 @@ dependencies {
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+
+	modApi("me.shedaniel.cloth:cloth-config:5.0.10") {
+		exclude(group: "net.fabricmc.fabric-api")
+	}
+	modApi("me.sargunvohra.mcmods:autoconfig1u:3.3.1") {
+		exclude(group: "net.fabricmc.fabric-api")
+	}
 }
 
 processResources {

@@ -2,15 +2,13 @@ package com.minecolonies.api.colony.buildings.views;
 
 import com.google.common.collect.ImmutableCollection;
 import com.google.common.collect.ImmutableList;
-import com.ldtteam.blockout.views.Window;
 import com.minecolonies.api.colony.ICitizenDataView;
 import com.minecolonies.api.colony.requestsystem.request.IRequest;
 import com.minecolonies.api.colony.requestsystem.requester.IRequester;
 import com.minecolonies.api.colony.requestsystem.token.IToken;
-import net.minecraft.network.PacketBuffer;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.List;
@@ -154,15 +152,16 @@ public interface IBuildingView extends IRequester
      *
      * @return BlockOut window.
      */
-    @Nullable
-    Window getWindow();
+    //TODO
+//    @Nullable
+//    Window getWindow();
 
     /**
-     * Read this view from a {@link PacketBuffer}.
+     * Read this view from a {@link PacketByteBuf}.
      *
      * @param buf The buffer to read this view from.
      */
-    void deserialize(@NotNull PacketBuffer buf);
+    void deserialize(@NotNull PacketByteBuf buf);
 
     Map<Integer, Collection<IToken<?>>> getOpenRequestsByCitizen();
 

@@ -751,8 +751,8 @@ public abstract class AbstractEntityCitizen extends AbstractCivilianEntity imple
      *
      * @param pose the pose to set.
      */
-    public void updatePose(final Pose pose)
-    {
-        setPose(pose);
-    }
+//    public void updatePose(final EntityPose pose)
+//    {
+//        setPose(pose);
+//    }
 }

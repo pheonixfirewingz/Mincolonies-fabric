@@ -2,10 +2,10 @@ package com.minecolonies.api.colony.buildings.views;
 
 import com.minecolonies.api.IMinecoloniesAPI;
 import net.minecraft.entity.EntityType;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -21,7 +21,7 @@ public class MobEntryView
     /**
      * The ResourceLocation of the mob.
      */
-    private ResourceLocation location;
+    private Identifier location;
 
     /**
      * Whether the guards should attack this mob
@@ -35,7 +35,7 @@ public class MobEntryView
      * @param priority     the mob priority.
      * @param shouldAttack if it should be attacked or not.
      */
-    public MobEntryView(final ResourceLocation location, final Boolean shouldAttack, final Integer priority)
+    public MobEntryView(final Identifier location, final Boolean shouldAttack, final Integer priority)
     {
         this.location = location;
         this.shouldAttack = shouldAttack;
@@ -43,12 +43,12 @@ public class MobEntryView
     }
 
     /**
-     * Writes the Location, Attack, and Priority to a {@link PacketBuffer}.
+     * Writes the Location, Attack, and Priority to a {@link PacketByteBuf}.
      *
      * @param buf   Buf to write to.
      * @param entry Entry to write.
      */
-    public static void writeToByteBuf(@NotNull final PacketBuffer buf, @NotNull final MobEntryView entry)
+    public static void writeToByteBuf(@NotNull final PacketByteBuf buf, @NotNull final MobEntryView entry)
     {
         buf.writeString(entry.getLocation().toString());
         buf.writeBoolean(entry.shouldAttack());
@@ -56,15 +56,15 @@ public class MobEntryView
     }
 
     /**
-     * Reads the Location, Attack, and Priority from a {@link PacketBuffer} to create a MobEntryView
+     * Reads the Location, Attack, and Priority from a {@link PacketByteBuf} to create a MobEntryView
      *
      * @param buf Buf to read from.
      * @return MobEntryView that was created.
      */
     @NotNull
-    public static MobEntryView readFromByteBuf(@NotNull final PacketBuffer buf)
+    public static MobEntryView readFromByteBuf(@NotNull final PacketByteBuf buf)
     {
-        final ResourceLocation location = new ResourceLocation(buf.readString(32767));
+        final Identifier location = new Identifier(buf.readString(32767));
         final Boolean attack = buf.readBoolean();
         final Integer priority = buf.readInt();
 
@@ -78,9 +78,9 @@ public class MobEntryView
      * @param name     Name of the tag.
      * @param entry    the View to write
      */
-    public static void write(@NotNull final CompoundNBT compound, final String name, @NotNull final MobEntryView entry)
+    public static void write(@NotNull final CompoundTag compound, final String name, @NotNull final MobEntryView entry)
     {
-        @NotNull final CompoundNBT coordsCompound = new CompoundNBT();
+        @NotNull final CompoundTag coordsCompound = new CompoundTag();
         coordsCompound.putString("location", entry.getLocation().toString());
         coordsCompound.putBoolean("attack", entry.shouldAttack());
         coordsCompound.putInt("priority", entry.getPriority());
@@ -95,10 +95,10 @@ public class MobEntryView
      * @return The new MobEntryView
      */
     @NotNull
-    public static MobEntryView read(@NotNull final CompoundNBT compound, final String name)
+    public static MobEntryView read(@NotNull final CompoundTag compound, final String name)
     {
-        final CompoundNBT entryCompound = compound.getCompound(name);
-        final ResourceLocation location = new ResourceLocation(entryCompound.getString("location"));
+        final CompoundTag entryCompound = compound.getCompound(name);
+        final Identifier location = new Identifier(entryCompound.getString("location"));
         final Boolean attack = entryCompound.getBoolean("attack");
         final Integer priority = entryCompound.getInt("priority");
         return new MobEntryView(location, attack, priority);
@@ -129,7 +129,7 @@ public class MobEntryView
      *
      * @return the priority.
      */
-    public ResourceLocation getLocation()
+    public Identifier getLocation()
     {
         return location;
     }
@@ -139,7 +139,7 @@ public class MobEntryView
      *
      * @param location the new location attribute.
      */
-    public void setLocation(final ResourceLocation location)
+    public void setLocation(final Identifier location)
     {
         this.location = location;
     }
@@ -171,15 +171,15 @@ public class MobEntryView
      */
     public String getName()
     {
-        if (IMinecoloniesAPI.getInstance().getConfig().getServer().enableInDevelopmentFeatures.get())
+        if (IMinecoloniesAPI.getInstance().getConfig().getServer().enableInDevelopmentFeatures)
         {
-            return String.format("%s:%d", ForgeRegistries.ENTITIES.getValue(this.location).getTranslationKey(), this.priority);
+            return String.format("%s:%d", Registry.ENTITY_TYPE.get(this.location).getTranslationKey(), this.priority);
         }
-        return ForgeRegistries.ENTITIES.getValue(this.location).getName().getString();
+        return Registry.ENTITY_TYPE.get(this.location).getName().getString();
     }
 
     public EntityType<?> getEntityEntry()
     {
-        return ForgeRegistries.ENTITIES.getValue(this.location);
+        return Registry.ENTITY_TYPE.get(this.location);
     }
 }

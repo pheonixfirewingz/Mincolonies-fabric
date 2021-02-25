@@ -11,13 +11,13 @@ import com.minecolonies.api.colony.interactionhandling.registry.IInteractionResp
 import com.minecolonies.api.colony.interactionhandling.registry.InteractionResponseHandlerEntry;
 import com.minecolonies.api.colony.jobs.registry.IJobDataManager;
 import com.minecolonies.api.colony.jobs.registry.JobEntry;
-import com.minecolonies.api.compatibility.IFurnaceRecipes;
 import com.minecolonies.api.configuration.Configuration;
 import com.minecolonies.api.crafting.registry.RecipeTypeEntry;
 import com.minecolonies.api.entity.ai.registry.IMobAIRegistry;
 import com.minecolonies.api.entity.pathfinding.registry.IPathNavigateRegistry;
 import com.minecolonies.api.research.IGlobalResearchTree;
-import net.minecraftforge.registries.IForgeRegistry;
+import com.minecolonies.coremod.util.FurnaceRecipes;
+import net.minecraft.util.registry.Registry;
 
 public interface IMinecoloniesAPI
 {
@@ -37,31 +37,31 @@ public interface IMinecoloniesAPI
 
     IBuildingDataManager getBuildingDataManager();
 
-    IForgeRegistry<BuildingEntry> getBuildingRegistry();
+    Registry<BuildingEntry> getBuildingRegistry();
 
     IJobDataManager getJobDataManager();
 
-    IForgeRegistry<JobEntry> getJobRegistry();
+    Registry<JobEntry> getJobRegistry();
 
-    IForgeRegistry<InteractionResponseHandlerEntry> getInteractionResponseHandlerRegistry();
+    Registry<InteractionResponseHandlerEntry> getInteractionResponseHandlerRegistry();
 
     IGuardTypeDataManager getGuardTypeDataManager();
 
-    IForgeRegistry<GuardType> getGuardTypeRegistry();
+    Registry<GuardType> getGuardTypeRegistry();
 
     IModelTypeRegistry getModelTypeRegistry();
 
     Configuration getConfig();
 
-    IFurnaceRecipes getFurnaceRecipes();
+    FurnaceRecipes getFurnaceRecipes();
 
     IInteractionResponseHandlerDataManager getInteractionResponseHandlerDataManager();
 
     IGlobalResearchTree getGlobalResearchTree();
 
-    IForgeRegistry<ColonyEventTypeRegistryEntry> getColonyEventRegistry();
+    Registry<ColonyEventTypeRegistryEntry> getColonyEventRegistry();
 
-    IForgeRegistry<ColonyEventDescriptionTypeRegistryEntry> getColonyEventDescriptionRegistry();
+    Registry<ColonyEventDescriptionTypeRegistryEntry> getColonyEventDescriptionRegistry();
 
-    IForgeRegistry<RecipeTypeEntry> getRecipeTypeRegistry();
+    Registry<RecipeTypeEntry> getRecipeTypeRegistry();
 }

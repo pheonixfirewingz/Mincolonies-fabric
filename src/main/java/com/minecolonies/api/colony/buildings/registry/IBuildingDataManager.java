@@ -5,9 +5,9 @@ import com.minecolonies.api.colony.buildings.IBuilding;
 import com.minecolonies.api.colony.buildings.views.IBuildingView;
 import com.minecolonies.api.tileentities.AbstractTileEntityColonyBuilding;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 
 /**
@@ -22,13 +22,13 @@ public interface IBuildingDataManager
     }
 
     /**
-     * Creates a new entry from a given {@link IColony} and the data passed in as {@link CompoundNBT}.
+     * Creates a new entry from a given {@link IColony} and the data passed in as {@link CompoundTag}.
      *
      * @param colony   The {@link IColony} to which the new {@link IBuilding} belongs.
-     * @param compound The data from which to load new {@link IBuilding} stored in a {@link CompoundNBT}.
-     * @return The {@link IBuilding} with the data loaded from {@link CompoundNBT}.
+     * @param compound The data from which to load new {@link IBuilding} stored in a {@link CompoundTag}.
+     * @return The {@link IBuilding} with the data loaded from {@link CompoundTag}.
      */
-    IBuilding createFrom(final IColony colony, final CompoundNBT compound);
+    IBuilding createFrom(final IColony colony, final CompoundTag compound);
 
     /**
      * Creates a new entry from a given {@link IColony} and the data passed in as {@link AbstractTileEntityColonyBuilding}.
@@ -47,7 +47,7 @@ public interface IBuildingDataManager
      * @param buildingName The name of the {@link IBuilding} as registered to the registry.
      * @return The {@link IBuilding} with the data loaded from {@link AbstractTileEntityColonyBuilding}.
      */
-    IBuilding createFrom(final IColony colony, BlockPos position, final ResourceLocation buildingName);
+    IBuilding createFrom(final IColony colony, BlockPos position, final Identifier buildingName);
 
     /**
      * Creates a new entry from a given {@link IColonyView}, the position as {@link BlockPos} and the data passed in as {@link ByteBuf}.
@@ -57,5 +57,5 @@ public interface IBuildingDataManager
      * @param networkBuffer The data from which to load the new {@link IBuildingView} stored in the networks {@link ByteBuf}.
      * @return The {@link IBuildingView} with the data loaded from the {@link ByteBuf}.
      */
-    IBuildingView createViewFrom(final IColonyView colony, final BlockPos position, final PacketBuffer networkBuffer);
+    IBuildingView createViewFrom(final IColonyView colony, final BlockPos position, final PacketByteBuf networkBuffer);
 }

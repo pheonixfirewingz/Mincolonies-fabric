@@ -4,6 +4,7 @@ import com.minecolonies.api.colony.requestsystem.location.ILocation;
 import com.minecolonies.api.colony.requestsystem.manager.IRequestManager;
 import com.minecolonies.api.colony.requestsystem.request.IRequest;
 import com.minecolonies.api.colony.requestsystem.token.IToken;
+import net.minecraft.text.Text;
 import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.ITextComponent;
 import org.jetbrains.annotations.NotNull;
@@ -47,10 +48,9 @@ public interface IRequester
     /**
      * Gets the name of the requester that requested the request given by the token.
      *
-     * @param request the request for which the name of the requester is retrieved
      * @param manager the request manager.
+     * @param request the request for which the name of the requester is retrieved
      * @return The display name of the requester.
      */
-    @NotNull
-    IFormattableTextComponent getRequesterDisplayName(@NotNull final IRequestManager manager, @NotNull final IRequest<?> request);
+	@NotNull Text getRequesterDisplayName(@NotNull final IRequestManager manager, @NotNull final IRequest<?> request);
 }
