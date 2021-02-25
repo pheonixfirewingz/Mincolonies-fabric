@@ -1,7 +1,6 @@
 package com.minecolonies.coremod.entity.ai.citizen.smelter;
 
 import com.google.common.reflect.TypeToken;
-import com.minecolonies.api.colony.IColonyManager;
 import com.minecolonies.api.colony.interactionhandling.ChatPriority;
 import com.minecolonies.api.colony.requestsystem.requestable.IRequestable;
 import com.minecolonies.api.colony.requestsystem.requestable.StackList;

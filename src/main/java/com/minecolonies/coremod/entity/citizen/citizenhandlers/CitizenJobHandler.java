@@ -2,7 +2,6 @@ package com.minecolonies.coremod.entity.citizen.citizenhandlers;
 
 import com.minecolonies.api.advancements.AdvancementTriggers;
 import com.minecolonies.api.client.render.modeltype.BipedModelType;
-import com.minecolonies.api.colony.IColony;
 import com.minecolonies.api.colony.jobs.IJob;
 import com.minecolonies.api.entity.ai.DesiredActivity;
 import com.minecolonies.api.entity.citizen.AbstractEntityCitizen;

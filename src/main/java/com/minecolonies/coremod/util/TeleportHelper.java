@@ -1,8 +1,6 @@
 package com.minecolonies.coremod.util;
 
 import com.ldtteam.structurize.util.LanguageHandler;
-import com.minecolonies.api.colony.IColony;
-import com.minecolonies.api.colony.IColonyManager;
 import com.minecolonies.api.entity.citizen.AbstractEntityCitizen;
 import com.minecolonies.api.util.BlockPosUtil;
 import com.minecolonies.api.util.EntityUtils;

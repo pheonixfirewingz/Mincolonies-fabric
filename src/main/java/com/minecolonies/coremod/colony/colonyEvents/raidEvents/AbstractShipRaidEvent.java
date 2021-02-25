@@ -4,7 +4,6 @@ import com.ldtteam.structurize.management.Structures;
 import com.ldtteam.structurize.util.LanguageHandler;
 import com.ldtteam.structurize.util.PlacementSettings;
 import com.minecolonies.api.colony.ColonyState;
-import com.minecolonies.api.colony.IColony;
 import com.minecolonies.api.colony.colonyEvents.EventStatus;
 import com.minecolonies.api.colony.colonyEvents.IColonyRaidEvent;
 import com.minecolonies.api.colony.colonyEvents.IColonyStructureSpawnEvent;

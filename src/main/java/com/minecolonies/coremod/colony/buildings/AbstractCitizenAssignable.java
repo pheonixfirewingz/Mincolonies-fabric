@@ -2,7 +2,6 @@ package com.minecolonies.coremod.colony.buildings;
 
 import com.google.common.collect.Lists;
 import com.minecolonies.api.colony.ICitizenData;
-import com.minecolonies.api.colony.IColony;
 import com.minecolonies.api.colony.buildings.ICitizenAssignable;
 import com.minecolonies.api.entity.citizen.AbstractEntityCitizen;
 import com.minecolonies.coremod.colony.CitizenData;

@@ -1,7 +1,5 @@
 package com.minecolonies.api.inventory.container;
 
-import com.minecolonies.api.colony.IColony;
-import com.minecolonies.api.colony.IColonyManager;
 import com.minecolonies.api.colony.buildings.IBuilding;
 import com.minecolonies.api.inventory.ModContainers;
 import com.minecolonies.api.tileentities.TileEntityColonyBuilding;

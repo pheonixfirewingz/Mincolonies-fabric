@@ -2,7 +2,6 @@ package com.minecolonies.coremod.network.messages.server.colony.citizen;
 
 import com.ldtteam.structurize.util.LanguageHandler;
 import com.minecolonies.api.colony.ICitizenData;
-import com.minecolonies.api.colony.IColony;
 import com.minecolonies.coremod.colony.buildings.views.AbstractBuildingView;
 import com.minecolonies.coremod.network.messages.server.AbstractColonyServerMessage;
 import net.minecraft.entity.player.ServerPlayerEntity;

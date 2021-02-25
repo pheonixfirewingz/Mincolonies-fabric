@@ -1,7 +1,5 @@
 package com.minecolonies.coremod.colony.buildings.workerbuildings;
 
-import com.minecolonies.api.colony.IColony;
-import com.minecolonies.api.colony.IColonyView;
 import com.minecolonies.api.colony.buildings.ModBuildings;
 import com.minecolonies.api.colony.buildings.registry.BuildingEntry;
 import com.minecolonies.coremod.colony.buildings.AbstractBuildingGuards;

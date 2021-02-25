@@ -2,7 +2,6 @@ package com.minecolonies.api.entity.mobs;
 
 import com.google.common.collect.Multimap;
 import com.minecolonies.api.IMinecoloniesAPI;
-import com.minecolonies.api.colony.IColony;
 import com.minecolonies.api.entity.mobs.barbarians.IChiefBarbarianEntity;
 import com.minecolonies.api.entity.mobs.barbarians.IMeleeBarbarianEntity;
 import com.minecolonies.api.entity.mobs.egyptians.IPharaoEntity;

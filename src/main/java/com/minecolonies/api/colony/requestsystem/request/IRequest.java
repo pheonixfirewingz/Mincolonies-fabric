@@ -3,7 +3,6 @@ package com.minecolonies.api.colony.requestsystem.request;
 import com.google.common.collect.ImmutableCollection;
 import com.google.common.collect.ImmutableList;
 import com.google.common.reflect.TypeToken;
-import com.minecolonies.api.colony.IColonyView;
 import com.minecolonies.api.colony.requestsystem.manager.AssigningStrategy;
 import com.minecolonies.api.colony.requestsystem.manager.IRequestManager;
 import com.minecolonies.api.colony.requestsystem.requestable.IRequestable;

@@ -1,6 +1,5 @@
 package com.minecolonies.coremod.network.messages.server.colony.building.warehouse;
 
-import com.minecolonies.api.colony.IColony;
 import com.minecolonies.api.colony.buildings.views.IBuildingView;
 import com.minecolonies.api.inventory.api.CombinedItemHandler;
 import com.minecolonies.coremod.colony.buildings.workerbuildings.BuildingWareHouse;

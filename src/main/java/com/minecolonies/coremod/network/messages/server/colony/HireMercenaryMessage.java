@@ -1,6 +1,5 @@
 package com.minecolonies.coremod.network.messages.server.colony;
 
-import com.minecolonies.api.colony.IColony;
 import com.minecolonies.api.colony.permissions.Action;
 import com.minecolonies.coremod.entity.mobs.EntityMercenary;
 import com.minecolonies.coremod.network.messages.server.AbstractColonyServerMessage;

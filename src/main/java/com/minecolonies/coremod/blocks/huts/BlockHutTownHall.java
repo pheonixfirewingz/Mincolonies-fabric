@@ -1,7 +1,6 @@
 package com.minecolonies.coremod.blocks.huts;
 
 import com.minecolonies.api.blocks.AbstractBlockHut;
-import com.minecolonies.api.colony.IColonyManager;
 import com.minecolonies.api.colony.buildings.IBuilding;
 import com.minecolonies.api.colony.buildings.ModBuildings;
 import com.minecolonies.api.colony.buildings.registry.BuildingEntry;

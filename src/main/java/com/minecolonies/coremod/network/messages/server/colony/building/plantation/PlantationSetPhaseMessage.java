@@ -1,6 +1,5 @@
 package com.minecolonies.coremod.network.messages.server.colony.building.plantation;
 
-import com.minecolonies.api.colony.IColony;
 import com.minecolonies.coremod.colony.buildings.workerbuildings.BuildingPlantation;
 import com.minecolonies.coremod.network.messages.server.AbstractBuildingServerMessage;
 import net.minecraft.entity.player.PlayerEntity;

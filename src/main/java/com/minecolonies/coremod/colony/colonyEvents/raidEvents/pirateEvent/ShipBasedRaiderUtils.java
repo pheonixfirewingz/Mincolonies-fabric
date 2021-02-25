@@ -4,7 +4,6 @@ import com.google.common.collect.Lists;
 import com.ldtteam.structures.blueprints.v1.Blueprint;
 import com.ldtteam.structurize.management.Structures;
 import com.ldtteam.structurize.util.PlacementSettings;
-import com.minecolonies.api.colony.IColony;
 import com.minecolonies.api.colony.colonyEvents.IColonyRaidEvent;
 import com.minecolonies.api.util.BlockPosUtil;
 import com.minecolonies.api.util.CreativeBuildingStructureHandler;

@@ -1,6 +1,5 @@
 package com.minecolonies.api.colony.requestsystem.manager;
 
-import com.minecolonies.api.colony.IColony;
 import com.minecolonies.api.colony.requestsystem.data.IDataStoreManager;
 import com.minecolonies.api.colony.requestsystem.factory.IFactoryController;
 import com.minecolonies.api.colony.requestsystem.request.IRequest;

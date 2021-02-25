@@ -1,8 +1,6 @@
 package com.minecolonies.coremod.network.messages.client;
 
 import com.ldtteam.structurize.util.LanguageHandler;
-import com.minecolonies.api.colony.IColony;
-import com.minecolonies.api.colony.IColonyManager;
 import com.minecolonies.api.items.ModItems;
 import com.minecolonies.api.network.IMessage;
 import com.minecolonies.api.tileentities.AbstractTileEntityColonyBuilding;

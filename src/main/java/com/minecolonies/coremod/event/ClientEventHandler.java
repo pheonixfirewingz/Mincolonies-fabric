@@ -12,8 +12,6 @@ import com.ldtteam.structurize.placement.structure.IStructureHandler;
 import com.ldtteam.structurize.util.PlacementSettings;
 import com.ldtteam.structurize.util.RenderUtils;
 import com.minecolonies.api.MinecoloniesAPIProxy;
-import com.minecolonies.api.colony.IColonyManager;
-import com.minecolonies.api.colony.IColonyView;
 import com.minecolonies.api.colony.buildings.views.IBuildingView;
 import com.minecolonies.api.colony.requestsystem.location.ILocation;
 import com.minecolonies.api.items.ModItems;

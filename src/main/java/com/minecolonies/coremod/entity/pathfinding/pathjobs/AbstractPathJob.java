@@ -2,7 +2,6 @@ package com.minecolonies.coremod.entity.pathfinding.pathjobs;
 
 import com.ldtteam.structurize.blocks.decorative.BlockFloatingCarpet;
 import com.minecolonies.api.MinecoloniesAPIProxy;
-import com.minecolonies.api.blocks.AbstractBlockBarrel;
 import com.minecolonies.api.blocks.decorative.AbstractBlockMinecoloniesConstructionTape;
 import com.minecolonies.api.blocks.huts.AbstractBlockMinecoloniesDefault;
 import com.minecolonies.api.entity.pathfinding.PathResult;

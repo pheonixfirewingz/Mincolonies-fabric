@@ -2,7 +2,6 @@ package com.minecolonies.coremod.colony.requestsystem.management.manager;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.reflect.TypeToken;
-import com.minecolonies.api.colony.IColony;
 import com.minecolonies.api.colony.requestsystem.StandardFactoryController;
 import com.minecolonies.api.colony.requestsystem.data.*;
 import com.minecolonies.api.colony.requestsystem.factory.IFactoryController;

@@ -1,7 +1,6 @@
 package com.minecolonies.coremod.entity.ai.citizen.enchanter;
 
 import com.minecolonies.api.colony.ICitizenData;
-import com.minecolonies.api.colony.IColonyManager;
 import com.minecolonies.api.colony.interactionhandling.ChatPriority;
 import com.minecolonies.api.entity.ai.statemachine.AITarget;
 import com.minecolonies.api.entity.ai.statemachine.states.IAIState;

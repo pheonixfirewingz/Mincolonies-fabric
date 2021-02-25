@@ -1,98 +1,68 @@
 package com.minecolonies.coremod.blocks;
 
-import com.minecolonies.api.blocks.AbstractBlockBarrel;
-import com.minecolonies.api.blocks.ModBlocks;
-import com.minecolonies.api.blocks.types.BarrelType;
-import com.minecolonies.coremod.tileentities.TileEntityBarrel;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.material.Material;
+import com.minecolonies.coremod.MinecoloniesBlocks;
+import com.minecolonies.coremod.blocks.types.BarrelType;
+import com.minecolonies.api.tileentities.AbstractTileEntityBarrel;
+import net.minecraft.block.*;
+import net.minecraft.block.entity.*;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.state.StateContainer;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.item.*;
+import net.minecraft.state.*;
+import net.minecraft.state.property.*;
 import net.minecraft.util.*;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.IWorldReader;
-import net.minecraft.world.World;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.util.hit.*;
+import net.minecraft.util.math.*;
+import net.minecraft.util.shape.*;
+import net.minecraft.world.*;
+import org.jetbrains.annotations.*;
 
-import javax.annotation.Nullable;
-
-public class BlockBarrel extends AbstractBlockBarrel<BlockBarrel>
+public class BlockBarrel extends Block implements BlockEntityProvider
 {
     /**
      * The hardness this block has.
      */
     private static final float  BLOCK_HARDNESS = 5F;
     /**
-     * This blocks name.
-     */
-    private static final String BLOCK_NAME     = "barrel_block";
-    /**
      * The resistance this block has.
      */
     private static final float  RESISTANCE     = 1F;
 
+    public static final EnumProperty<BarrelType> VARIANT = EnumProperty.of("variant", BarrelType.class);
+
+    /**
+     * The position it faces.
+     */
+    public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
+
+
     public BlockBarrel()
     {
-        super(Properties.create(Material.WOOD).hardnessAndResistance(BLOCK_HARDNESS, RESISTANCE));
-        this.setDefaultState(this.getDefaultState().with(AbstractBlockBarrel.FACING, Direction.NORTH).with(VARIANT, BarrelType.ZERO));
-        setRegistryName(BLOCK_NAME);
+        super(Settings.of(Material.WOOD).strength(BLOCK_HARDNESS, RESISTANCE));
+        this.setDefaultState(this.getDefaultState().with(FACING, Direction.NORTH).with(VARIANT, BarrelType.ZERO));
     }
 
-    @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
+    @Override protected void appendProperties(StateManager.Builder<Block, BlockState> builder)
     {
-        builder.add(AbstractBlockBarrel.FACING, VARIANT);
+        builder.add(FACING, VARIANT);
     }
 
-    @Nullable
-    @Override
-    public TileEntity createTileEntity(final BlockState state, final IBlockReader world)
+    @Override public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit)
     {
-        return new TileEntityBarrel();
-    }
-
-    @Override
-    public boolean hasTileEntity(final BlockState state)
-    {
-        return true;
-    }
-
-    @NotNull
-    @Override
-    public ActionResultType onBlockActivated(
-      final BlockState state,
-      final World worldIn,
-      final BlockPos pos,
-      final PlayerEntity player,
-      final Hand hand,
-      final BlockRayTraceResult ray)
-    {
-        final ItemStack itemstack = player.inventory.getCurrentItem();
-        final TileEntity te = worldIn.getTileEntity(pos);
-        if (te instanceof TileEntityBarrel && !worldIn.isRemote)
+        final ItemStack itemstack = player.getInventory().getMainHandStack();
+        final BlockEntity te = world.getBlockEntity(pos);
+        //fixme: need title entity
+        /*if (te instanceof TEBarrel && !world.isClient())
         {
-            ((TileEntityBarrel) te).useBarrel(player, itemstack);
-            ((TileEntityBarrel) te).updateBlock(worldIn);
-        }
+            ((TEBarrel) te).useBarrel(player, itemstack);
+            ((TEBarrel) te).updateBlock(world);
+        }*/
 
-        return ActionResultType.SUCCESS;
+        return ActionResult.SUCCESS;
     }
 
-    @NotNull
-    @Override
-    public VoxelShape getShape(final BlockState state, final IBlockReader worldIn, final BlockPos pos, final ISelectionContext context)
+    @Override public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context)
     {
-        return VoxelShapes.create(0, 0, 0, 1, 1.5, 1);
+        return VoxelShapes.cuboid(0D, 0D, 0D, 1D, 1.5D, 1D);
     }
 
     /**
@@ -100,36 +70,63 @@ public class BlockBarrel extends AbstractBlockBarrel<BlockBarrel>
      *
      * @deprecated (Remove this as soon as minecraft offers anything better).
      */
-    @NotNull
-    @Override
-    @Deprecated
-    public BlockState rotate(@NotNull final BlockState state, final Rotation rot)
+    @Override public BlockState rotate(BlockState state, BlockRotation rotation)
     {
-        return state.with(AbstractBlockBarrel.FACING, rot.rotate(state.get(AbstractBlockBarrel.FACING)));
+        return state.with(FACING, rotation.rotate(state.get(FACING)));
     }
 
     /**
      * @deprecated (Remove this as soon as minecraft offers anything better).
      */
-    @NotNull
-    @Override
-    @Deprecated
-    public BlockState mirror(@NotNull final BlockState state, final Mirror mirrorIn)
+    @Override public BlockState mirror(BlockState state, BlockMirror mirror)
     {
-        return state.rotate(mirrorIn.toRotation(state.get(AbstractBlockBarrel.FACING)));
+        return  state.rotate(mirror.getRotation(state.get(FACING)));
     }
 
-    @Nullable
-    @Override
-    public BlockState getStateForPlacement(final BlockItemUseContext context)
+    @Nullable @Override public BlockState getPlacementState(ItemPlacementContext ctx)
     {
-        return super.getStateForPlacement(context).with(AbstractBlockBarrel.FACING, context.getPlacementHorizontalFacing());
+        return super.getPlacementState(ctx).with(FACING, ctx.getPlayerFacing());
     }
 
-    @Override
-    public boolean isValidPosition(final BlockState state, final IWorldReader worldIn, final BlockPos pos)
+    /**
+     * @deprecated (Remove this as soon as minecraft offers anything better).
+     */
+    @Override public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos)
     {
-        return !worldIn.isAirBlock(pos.down())
-                 && worldIn.getBlockState(pos.down()).getBlock() != ModBlocks.blockBarrel;
+        return !world.isAir(pos.down()) && world.getBlockState(pos.down()).getBlock() != MinecoloniesBlocks.barrel_block;
+    }
+
+    public static BlockState changeStateOverFullness(@NotNull final AbstractTileEntityBarrel te, @NotNull final BlockState blockState)
+    {
+        /*
+         * 12.8 -> the number of items needed to go up on a state (having 6 filling states)
+         * So items/12.8 -> meta of the state we should get
+         */
+        BarrelType type = BarrelType.byMetadata((int) Math.round(te.getItems() / 12.8));
+
+        /*
+         * We check if the barrel is marked as empty but it have items inside. If so, means that it
+         * does not have all the items needed to go on TWENTY state, but we need to mark it so the player
+         * knows it have some items inside
+         */
+
+        if(type.equals(BarrelType.ZERO) && te.getItems() > 0)
+        {
+            type = BarrelType.TWENTY;
+        } else if(te.getItems() == AbstractTileEntityBarrel.MAX_ITEMS)
+        {
+            type = BarrelType.WORKING;
+        }
+        if(te.isDone())
+        {
+            type = BarrelType.DONE;
+        }
+
+        return blockState.with(VARIANT, type).with(FACING, blockState.get(FACING));
+    }
+
+    @Nullable @Override public BlockEntity createBlockEntity(BlockPos pos, BlockState state)
+    {
+        return null;
     }
 }

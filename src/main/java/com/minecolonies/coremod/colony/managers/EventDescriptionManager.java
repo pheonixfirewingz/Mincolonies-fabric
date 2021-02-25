@@ -1,7 +1,6 @@
 package com.minecolonies.coremod.colony.managers;
 
 import com.minecolonies.api.MinecoloniesAPIProxy;
-import com.minecolonies.api.colony.IColony;
 import com.minecolonies.api.colony.colonyEvents.descriptions.IColonyEventDescription;
 import com.minecolonies.api.colony.colonyEvents.registry.ColonyEventDescriptionTypeRegistryEntry;
 import com.minecolonies.api.colony.managers.interfaces.IEventDescriptionManager;

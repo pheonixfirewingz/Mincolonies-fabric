@@ -4,8 +4,6 @@ import com.ldtteam.structurize.api.util.ItemStackUtils;
 import com.ldtteam.structurize.placement.handlers.placement.IPlacementHandler;
 import com.ldtteam.structurize.util.BlockUtils;
 import com.ldtteam.structurize.util.PlacementSettings;
-import com.minecolonies.api.colony.IColony;
-import com.minecolonies.api.colony.IColonyManager;
 import com.minecolonies.coremod.colony.buildings.workerbuildings.BuildingWareHouse;
 import net.minecraft.block.AbstractChestBlock;
 import net.minecraft.block.BlockState;

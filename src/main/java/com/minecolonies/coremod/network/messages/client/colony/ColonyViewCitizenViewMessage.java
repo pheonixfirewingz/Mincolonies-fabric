@@ -1,7 +1,6 @@
 package com.minecolonies.coremod.network.messages.client.colony;
 
 import com.minecolonies.api.colony.ICitizenData;
-import com.minecolonies.api.colony.IColonyManager;
 import com.minecolonies.api.network.IMessage;
 import com.minecolonies.coremod.colony.Colony;
 import io.netty.buffer.Unpooled;

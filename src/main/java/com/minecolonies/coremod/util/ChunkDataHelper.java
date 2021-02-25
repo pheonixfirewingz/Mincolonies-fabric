@@ -1,8 +1,6 @@
 package com.minecolonies.coremod.util;
 
 import com.minecolonies.api.colony.IChunkmanagerCapability;
-import com.minecolonies.api.colony.IColony;
-import com.minecolonies.api.colony.IColonyManager;
 import com.minecolonies.api.colony.IColonyTagCapability;
 import com.minecolonies.api.colony.buildings.IBuilding;
 import com.minecolonies.api.util.BlockPosUtil;

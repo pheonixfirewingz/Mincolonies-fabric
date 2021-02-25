@@ -1,6 +1,5 @@
 package com.minecolonies.coremod.colony;
 
-import com.minecolonies.api.colony.IColonyView;
 import com.minecolonies.api.colony.IVisitorViewData;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;

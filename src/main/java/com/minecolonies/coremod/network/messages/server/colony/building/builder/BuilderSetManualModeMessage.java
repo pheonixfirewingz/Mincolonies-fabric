@@ -2,7 +2,6 @@ package com.minecolonies.coremod.network.messages.server.colony.building.builder
 
 import org.jetbrains.annotations.NotNull;
 
-import com.minecolonies.api.colony.IColony;
 import com.minecolonies.coremod.colony.buildings.workerbuildings.BuildingBuilder;
 import com.minecolonies.coremod.network.messages.server.AbstractBuildingServerMessage;
 

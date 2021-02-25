@@ -1,7 +1,5 @@
 package com.minecolonies.coremod.entity.pathfinding;
 
-import com.minecolonies.api.colony.IColony;
-import com.minecolonies.api.colony.IColonyManager;
 import com.minecolonies.api.entity.ai.pathfinding.AbstractWalkToProxy;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;

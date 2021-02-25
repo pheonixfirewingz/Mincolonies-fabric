@@ -3,7 +3,6 @@ package com.minecolonies.coremod.colony.buildings.modules;
 import com.ldtteam.structurize.util.LanguageHandler;
 import com.minecolonies.api.advancements.AdvancementTriggers;
 import com.minecolonies.api.colony.ICitizenData;
-import com.minecolonies.api.colony.IColony;
 import com.minecolonies.api.colony.buildings.IBuilding;
 import com.minecolonies.api.colony.buildings.modules.*;
 import com.minecolonies.api.entity.citizen.AbstractEntityCitizen;

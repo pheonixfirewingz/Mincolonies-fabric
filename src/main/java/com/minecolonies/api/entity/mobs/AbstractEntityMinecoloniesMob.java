@@ -1,8 +1,6 @@
 package com.minecolonies.api.entity.mobs;
 
 import com.minecolonies.api.MinecoloniesAPIProxy;
-import com.minecolonies.api.colony.IColony;
-import com.minecolonies.api.colony.IColonyManager;
 import com.minecolonies.api.colony.colonyEvents.IColonyCampFireRaidEvent;
 import com.minecolonies.api.colony.colonyEvents.IColonyEvent;
 import com.minecolonies.api.enchants.ModEnchants;

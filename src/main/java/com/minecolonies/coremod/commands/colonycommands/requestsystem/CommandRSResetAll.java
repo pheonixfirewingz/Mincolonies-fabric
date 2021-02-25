@@ -1,8 +1,6 @@
 package com.minecolonies.coremod.commands.colonycommands.requestsystem;
 
 import com.ldtteam.structurize.util.LanguageHandler;
-import com.minecolonies.api.colony.IColony;
-import com.minecolonies.api.colony.IColonyManager;
 import com.minecolonies.coremod.commands.commandTypes.IMCOPCommand;
 import com.mojang.brigadier.context.CommandContext;
 import net.minecraft.command.CommandSource;

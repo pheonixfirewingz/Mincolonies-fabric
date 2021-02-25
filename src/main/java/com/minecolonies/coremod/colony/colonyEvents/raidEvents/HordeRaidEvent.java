@@ -2,7 +2,6 @@ package com.minecolonies.coremod.colony.colonyEvents.raidEvents;
 
 import com.ldtteam.structurize.util.LanguageHandler;
 import com.minecolonies.api.colony.ColonyState;
-import com.minecolonies.api.colony.IColony;
 import com.minecolonies.api.colony.colonyEvents.EventStatus;
 import com.minecolonies.api.colony.colonyEvents.IColonyCampFireRaidEvent;
 import com.minecolonies.api.colony.colonyEvents.IColonyEvent;

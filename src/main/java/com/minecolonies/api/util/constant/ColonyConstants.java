@@ -1,6 +1,5 @@
 package com.minecolonies.api.util.constant;
 
-import com.minecolonies.api.colony.IColony;
 import net.minecraft.util.math.*;
 import net.minecraft.world.server.*;
 

@@ -7,8 +7,6 @@ import com.minecolonies.api.colony.buildings.IBuilding;
 import com.minecolonies.api.colony.buildings.views.IBuildingView;
 import com.minecolonies.api.colony.permissions.Player;
 import com.minecolonies.api.colony.permissions.Rank;
-import com.minecolonies.api.compatibility.CompatibilityManager;
-import com.minecolonies.api.compatibility.ICompatibilityManager;
 import com.minecolonies.api.crafting.IRecipeManager;
 import com.minecolonies.api.items.ModTags;
 import com.minecolonies.api.util.ItemStackUtils;
@@ -22,11 +20,9 @@ import com.minecolonies.coremod.util.ChunkDataHelper;
 import com.minecolonies.coremod.util.FurnaceRecipes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.RegistryKey;
+import net.minecraft.server.network.*;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.registry.*;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.server.ServerWorld;
@@ -49,23 +45,18 @@ import static com.minecolonies.coremod.MineColonies.*;
  * Singleton class that links colonies to minecraft.
  */
 @SuppressWarnings("PMD.ExcessiveClassLength")
-public final class ColonyManager implements IColonyManager
+public final class ColonyManager
 {
     /**
      * The list of colony views.
      */
     @NotNull
-    private final Map<RegistryKey<World>, ColonyList<IColonyView>> colonyViews = new HashMap<>();
+    private final Map<RegistryKey<World>, ColonyList<ColonyView>> colonyViews = new HashMap<>();
 
     /**
      * Recipemanager of this server.
      */
     private final IRecipeManager recipeManager = new StandardRecipeManager();
-
-    /**
-     * Creates a new compatibilityManager.
-     */
-    private final ICompatibilityManager compatibilityManager = new CompatibilityManager();
 
     /**
      * Pseudo unique id for the server
@@ -82,7 +73,7 @@ public final class ColonyManager implements IColonyManager
      */
     private boolean loaded = false;
 
-    @Override
+    
     public void createColony(@NotNull final World w, final BlockPos pos, @NotNull final PlayerEntity player, @NotNull final String style)
     {
         final IColonyManagerCapability cap = w.getCapability(COLONY_MANAGER_CAP, null).resolve().orElse(null);
@@ -92,7 +83,7 @@ public final class ColonyManager implements IColonyManager
             return;
         }
 
-        final IColony colony = cap.createColony(w, pos);
+        final Colony colony = cap.createColony(w, pos);
         colony.setStyle(style);
 
         final String colonyName = LanguageHandler.format("com.minecolonies.coremod.gui.townHall.defaultName", player.getName().getString());
@@ -113,13 +104,13 @@ public final class ColonyManager implements IColonyManager
         ChunkDataHelper.claimColonyChunks(colony.getWorld(), true, colony.getID(), colony.getCenter(), colony.getDimension());
     }
 
-    @Override
+    
     public void deleteColonyByWorld(final int id, final boolean canDestroy, final World world)
     {
         deleteColony(getColonyByWorld(id, world), canDestroy);
     }
 
-    @Override
+    
     public void deleteColonyByDimension(final int id, final boolean canDestroy, final RegistryKey<World> dimension)
     {
         deleteColony(getColonyByDimension(id, dimension), canDestroy);
@@ -131,7 +122,7 @@ public final class ColonyManager implements IColonyManager
      * @param iColony    the colony to destroy.
      * @param canDestroy if the building outlines should be destroyed as well.
      */
-    private void deleteColony(@Nullable final IColony iColony, final boolean canDestroy)
+    private void deleteColony(@Nullable final Colony iColony, final boolean canDestroy)
     {
         if (!(iColony instanceof Colony))
         {
@@ -212,7 +203,7 @@ public final class ColonyManager implements IColonyManager
         }
     }
 
-    @Override
+    
     public void removeColonyView(final int id, final RegistryKey<World> dimension)
     {
         if (colonyViews.containsKey(dimension))
@@ -221,9 +212,9 @@ public final class ColonyManager implements IColonyManager
         }
     }
 
-    @Override
+    
     @Nullable
-    public IColony getColonyByWorld(final int id, final World world)
+    public Colony getColonyByWorld(final int id, final World world)
     {
         final IColonyManagerCapability cap = world.getCapability(COLONY_MANAGER_CAP, null).resolve().orElse(null);
         if (cap == null)
@@ -234,9 +225,9 @@ public final class ColonyManager implements IColonyManager
         return cap.getColony(id);
     }
 
-    @Override
+    
     @Nullable
-    public IColony getColonyByDimension(final int id, final RegistryKey<World> registryKey)
+    public Colony getColonyByDimension(final int id, final RegistryKey<World> registryKey)
     {
         final World world = ServerLifecycleHooks.getCurrentServer().getWorld(registryKey);
         if (world == null)
@@ -252,10 +243,10 @@ public final class ColonyManager implements IColonyManager
         return cap.getColony(id);
     }
 
-    @Override
+    
     public IBuilding getBuilding(@NotNull final World w, @NotNull final BlockPos pos)
     {
-        @Nullable final IColony colony = getColonyByPosFromWorld(w, pos);
+        @Nullable final Colony colony = getColonyByPosFromWorld(w, pos);
         if (colony != null)
         {
             final IBuilding building = colony.getBuildingManager().getBuilding(pos);
@@ -266,7 +257,7 @@ public final class ColonyManager implements IColonyManager
         }
 
         //  Fallback - there might be a AbstractBuilding for this block, but it's outside of it's owning colony's radius.
-        for (@NotNull final IColony otherColony : getColonies(w))
+        for (@NotNull final Colony otherColony : getColonies(w))
         {
             final IBuilding building = otherColony.getBuildingManager().getBuilding(pos);
             if (building != null)
@@ -278,8 +269,8 @@ public final class ColonyManager implements IColonyManager
         return null;
     }
 
-    @Override
-    public IColony getColonyByPosFromWorld(@Nullable final World w, @NotNull final BlockPos pos)
+    
+    public Colony getColonyByPosFromWorld(@Nullable final World w, @NotNull final BlockPos pos)
     {
         if (w == null)
         {
@@ -294,13 +285,13 @@ public final class ColonyManager implements IColonyManager
         return getColonyByWorld(id, w);
     }
 
-    @Override
-    public IColony getColonyByPosFromDim(final RegistryKey<World> registryKey, @NotNull final BlockPos pos)
+    
+    public Colony getColonyByPosFromDim(final RegistryKey<World> registryKey, @NotNull final BlockPos pos)
     {
         return getColonyByPosFromWorld(ServerLifecycleHooks.getCurrentServer().getWorld(registryKey), pos);
     }
 
-    @Override
+    
     public boolean isTooCloseToColony(@NotNull final World w, @NotNull final BlockPos pos)
     {
         return !ChunkDataHelper.canClaimChunksInRange(w,
@@ -308,9 +299,9 @@ public final class ColonyManager implements IColonyManager
           Math.max(MineColonies.getConfig().getServer().minColonyDistance.get(), getConfig().getServer().initialColonySize.get()));
     }
 
-    @Override
+    
     @NotNull
-    public List<IColony> getColonies(@NotNull final World w)
+    public List<Colony> getColonies(@NotNull final World w)
     {
         final IColonyManagerCapability cap = w.getCapability(COLONY_MANAGER_CAP, null).resolve().orElse(null);
         if (cap == null)
@@ -321,11 +312,11 @@ public final class ColonyManager implements IColonyManager
         return cap.getColonies();
     }
 
-    @Override
+    
     @NotNull
-    public List<IColony> getAllColonies()
+    public List<Colony> getAllColonies()
     {
-        final List<IColony> allColonies = new ArrayList<>();
+        final List<Colony> allColonies = new ArrayList<>();
         for (final World world : ServerLifecycleHooks.getCurrentServer().getWorlds())
         {
             world.getCapability(COLONY_MANAGER_CAP, null).ifPresent(c -> allColonies.addAll(c.getColonies()));
@@ -333,12 +324,12 @@ public final class ColonyManager implements IColonyManager
         return allColonies;
     }
 
-    @Override
+    
     @NotNull
-    public List<IColony> getColoniesAbandonedSince(final int abandonedSince)
+    public List<Colony> getColoniesAbandonedSince(final int abandonedSince)
     {
-        final List<IColony> sortedList = new ArrayList<>();
-        for (final IColony colony : getAllColonies())
+        final List<Colony> sortedList = new ArrayList<>();
+        for (final Colony colony : getAllColonies())
         {
             if (colony.getLastContactInHours() >= abandonedSince)
             {
@@ -349,13 +340,13 @@ public final class ColonyManager implements IColonyManager
         return sortedList;
     }
 
-    @Override
+    
     public IBuildingView getBuildingView(final RegistryKey<World> dimension, final BlockPos pos)
     {
         if (colonyViews.containsKey(dimension))
         {
             //  On client we will just check all known views
-            for (@NotNull final IColonyView colony : colonyViews.get(dimension))
+            for (@NotNull final ColonyView colony : colonyViews.get(dimension))
             {
                 final IBuildingView building = colony.getBuilding(pos);
                 if (building != null)
@@ -368,9 +359,9 @@ public final class ColonyManager implements IColonyManager
         return null;
     }
 
-    @Override
+    
     @Nullable
-    public IColony getIColony(@NotNull final World w, @NotNull final BlockPos pos)
+    public Colony getIColony(@NotNull final World w, @NotNull final BlockPos pos)
     {
         return w.isRemote ? getColonyView(w, pos) : getColonyByPosFromWorld(w, pos);
     }
@@ -382,7 +373,7 @@ public final class ColonyManager implements IColonyManager
      * @param pos coordinates.
      * @return returns the view belonging to the colony at x, y, z.
      */
-    private IColonyView getColonyView(@NotNull final World w, @NotNull final BlockPos pos)
+    private ColonyView getColonyView(@NotNull final World w, @NotNull final BlockPos pos)
     {
         final Chunk centralChunk = w.getChunkAt(pos);
 
@@ -394,16 +385,16 @@ public final class ColonyManager implements IColonyManager
         return getColonyView(id, w.getDimensionKey());
     }
 
-    @Override
+    
     @Nullable
-    public IColony getClosestIColony(@NotNull final World w, @NotNull final BlockPos pos)
+    public Colony getClosestIColony(@NotNull final World w, @NotNull final BlockPos pos)
     {
         return w.isRemote ? getClosestColonyView(w, pos) : getClosestColony(w, pos);
     }
 
-    @Override
+    
     @Nullable
-    public IColonyView getClosestColonyView(@Nullable final World w, @Nullable final BlockPos pos)
+    public ColonyView getClosestColonyView(@Nullable final World w, @Nullable final BlockPos pos)
     {
         if (w == null || pos == null)
         {
@@ -423,12 +414,12 @@ public final class ColonyManager implements IColonyManager
         }
         else if (!cap.getAllCloseColonies().isEmpty())
         {
-            @Nullable IColonyView closestColony = null;
+            @Nullable ColonyView closestColony = null;
             long closestDist = Long.MAX_VALUE;
 
             for (final int cId : cap.getAllCloseColonies())
             {
-                final IColonyView c = getColonyView(cId, w.getDimensionKey());
+                final ColonyView c = getColonyView(cId, w.getDimensionKey());
                 if (c != null && c.getDimension() == w.getDimensionKey())
                 {
                     final long dist = c.getDistanceSquared(pos);
@@ -442,12 +433,12 @@ public final class ColonyManager implements IColonyManager
             return closestColony;
         }
 
-        @Nullable IColonyView closestColony = null;
+        @Nullable ColonyView closestColony = null;
         long closestDist = Long.MAX_VALUE;
 
         if (colonyViews.containsKey(w.getDimensionKey()))
         {
-            for (@NotNull final IColonyView c : colonyViews.get(w.getDimensionKey()))
+            for (@NotNull final ColonyView c : colonyViews.get(w.getDimensionKey()))
             {
                 if (c.getDimension() == w.getDimensionKey() && c.getCenter() != null)
                 {
@@ -464,8 +455,8 @@ public final class ColonyManager implements IColonyManager
         return closestColony;
     }
 
-    @Override
-    public IColony getClosestColony(@NotNull final World w, @NotNull final BlockPos pos)
+    
+    public Colony getClosestColony(@NotNull final World w, @NotNull final BlockPos pos)
     {
         final Chunk chunk = w.getChunkAt(pos);
         final IColonyTagCapability cap = chunk.getCapability(CLOSE_COLONY_CAP, null).resolve().orElse(null);
@@ -480,12 +471,12 @@ public final class ColonyManager implements IColonyManager
         }
         else if (!cap.getAllCloseColonies().isEmpty())
         {
-            @Nullable IColony closestColony = null;
+            @Nullable Colony closestColony = null;
             long closestDist = Long.MAX_VALUE;
 
             for (final int cId : cap.getAllCloseColonies())
             {
-                final IColony c = getColonyByWorld(cId, w);
+                final Colony c = getColonyByWorld(cId, w);
                 if (c != null && c.getDimension() == w.getDimensionKey())
                 {
                     final long dist = c.getDistanceSquared(pos);
@@ -499,10 +490,10 @@ public final class ColonyManager implements IColonyManager
             return closestColony;
         }
 
-        @Nullable IColony closestColony = null;
+        @Nullable Colony closestColony = null;
         long closestDist = Long.MAX_VALUE;
 
-        for (@NotNull final IColony c : getColonies(w))
+        for (@NotNull final Colony c : getColonies(w))
         {
             if (c.getDimension() == w.getDimensionKey())
             {
@@ -518,16 +509,16 @@ public final class ColonyManager implements IColonyManager
         return closestColony;
     }
 
-    @Override
+    
     @Nullable
-    public IColony getIColonyByOwner(@NotNull final World w, @NotNull final PlayerEntity owner)
+    public Colony getIColonyByOwner(@NotNull final World w, @NotNull final PlayerEntity owner)
     {
         return getIColonyByOwner(w, w.isRemote ? owner.getUniqueID() : owner.getGameProfile().getId());
     }
 
-    @Override
+    
     @Nullable
-    public IColony getIColonyByOwner(@NotNull final World w, final UUID owner)
+    public Colony getIColonyByOwner(@NotNull final World w, final UUID owner)
     {
         return w.isRemote ? getColonyViewByOwner(owner, w.getDimensionKey()) : getColonyByOwner(owner);
     }
@@ -539,11 +530,11 @@ public final class ColonyManager implements IColonyManager
      * @param dimension the dimension id.
      * @return ColonyView.
      */
-    private IColony getColonyViewByOwner(final UUID owner, final RegistryKey<World> dimension)
+    private Colony getColonyViewByOwner(final UUID owner, final RegistryKey<World> dimension)
     {
         if (colonyViews.containsKey(dimension))
         {
-            for (@NotNull final IColonyView c : colonyViews.get(dimension))
+            for (@NotNull final ColonyView c : colonyViews.get(dimension))
             {
                 final Player p = c.getPlayers().get(owner);
                 if (p != null && p.getRank().equals(Rank.OWNER))
@@ -557,7 +548,7 @@ public final class ColonyManager implements IColonyManager
     }
 
     @Nullable
-    private IColony getColonyByOwner(@Nullable final UUID owner)
+    private Colony getColonyByOwner(@Nullable final UUID owner)
     {
         if (owner == null)
         {
@@ -570,26 +561,26 @@ public final class ColonyManager implements IColonyManager
                  .orElse(null);
     }
 
-    @Override
+    
     public int getMinimumDistanceBetweenTownHalls()
     {
         //  [TownHall](Radius)+(Padding)+(Radius)[TownHall]
         return getConfig().getServer().minColonyDistance.get() * BLOCKS_PER_CHUNK;
     }
 
-    @Override
+    
     public void onServerTick(@NotNull final TickEvent.ServerTickEvent event)
     {
         if (event.phase == TickEvent.Phase.END)
         {
-            for (@NotNull final IColony c : getAllColonies())
+            for (@NotNull final Colony c : getAllColonies())
             {
                 c.onServerTick(event);
             }
         }
     }
 
-    @Override
+    
     public void write(@NotNull final CompoundNBT compound)
     {
         //Get the colonies NBT tags and store them in a ListNBT.
@@ -609,7 +600,7 @@ public final class ColonyManager implements IColonyManager
         compound.put(RECIPE_MANAGER_TAG, recipeCompound);
     }
 
-    @Override
+    
     public void read(@NotNull final CompoundNBT compound)
     {
         if (compound.hasUniqueId(TAG_UUID))
@@ -625,7 +616,7 @@ public final class ColonyManager implements IColonyManager
         recipeManager.read(compound.getCompound(RECIPE_MANAGER_TAG));
     }
 
-    @Override
+    
     public void onClientTick(@NotNull final TickEvent.ClientTickEvent event)
     {
         if (event.phase == TickEvent.Phase.END && Minecraft.getInstance().world == null && !colonyViews.isEmpty())
@@ -640,7 +631,7 @@ public final class ColonyManager implements IColonyManager
         }
     }
 
-    @Override
+    
     public void onWorldTick(@NotNull final TickEvent.WorldTickEvent event)
     {
         if (event.phase == TickEvent.Phase.END)
@@ -654,7 +645,7 @@ public final class ColonyManager implements IColonyManager
         }
     }
 
-    @Override
+    
     public void onWorldLoad(@NotNull final World world)
     {
         ModTagsInitializer.init();
@@ -684,31 +675,31 @@ public final class ColonyManager implements IColonyManager
                 BackUpHelper.loadMissingColonies();
             }
 
-            for (@NotNull final IColony c : getColonies(world))
+            for (@NotNull final Colony c : getColonies(world))
             {
                 c.onWorldLoad(world);
             }
         }
     }
 
-    @Override
+    
     public UUID getServerUUID()
     {
         return serverUUID;
     }
 
-    @Override
+    
     public void setServerUUID(final UUID uuid)
     {
         serverUUID = uuid;
     }
 
-    @Override
+    
     public void onWorldUnload(@NotNull final World world)
     {
         if (!world.isRemote)
         {
-            for (@NotNull final IColony c : getColonies(world))
+            for (@NotNull final Colony c : getColonies(world))
             {
                 c.onWorldUnload(world);
             }
@@ -721,10 +712,10 @@ public final class ColonyManager implements IColonyManager
         }
     }
 
-    @Override
+    
     public void handleColonyViewMessage(final int colonyId, @NotNull final PacketBuffer colonyData, @NotNull final World world, final boolean isNewSubscription, final RegistryKey<World> dim)
     {
-        IColonyView view = getColonyView(colonyId, dim);
+        ColonyView view = getColonyView(colonyId, dim);
         if (view == null)
         {
             view = ColonyView.createFromNetwork(colonyId);
@@ -734,7 +725,7 @@ public final class ColonyManager implements IColonyManager
             }
             else
             {
-                final ColonyList<IColonyView> list = new ColonyList<>();
+                final ColonyList<ColonyView> list = new ColonyList<>();
                 list.add(view);
                 colonyViews.put(dim, list);
             }
@@ -742,8 +733,8 @@ public final class ColonyManager implements IColonyManager
         view.handleColonyViewMessage(colonyData, world, isNewSubscription);
     }
 
-    @Override
-    public IColonyView getColonyView(final int id, final RegistryKey<World> dimension)
+    
+    public ColonyView getColonyView(final int id, final RegistryKey<World> dimension)
     {
         if (colonyViews.containsKey(dimension))
         {
@@ -752,10 +743,10 @@ public final class ColonyManager implements IColonyManager
         return null;
     }
 
-    @Override
+    
     public void handlePermissionsViewMessage(final int colonyID, @NotNull final PacketBuffer data, final RegistryKey<World> dim)
     {
-        final IColonyView view = getColonyView(colonyID, dim);
+        final ColonyView view = getColonyView(colonyID, dim);
         if (view == null)
         {
             Log.getLogger().error(String.format("Colony view does not exist for ID #%d", colonyID), new Exception());
@@ -766,10 +757,10 @@ public final class ColonyManager implements IColonyManager
         }
     }
 
-    @Override
+    
     public void handleColonyViewCitizensMessage(final int colonyId, final int citizenId, final PacketBuffer buf, final RegistryKey<World> dim)
     {
-        final IColonyView view = getColonyView(colonyId, dim);
+        final ColonyView view = getColonyView(colonyId, dim);
         if (view == null)
         {
             return;
@@ -777,10 +768,10 @@ public final class ColonyManager implements IColonyManager
         view.handleColonyViewCitizensMessage(citizenId, buf);
     }
 
-    @Override
+    
     public void handleColonyViewWorkOrderMessage(final int colonyId, final PacketBuffer buf, final RegistryKey<World> dim)
     {
-        final IColonyView view = getColonyView(colonyId, dim);
+        final ColonyView view = getColonyView(colonyId, dim);
         if (view == null)
         {
             return;
@@ -788,10 +779,10 @@ public final class ColonyManager implements IColonyManager
         view.handleColonyViewWorkOrderMessage(buf);
     }
 
-    @Override
+    
     public void handleColonyViewRemoveCitizenMessage(final int colonyId, final int citizenId, final RegistryKey<World> dim)
     {
-        final IColonyView view = getColonyView(colonyId, dim);
+        final ColonyView view = getColonyView(colonyId, dim);
         if (view != null)
         {
             //  Can legitimately be NULL, because (to keep the code simple and fast), it is
@@ -800,10 +791,10 @@ public final class ColonyManager implements IColonyManager
         }
     }
 
-    @Override
+    
     public void handleColonyBuildingViewMessage(final int colonyId, final BlockPos buildingId, @NotNull final PacketBuffer buf, final RegistryKey<World> dim)
     {
-        final IColonyView view = getColonyView(colonyId, dim);
+        final ColonyView view = getColonyView(colonyId, dim);
         if (view != null)
         {
             view.handleColonyBuildingViewMessage(buildingId, buf);
@@ -814,10 +805,10 @@ public final class ColonyManager implements IColonyManager
         }
     }
 
-    @Override
+    
     public void handleColonyViewRemoveBuildingMessage(final int colonyId, final BlockPos buildingId, final RegistryKey<World> dim)
     {
-        final IColonyView view = getColonyView(colonyId, dim);
+        final ColonyView view = getColonyView(colonyId, dim);
         if (view != null)
         {
             //  Can legitimately be NULL, because (to keep the code simple and fast), it is
@@ -826,10 +817,10 @@ public final class ColonyManager implements IColonyManager
         }
     }
 
-    @Override
+    
     public void handleColonyViewRemoveWorkOrderMessage(final int colonyId, final int workOrderId, final RegistryKey<World> dim)
     {
-        final IColonyView view = getColonyView(colonyId, dim);
+        final ColonyView view = getColonyView(colonyId, dim);
         if (view != null)
         {
             //  Can legitimately be NULL, because (to keep the code simple and fast), it is
@@ -838,38 +829,38 @@ public final class ColonyManager implements IColonyManager
         }
     }
 
-    @Override
+    
     public boolean isSchematicDownloaded()
     {
         return schematicDownloaded;
     }
 
-    @Override
+    
     public void setSchematicDownloaded(final boolean downloaded)
     {
         schematicDownloaded = downloaded;
     }
 
-    @Override
+    
     public boolean isCoordinateInAnyColony(@NotNull final World world, final BlockPos pos)
     {
         final Chunk centralChunk = world.getChunkAt(pos);
         return centralChunk.getCapability(CLOSE_COLONY_CAP, null).map(IColonyTagCapability::getOwningColony).orElse(0) != 0;
     }
 
-    @Override
+    
     public ICompatibilityManager getCompatibilityManager()
     {
         return compatibilityManager;
     }
 
-    @Override
+    
     public IRecipeManager getRecipeManager()
     {
         return recipeManager;
     }
 
-    @Override
+    
     public int getTopColonyId()
     {
         int top = 0;
@@ -884,7 +875,7 @@ public final class ColonyManager implements IColonyManager
         return top;
     }
 
-    @Override
+    
     public void resetColonyViews()
     {
         colonyViews.clear();

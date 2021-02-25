@@ -1,6 +1,5 @@
 package com.minecolonies.coremod.entity.pathfinding.pathjobs;
 
-import com.minecolonies.api.colony.IColony;
 import com.minecolonies.api.compatibility.Compatibility;
 import com.minecolonies.api.crafting.ItemStorage;
 import com.minecolonies.api.entity.pathfinding.TreePathResult;

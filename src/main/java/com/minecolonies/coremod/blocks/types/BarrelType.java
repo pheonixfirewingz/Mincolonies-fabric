@@ -1,19 +1,19 @@
-package com.minecolonies.api.blocks.types;
+package com.minecolonies.coremod.blocks.types;
 
-import net.minecraft.block.material.*;
 import net.minecraft.util.*;
+import net.minecraft.block.Material;
 import org.jetbrains.annotations.NotNull;
 
-public enum BarrelType implements IStringSerializable
+public enum BarrelType implements StringIdentifiable
 {
-	ZERO(0, "0perc", MaterialColor.WOOD),
-	TWENTY(1, "20perc", MaterialColor.WOOD),
-	FORTY(2, "40perc", MaterialColor.WOOD),
-	SIXTY(3, "60perc", MaterialColor.WOOD),
-	EIGHTY(4, "80perc", MaterialColor.WOOD),
-	HUNDRED(5, "100perc", MaterialColor.WOOD),
-	WORKING(6, "working", MaterialColor.WOOD),
-	DONE(7, "done", MaterialColor.WOOD),
+	ZERO(0, "0perc", Material.WOOD),
+	TWENTY(1, "20perc", Material.WOOD),
+	FORTY(2, "40perc", Material.WOOD),
+	SIXTY(3, "60perc", Material.WOOD),
+	EIGHTY(4, "80perc", Material.WOOD),
+	HUNDRED(5, "100perc", Material.WOOD),
+	WORKING(6, "working", Material.WOOD),
+	DONE(7, "done", Material.WOOD),
 	;
 
 	private static final BarrelType[] META_LOOKUP = new BarrelType[values().length];
@@ -30,7 +30,7 @@ public enum BarrelType implements IStringSerializable
 	private final String name;
 	private final String unlocalizedName;
 
-	private final MaterialColor mapColor;
+	private final Material mapColor;
 
 	/***
 	 * Constructor for the BarrelType
@@ -38,7 +38,7 @@ public enum BarrelType implements IStringSerializable
 	 * @param nameIn the name
 	 * @param mapColorIn the color
 	 */
-	BarrelType(final int metaIn, final String nameIn, final MaterialColor mapColorIn)
+	BarrelType(final int metaIn, final String nameIn, final Material mapColorIn)
 	{
 		this(metaIn, nameIn, nameIn, mapColorIn);
 	}
@@ -50,7 +50,7 @@ public enum BarrelType implements IStringSerializable
 	 * @param unlocalizedNameIn the unlocalized name
 	 * @param mapColorIn the color
 	 */
-	BarrelType(final int metaIn, final String nameIn, final String unlocalizedNameIn, final MaterialColor mapColorIn)
+	BarrelType(final int metaIn, final String nameIn, final String unlocalizedNameIn, final Material mapColorIn)
 	{
 		this.meta = metaIn;
 		this.name = nameIn;
@@ -88,7 +88,7 @@ public enum BarrelType implements IStringSerializable
 	 * Returns the color that represents the entry on the map
 	 * @return the color
 	 */
-	public MaterialColor getMaterialColor()
+	public Material getMaterialColor()
 	{
 		return this.mapColor;
 	}
@@ -122,9 +122,8 @@ public enum BarrelType implements IStringSerializable
 		return this.unlocalizedName;
 	}
 
-	@NotNull
-	@Override
-	public String getString()
+
+	@Override public String asString()
 	{
 		return this.name;
 	}

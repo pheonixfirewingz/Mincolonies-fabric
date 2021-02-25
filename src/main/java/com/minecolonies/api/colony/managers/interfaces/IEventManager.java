@@ -1,6 +1,5 @@
 package com.minecolonies.api.colony.managers.interfaces;
 
-import com.minecolonies.api.colony.IColony;
 import com.minecolonies.api.colony.colonyEvents.IColonyEvent;
 
 import net.minecraft.entity.Entity;

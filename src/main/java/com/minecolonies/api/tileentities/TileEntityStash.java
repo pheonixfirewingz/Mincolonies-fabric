@@ -1,7 +1,5 @@
 package com.minecolonies.api.tileentities;
 
-import com.minecolonies.api.colony.IColony;
-import com.minecolonies.api.colony.IColonyManager;
 import com.minecolonies.api.colony.buildings.IBuilding;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.items.ItemStackHandler;

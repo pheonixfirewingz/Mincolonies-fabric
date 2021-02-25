@@ -2,7 +2,6 @@ package com.minecolonies.coremod.entity.ai.citizen.farmer;
 
 import com.google.common.reflect.TypeToken;
 import com.minecolonies.api.advancements.AdvancementTriggers;
-import com.minecolonies.api.colony.IColony;
 import com.minecolonies.api.colony.interactionhandling.ChatPriority;
 import com.minecolonies.api.colony.requestsystem.requestable.StackList;
 import com.minecolonies.api.compatibility.Compatibility;

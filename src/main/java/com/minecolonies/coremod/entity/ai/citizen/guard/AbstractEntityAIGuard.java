@@ -1,7 +1,6 @@
 package com.minecolonies.coremod.entity.ai.citizen.guard;
 
 import com.minecolonies.api.colony.ICitizenData;
-import com.minecolonies.api.colony.IColony;
 import com.minecolonies.api.colony.buildings.IBuilding;
 import com.minecolonies.api.colony.buildings.IGuardBuilding;
 import com.minecolonies.api.colony.buildings.views.MobEntryView;

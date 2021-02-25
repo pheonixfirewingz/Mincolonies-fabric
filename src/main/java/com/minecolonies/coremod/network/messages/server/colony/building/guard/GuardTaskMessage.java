@@ -1,6 +1,5 @@
 package com.minecolonies.coremod.network.messages.server.colony.building.guard;
 
-import com.minecolonies.api.colony.IColony;
 import com.minecolonies.api.colony.guardtype.registry.IGuardTypeRegistry;
 import com.minecolonies.api.entity.ai.citizen.guards.GuardTask;
 import com.minecolonies.coremod.colony.buildings.AbstractBuildingGuards;

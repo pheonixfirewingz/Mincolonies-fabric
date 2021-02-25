@@ -4,8 +4,6 @@ import com.ldtteam.structures.blueprints.v1.Blueprint;
 import com.ldtteam.structurize.placement.handlers.placement.PlacementError;
 import com.ldtteam.structurize.util.BlockUtils;
 import com.ldtteam.structurize.util.LanguageHandler;
-import com.minecolonies.api.colony.IColony;
-import com.minecolonies.api.colony.IColonyManager;
 import com.minecolonies.api.colony.permissions.Action;
 import com.minecolonies.api.creativetab.ModCreativeTabs;
 import com.minecolonies.api.util.WorldUtil;

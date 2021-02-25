@@ -5,7 +5,6 @@ import com.ldtteam.structurize.util.LanguageHandler;
 import com.minecolonies.api.blocks.ModBlocks;
 import com.minecolonies.api.colony.ColonyState;
 import com.minecolonies.api.colony.ICitizenData;
-import com.minecolonies.api.colony.IColony;
 import com.minecolonies.api.colony.IColonyTagCapability;
 import com.minecolonies.api.colony.buildings.IBuilding;
 import com.minecolonies.api.colony.managers.interfaces.*;
@@ -13,7 +12,6 @@ import com.minecolonies.api.colony.permissions.Action;
 import com.minecolonies.api.colony.permissions.Rank;
 import com.minecolonies.api.colony.requestsystem.manager.IRequestManager;
 import com.minecolonies.api.colony.requestsystem.requester.IRequester;
-import com.minecolonies.api.colony.workorders.IWorkManager;
 import com.minecolonies.api.entity.ai.statemachine.tickratestatemachine.ITickRateStateMachine;
 import com.minecolonies.api.entity.ai.statemachine.tickratestatemachine.TickRateStateMachine;
 import com.minecolonies.api.entity.ai.statemachine.tickratestatemachine.TickingTransition;
@@ -48,7 +46,7 @@ import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.*;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
@@ -78,7 +76,7 @@ import static com.minecolonies.coremod.MineColonies.getConfig;
  * This class describes a colony and contains all the data and methods for manipulating a Colony.
  */
 @SuppressWarnings({Suppression.BIG_CLASS, Suppression.SPLIT_CLASS})
-public class Colony implements IColony
+public class Colony
 {
     /**
      * The default style for the building.
@@ -118,27 +116,27 @@ public class Colony implements IColony
     /**
      * Building manager of the colony.
      */
-    private final IBuildingManager buildingManager = new BuildingManager(this);
+    private final BuildingManager buildingManager = new BuildingManager(this);
 
     /**
      * Citizen manager of the colony.
      */
-    private final ICitizenManager citizenManager = new CitizenManager(this);
+    private final CitizenManager citizenManager = new CitizenManager(this);
 
     /**
      * Citizen manager of the colony.
      */
-    private final IVisitorManager visitorManager = new VisitorManager(this);
+    private final VisitorManager visitorManager = new VisitorManager(this);
 
     /**
      * Barbarian manager of the colony.
      */
-    private final IRaiderManager raidManager = new RaidManager(this);
+    private final RaidManager raidManager = new RaidManager(this);
 
     /**
      * Event manager of the colony.
      */
-    private final IEventManager eventManager = new EventManager(this);
+    private final EventManager eventManager = new EventManager(this);
 
     /**
      * Event description manager of the colony.
@@ -148,12 +146,12 @@ public class Colony implements IColony
     /**
      * The colony package manager.
      */
-    private final IColonyPackageManager packageManager = new ColonyPackageManager(this);
+    private final ColonyPackageManager packageManager = new ColonyPackageManager(this);
 
     /**
      * The progress manager of the colony.
      */
-    private final IProgressManager progressManager = new ProgressManager(this);
+    private final ProgressManager progressManager = new ProgressManager(this);
 
     /**
      * The Positions which players can freely interact.

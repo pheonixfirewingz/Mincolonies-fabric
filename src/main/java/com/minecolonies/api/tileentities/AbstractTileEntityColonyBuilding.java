@@ -1,7 +1,6 @@
 package com.minecolonies.api.tileentities;
 
 import com.ldtteam.structurize.blocks.interfaces.IBlueprintDataProvider;
-import com.minecolonies.api.colony.IColony;
 import com.minecolonies.api.colony.buildings.IBuildingContainer;
 import com.minecolonies.api.colony.buildings.views.IBuildingView;
 import com.minecolonies.api.util.InventoryFunctions;

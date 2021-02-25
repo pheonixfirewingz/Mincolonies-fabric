@@ -1,7 +1,5 @@
 package com.minecolonies.coremod.colony.buildings;
 
-import com.minecolonies.api.colony.IColony;
-import com.minecolonies.api.colony.IColonyView;
 import com.minecolonies.coremod.Network;
 import com.minecolonies.coremod.network.messages.server.colony.building.herder.HerderSetBreedingMessage;
 

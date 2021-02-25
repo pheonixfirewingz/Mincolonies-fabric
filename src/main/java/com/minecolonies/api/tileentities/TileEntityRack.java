@@ -2,7 +2,7 @@ package com.minecolonies.api.tileentities;
 
 import com.minecolonies.api.MinecoloniesAPIProxy;
 import com.minecolonies.api.blocks.AbstractBlockMinecoloniesRack;
-import com.minecolonies.api.blocks.types.RackType;
+import com.minecolonies.coremod.blocks.types.RackType;
 import com.minecolonies.api.crafting.ItemStorage;
 import com.minecolonies.api.inventory.api.CombinedItemHandler;
 import com.minecolonies.api.inventory.container.ContainerRack;

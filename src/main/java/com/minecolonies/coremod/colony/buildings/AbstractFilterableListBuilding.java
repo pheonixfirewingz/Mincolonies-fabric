@@ -1,6 +1,5 @@
 package com.minecolonies.coremod.colony.buildings;
 
-import com.minecolonies.api.colony.IColony;
 import com.minecolonies.api.crafting.ItemStorage;
 import com.minecolonies.api.util.Log;
 import net.minecraft.item.ItemStack;

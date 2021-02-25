@@ -1,9 +1,7 @@
 package com.minecolonies.coremod.event;
 
 import com.ldtteam.structurize.items.ModItems;
-import com.minecolonies.api.colony.IColonyManager;
 import com.minecolonies.api.colony.IColonyTagCapability;
-import com.minecolonies.api.colony.IColonyView;
 import com.minecolonies.api.util.Tuple;
 import com.minecolonies.coremod.client.render.MRenderTypes;
 import com.mojang.blaze3d.matrix.MatrixStack;

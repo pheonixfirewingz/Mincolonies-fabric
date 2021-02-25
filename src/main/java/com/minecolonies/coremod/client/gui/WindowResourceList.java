@@ -7,8 +7,6 @@ import com.ldtteam.blockout.controls.Image;
 import com.ldtteam.blockout.controls.ItemIcon;
 import com.ldtteam.blockout.controls.Text;
 import com.ldtteam.blockout.views.ScrollingList;
-import com.minecolonies.api.colony.IColonyManager;
-import com.minecolonies.api.colony.IColonyView;
 import com.minecolonies.api.colony.buildings.views.IBuildingView;
 import com.minecolonies.api.colony.requestsystem.request.IRequest;
 import com.minecolonies.api.colony.requestsystem.requestable.deliveryman.Delivery;

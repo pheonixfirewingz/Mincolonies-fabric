@@ -2,8 +2,6 @@ package com.minecolonies.coremod.colony.crafting;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.minecolonies.api.colony.IColony;
-import com.minecolonies.api.colony.IColonyManager;
 import com.minecolonies.api.colony.buildings.IBuildingWorker;
 import com.minecolonies.api.colony.requestsystem.StandardFactoryController;
 import com.minecolonies.api.colony.requestsystem.token.IToken;

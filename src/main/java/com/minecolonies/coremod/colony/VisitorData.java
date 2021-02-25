@@ -1,6 +1,5 @@
 package com.minecolonies.coremod.colony;
 
-import com.minecolonies.api.colony.IColony;
 import com.minecolonies.api.colony.IVisitorData;
 import com.minecolonies.api.util.BlockPosUtil;
 import com.minecolonies.api.util.WorldUtil;

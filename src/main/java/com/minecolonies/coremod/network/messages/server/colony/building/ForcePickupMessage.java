@@ -1,7 +1,6 @@
 package com.minecolonies.coremod.network.messages.server.colony.building;
 
 import com.ldtteam.structurize.util.LanguageHandler;
-import com.minecolonies.api.colony.IColony;
 import com.minecolonies.api.colony.buildings.IBuilding;
 import com.minecolonies.api.colony.buildings.views.IBuildingView;
 import com.minecolonies.coremod.network.messages.server.AbstractBuildingServerMessage;

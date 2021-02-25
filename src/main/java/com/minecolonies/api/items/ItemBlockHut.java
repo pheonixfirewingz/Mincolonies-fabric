@@ -1,9 +1,7 @@
 package com.minecolonies.api.items;
 
 import com.minecolonies.api.blocks.*;
-import com.minecolonies.api.colony.IColonyView;
 import com.minecolonies.api.util.constant.TranslationConstants;
-import net.minecraft.client.util.*;
 import net.minecraft.item.*;
 import net.minecraft.util.text.*;
 import net.minecraft.world.*;

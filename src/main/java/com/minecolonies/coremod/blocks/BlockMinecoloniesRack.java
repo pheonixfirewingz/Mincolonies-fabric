@@ -1,48 +1,33 @@
 package com.minecolonies.coremod.blocks;
 
-import com.minecolonies.api.blocks.AbstractBlockMinecoloniesRack;
-import com.minecolonies.api.blocks.types.RackType;
-import com.minecolonies.api.colony.IColony;
-import com.minecolonies.api.colony.IColonyManager;
 import com.minecolonies.api.colony.permissions.Action;
-import com.minecolonies.api.tileentities.AbstractTileEntityRack;
-import com.minecolonies.api.tileentities.TileEntityRack;
-import com.minecolonies.api.util.BlockPosUtil;
-import com.minecolonies.api.util.InventoryUtils;
-import com.minecolonies.api.util.constant.Constants;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.LivingEntity;
+import com.minecolonies.api.tileentities.*;
+import com.minecolonies.api.util.*;
+import com.minecolonies.coremod.MinecoloniesBlocks;
+import com.minecolonies.coremod.blocks.types.*;
+import com.minecolonies.coremod.colony.*;
+import net.minecraft.block.*;
+import net.minecraft.block.entity.*;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.loot.LootContext;
-import net.minecraft.state.StateContainer;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.item.*;
+import net.minecraft.loot.context.*;
+import net.minecraft.server.network.*;
+import net.minecraft.server.world.*;
+import net.minecraft.state.*;
+import net.minecraft.state.property.*;
 import net.minecraft.util.*;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.fml.network.NetworkHooks;
-import net.minecraftforge.items.IItemHandler;
-import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nullable;
+import net.minecraft.util.hit.*;
+import net.minecraft.util.math.*;
+import net.minecraft.util.shape.*;
+import net.minecraft.world.*;
+import org.jetbrains.annotations.*;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Block for the shelves of the warehouse.
  */
-public class BlockMinecoloniesRack extends AbstractBlockMinecoloniesRack<BlockMinecoloniesRack>
+public class BlockMinecoloniesRack extends Block
 {
 
     /**
@@ -51,53 +36,46 @@ public class BlockMinecoloniesRack extends AbstractBlockMinecoloniesRack<BlockMi
     private static final float BLOCK_HARDNESS = 10.0F;
 
     /**
-     * This blocks name.
-     */
-    private static final String BLOCK_NAME = "blockminecoloniesrack";
-
-    /**
      * The resistance this block has.
      */
     private static final float RESISTANCE = Float.POSITIVE_INFINITY;
 
+    public static final EnumProperty<RackType> VARIANT =  EnumProperty.of("variant", RackType.class);
+    public static final int DEFAULT_META = RackType.DEFAULT.getMetadata();
+    public static final int FULL_META = RackType.FULL.getMetadata();
+    /**
+     * The position it faces.
+     */
+    public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
     /**
      * Smaller shape.
      */
-    private static final VoxelShape SHAPE = VoxelShapes.create(0.1, 0.1, 0.1, 0.9, 0.9, 0.9);
+    private static final VoxelShape SHAPE = VoxelShapes.cuboid(0.1, 0.1, 0.1, 0.9, 0.9, 0.9);
 
     public BlockMinecoloniesRack()
     {
-        super(Properties.create(Material.WOOD).hardnessAndResistance(BLOCK_HARDNESS, RESISTANCE));
+        super(Settings.of(Material.WOOD).strength(BLOCK_HARDNESS, RESISTANCE).noCollision());
         this.setDefaultState(this.getDefaultState().with(FACING, Direction.NORTH).with(VARIANT, RackType.DEFAULT));
-        setRegistryName(Constants.MOD_ID.toLowerCase() + ":" + BLOCK_NAME);
     }
-
-    @Override
-    public boolean propagatesSkylightDown(final BlockState state, @NotNull final IBlockReader reader, @NotNull final BlockPos pos)
+    @Override protected void appendProperties(StateManager.Builder<Block, BlockState> builder)
     {
-        return true;
+        builder.add(FACING, VARIANT);
     }
 
-    @NotNull
-    @Override
-    public VoxelShape getShape(final BlockState state, final IBlockReader worldIn, final BlockPos pos, final ISelectionContext context)
+    @Override public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context)
     {
         return SHAPE;
     }
 
-    @Nullable
-    @Override
-    public BlockState getStateForPlacement(final BlockItemUseContext context)
+    @Nullable @Override public BlockState getPlacementState(ItemPlacementContext ctx)
     {
-        final World worldIn = context.getWorld();
-        final BlockPos pos = context.getPos();
+        final World worldIn = ctx.getWorld();
+        final BlockPos pos = ctx.getBlockPos();
         final BlockState state = getDefaultState();
-        final TileEntity entity = worldIn.getTileEntity(pos);
+        final BlockEntity entity = worldIn.getBlockEntity(pos);
 
-        if (!(entity instanceof TileEntityRack))
-        {
-            return super.getStateForPlacement(context);
-        }
+        if (!(entity instanceof BlockEntityRack))
+            return super.getPlacementState(ctx);
 
         return getPlacementState(state, entity, pos);
     }
@@ -106,29 +84,29 @@ public class BlockMinecoloniesRack extends AbstractBlockMinecoloniesRack<BlockMi
      * Get the statement ready.
      *
      * @param state  the state to place.
-     * @param entity the tileEntity.
+     * @param entity the BlockEntity.
      * @param pos    the position.
      * @return the next state.
      */
-    public static BlockState getPlacementState(final BlockState state, final TileEntity entity, final BlockPos pos)
+    public static BlockState getPlacementState(final BlockState state, final BlockEntity entity, final BlockPos pos)
     {
-        final AbstractTileEntityRack rack = (AbstractTileEntityRack) entity;
+        final AbstractBlockEntityRack rack = (AbstractBlockEntityRack) entity;
         if (rack.isEmpty() && (rack.getOtherChest() == null || rack.getOtherChest().isEmpty()))
         {
             if (rack.getOtherChest() != null)
             {
                 if (rack.isMain())
                 {
-                    return state.with(AbstractBlockMinecoloniesRack.VARIANT, RackType.DEFAULTDOUBLE).with(FACING, BlockPosUtil.getFacing(rack.getNeighbor(), pos));
+                    return state.with(VARIANT, RackType.DEFAULTDOUBLE).with(FACING, BlockPosUtil.getFacing(rack.getNeighbor(), pos));
                 }
                 else
                 {
-                    return state.with(AbstractBlockMinecoloniesRack.VARIANT, RackType.EMPTYAIR);
+                    return state.with(VARIANT, RackType.EMPTYAIR);
                 }
             }
             else
             {
-                return state.with(AbstractBlockMinecoloniesRack.VARIANT, RackType.DEFAULT);
+                return state.with(VARIANT, RackType.DEFAULT);
             }
         }
         else
@@ -137,17 +115,17 @@ public class BlockMinecoloniesRack extends AbstractBlockMinecoloniesRack<BlockMi
             {
                 if (rack.isMain())
                 {
-                    return state.with(AbstractBlockMinecoloniesRack.VARIANT, RackType.FULLDOUBLE)
+                    return state.with(VARIANT, RackType.FULLDOUBLE)
                              .with(FACING, BlockPosUtil.getFacing(rack.getNeighbor(), pos));
                 }
                 else
                 {
-                    return state.with(AbstractBlockMinecoloniesRack.VARIANT, RackType.EMPTYAIR);
+                    return state.with(VARIANT, RackType.EMPTYAIR);
                 }
             }
             else
             {
-                return state.with(AbstractBlockMinecoloniesRack.VARIANT, RackType.FULL);
+                return state.with(VARIANT, RackType.FULL);
             }
         }
     }
@@ -157,88 +135,72 @@ public class BlockMinecoloniesRack extends AbstractBlockMinecoloniesRack<BlockMi
      *
      * @deprecated (Remove this as soon as minecraft offers anything better).
      */
-    @NotNull
-    @Override
-    @Deprecated
-    public BlockState rotate(@NotNull final BlockState state, final Rotation rot)
+    @Override public BlockState rotate(BlockState state, BlockRotation rotation)
     {
-        return state.with(FACING, rot.rotate(state.get(FACING)));
+        return state.with(FACING, rotation.rotate(state.get(FACING)));
     }
 
     /**
      * @deprecated (Remove this as soon as minecraft offers anything better).
      */
-    @NotNull
-    @Override
-    @Deprecated
-    public BlockState mirror(@NotNull final BlockState state, final Mirror mirrorIn)
+    @Override public BlockState mirror(BlockState state, BlockMirror mirror)
     {
-        return state.rotate(mirrorIn.toRotation(state.get(FACING)));
+        return  state.rotate(mirror.getRotation(state.get(FACING)));
     }
 
     @Override
-    public BlockState updatePostPlacement(
-      @NotNull final BlockState stateIn,
-      final Direction facing,
-      final BlockState state,
-      final IWorld worldIn,
-      final BlockPos currentPos,
-      final BlockPos pos)
+    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos)
     {
-        if (state.getBlock() instanceof BlockMinecoloniesRack || stateIn.getBlock() instanceof BlockMinecoloniesRack)
+
+        if (state.getBlock() instanceof BlockMinecoloniesRack || state.getBlock() instanceof BlockMinecoloniesRack)
         {
-            final TileEntity rack = worldIn.getTileEntity(pos);
-            if (rack instanceof TileEntityRack)
+            final BlockEntity rack = world.getBlockEntity(pos);
+            if (rack instanceof BlockEntityRack)
             {
-                ((AbstractTileEntityRack) rack).neighborChanged(currentPos);
+                ((AbstractBlockEntityRack) rack).neighborChanged(neighborPos);
             }
-            final TileEntity rack2 = worldIn.getTileEntity(currentPos);
-            if (rack2 instanceof TileEntityRack)
+            final BlockEntity rack2 = world.getBlockEntity(neighborPos);
+            if (rack2 instanceof BlockEntityRack)
             {
-                ((AbstractTileEntityRack) rack2).neighborChanged(pos);
+                ((AbstractBlockEntityRack) rack2).neighborChanged(pos);
             }
         }
-        return super.updatePostPlacement(stateIn, facing, state, worldIn, currentPos, pos);
+        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
     @Override
     public void spawnAdditionalDrops(final BlockState state, final ServerWorld worldIn, final BlockPos pos, final ItemStack stack)
     {
-        final TileEntity tileentity = worldIn.getTileEntity(pos);
-        if (tileentity instanceof TileEntityRack)
+        final BlockEntity BlockEntity = worldIn.getBlockEntity(pos);
+        if (BlockEntity instanceof BlockEntityRack)
         {
-            final IItemHandler handler = ((AbstractTileEntityRack) tileentity).getInventory();
+            final IItemHandler handler = ((AbstractBlockEntityRack) BlockEntity).getInventory();
             InventoryUtils.dropItemHandler(handler, worldIn, pos.getX(), pos.getY(), pos.getZ());
         }
         super.spawnAdditionalDrops(state, worldIn, pos, stack);
     }
 
     @Override
-    public ActionResultType onBlockActivated(
-      final BlockState state,
-      final World worldIn,
-      final BlockPos pos,
-      final PlayerEntity player,
-      final Hand hand,
-      final BlockRayTraceResult ray)
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit)
     {
-        final IColony colony = IColonyManager.getInstance().getColonyByPosFromWorld(worldIn, pos);
-        final TileEntity tileEntity = worldIn.getTileEntity(pos);
+        final Colony colony = ColonyManager.getInstance().getColonyByPosFromWorld(world, pos);
+        final BlockEntity BlockEntity = world.getBlockEntity(pos);
 
         if ((colony == null || colony.getPermissions().hasPermission(player, Action.ACCESS_HUTS))
-              && tileEntity instanceof TileEntityRack)
+                && BlockEntity instanceof BlockEntityRack)
         {
-            final TileEntityRack rack = (TileEntityRack) tileEntity;
+            final BlockEntityRack rack = (BlockEntityRack) BlockEntity;
             if (!worldIn.isRemote)
             {
                 NetworkHooks.openGui((ServerPlayerEntity) player,
-                  rack,
-                  buf -> buf.writeBlockPos(rack.getPos()).writeBlockPos(rack.getOtherChest() == null ? BlockPos.ZERO : rack.getOtherChest().getPos()));
+                        rack,
+                        buf -> buf.writeBlockPos(rack.getPos()).writeBlockPos(rack.getOtherChest() == null ? BlockPos.ZERO : rack.getOtherChest().getPos()));
             }
-            return ActionResultType.SUCCESS;
+            return ActionResult.SUCCESS;
         }
-        return ActionResultType.FAIL;
+        return ActionResult.FAIL;
     }
+
 
     @Override
     public void onBlockPlacedBy(final World worldIn, final BlockPos pos, final BlockState state, @Nullable final LivingEntity placer, final ItemStack stack)
@@ -254,25 +216,6 @@ public class BlockMinecoloniesRack extends AbstractBlockMinecoloniesRack<BlockMi
     }
 
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
-    {
-        builder.add(FACING, VARIANT);
-    }
-
-    @Override
-    public boolean hasTileEntity(final BlockState state)
-    {
-        return true;
-    }
-
-    @Nullable
-    @Override
-    public TileEntity createTileEntity(final BlockState state, final IBlockReader world)
-    {
-        return new TileEntityRack();
-    }
-
-    @Override
     public List<ItemStack> getDrops(final BlockState state, final LootContext.Builder builder)
     {
         final List<ItemStack> drops = new ArrayList<>();
@@ -281,23 +224,27 @@ public class BlockMinecoloniesRack extends AbstractBlockMinecoloniesRack<BlockMi
     }
 
     @Override
-    public void onReplaced(BlockState state, @NotNull World worldIn, @NotNull BlockPos pos, BlockState newState, boolean isMoving)
+    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved)
     {
         if (state.getBlock() != newState.getBlock())
         {
-            TileEntity tileEntity = worldIn.getTileEntity(pos);
-            if (tileEntity instanceof TileEntityRack)
+            BlockEntity BlockEntity = world.getBlockEntity(pos);
+            if(BlockEntity instanceof BlockEntityRack)
             {
-                TileEntityRack tileEntityRack = (TileEntityRack) tileEntity;
-                InventoryUtils.dropItemHandler(tileEntityRack.getInventory(),
-                  worldIn,
-                  tileEntityRack.getPos().getX(),
-                  tileEntityRack.getPos().getY(),
-                  tileEntityRack.getPos().getZ());
+                BlockEntityRack BlockEntityRack = (BlockEntityRack) BlockEntity;
+                InventoryUtils.dropItemHandler(BlockEntityRack.getInventory(),
+                        world,
+                        BlockEntityRack.getPos().getX(),
+                        BlockEntityRack.getPos().getY(),
+                        BlockEntityRack.getPos().getZ());
                 worldIn.updateComparatorOutputLevel(pos, this);
             }
-
-            super.onReplaced(state, worldIn, pos, newState, isMoving);
         }
+        super.onStateReplaced(state, world, pos, newState, moved);
+    }
+
+    public static boolean shouldBlockBeReplacedWithRack(final Block block)
+    {
+        return block == Blocks.CHEST || block instanceof BlockMinecoloniesRack;
     }
 }

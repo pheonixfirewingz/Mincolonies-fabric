@@ -1,6 +1,5 @@
 package com.minecolonies.coremod.event;
 
-import com.minecolonies.api.colony.IColonyManager;
 import com.minecolonies.coremod.Network;
 import com.minecolonies.coremod.datalistener.CrafterRecipeListener;
 import com.minecolonies.coremod.entity.pathfinding.Pathfinding;

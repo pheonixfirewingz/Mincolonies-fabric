@@ -1,6 +1,5 @@
 package com.minecolonies.coremod.network.messages.server.colony.building.farmer;
 
-import com.minecolonies.api.colony.IColony;
 import com.minecolonies.api.colony.buildings.views.IBuildingView;
 import com.minecolonies.coremod.colony.buildings.workerbuildings.BuildingFarmer;
 import com.minecolonies.coremod.network.messages.server.AbstractBuildingServerMessage;

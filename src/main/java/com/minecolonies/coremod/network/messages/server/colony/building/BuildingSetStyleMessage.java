@@ -1,7 +1,6 @@
 package com.minecolonies.coremod.network.messages.server.colony.building;
 
 import com.ldtteam.structurize.util.PlacementSettings;
-import com.minecolonies.api.colony.IColony;
 import com.minecolonies.api.colony.buildings.IBuilding;
 import com.minecolonies.api.colony.buildings.views.IBuildingView;
 import com.minecolonies.api.util.BlockPosUtil;

@@ -1,8 +1,6 @@
 package com.minecolonies.api.tileentities;
 
 import com.minecolonies.api.blocks.ModBlocks;
-import com.minecolonies.api.colony.IColonyManager;
-import com.minecolonies.api.colony.IColonyView;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.DyeColor;

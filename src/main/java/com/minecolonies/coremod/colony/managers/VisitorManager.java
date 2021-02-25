@@ -2,7 +2,6 @@ package com.minecolonies.coremod.colony.managers;
 
 import com.minecolonies.api.colony.ICitizenData;
 import com.minecolonies.api.colony.ICivilianData;
-import com.minecolonies.api.colony.IColony;
 import com.minecolonies.api.colony.IVisitorData;
 import com.minecolonies.api.colony.managers.interfaces.IVisitorManager;
 import com.minecolonies.api.entity.ModEntities;

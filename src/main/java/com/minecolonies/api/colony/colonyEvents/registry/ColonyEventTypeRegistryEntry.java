@@ -1,6 +1,5 @@
 package com.minecolonies.api.colony.colonyEvents.registry;
 
-import com.minecolonies.api.colony.IColony;
 import com.minecolonies.api.colony.colonyEvents.IColonyEvent;
 import com.minecolonies.api.util.Log;
 import net.minecraft.nbt.CompoundNBT;

@@ -1,6 +1,5 @@
 package com.minecolonies.coremod.research;
 
-import com.minecolonies.api.colony.IColony;
 import com.minecolonies.api.colony.buildings.IBuilding;
 import com.minecolonies.api.research.IResearchRequirement;
 import net.minecraft.util.text.TranslationTextComponent;

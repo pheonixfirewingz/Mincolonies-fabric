@@ -1,8 +1,6 @@
 package com.minecolonies.coremod.tileentities;
 
-import com.minecolonies.api.blocks.AbstractBlockBarrel;
 import com.minecolonies.api.blocks.ModBlocks;
-import com.minecolonies.api.colony.IColonyManager;
 import com.minecolonies.api.items.ModItems;
 import com.minecolonies.api.tileentities.AbstractTileEntityBarrel;
 import com.minecolonies.api.tileentities.MinecoloniesTileEntities;

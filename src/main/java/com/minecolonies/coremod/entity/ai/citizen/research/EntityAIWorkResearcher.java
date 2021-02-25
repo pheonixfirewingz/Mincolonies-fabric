@@ -1,6 +1,5 @@
 package com.minecolonies.coremod.entity.ai.citizen.research;
 
-import com.minecolonies.api.colony.IColony;
 import com.minecolonies.api.entity.ai.statemachine.AITarget;
 import com.minecolonies.api.entity.ai.statemachine.states.IAIState;
 import com.minecolonies.api.research.ILocalResearch;

@@ -1,14 +1,11 @@
 package com.minecolonies.coremod.entity.ai.citizen.cook;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.reflect.TypeToken;
 import com.ldtteam.structurize.util.LanguageHandler;
-import com.minecolonies.api.colony.IColonyManager;
 import com.minecolonies.api.colony.interactionhandling.ChatPriority;
 import com.minecolonies.api.colony.permissions.Action;
 import com.minecolonies.api.colony.requestsystem.requestable.Food;
 import com.minecolonies.api.colony.requestsystem.requestable.IRequestable;
-import com.minecolonies.api.colony.requestsystem.requestable.StackList;
 import com.minecolonies.api.crafting.ItemStorage;
 import com.minecolonies.api.entity.ai.statemachine.AITarget;
 import com.minecolonies.api.entity.ai.statemachine.states.IAIState;

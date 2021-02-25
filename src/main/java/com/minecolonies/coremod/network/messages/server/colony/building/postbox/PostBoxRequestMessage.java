@@ -1,6 +1,5 @@
 package com.minecolonies.coremod.network.messages.server.colony.building.postbox;
 
-import com.minecolonies.api.colony.IColony;
 import com.minecolonies.api.colony.requestsystem.requestable.Stack;
 import com.minecolonies.coremod.colony.buildings.views.AbstractBuildingView;
 import com.minecolonies.coremod.colony.buildings.workerbuildings.PostBox;

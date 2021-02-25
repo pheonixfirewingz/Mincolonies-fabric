@@ -6,7 +6,6 @@ import com.ldtteam.blockout.controls.ItemIcon;
 import com.ldtteam.blockout.controls.Text;
 import com.ldtteam.blockout.controls.TextField;
 import com.ldtteam.blockout.views.ScrollingList;
-import com.minecolonies.api.colony.IColonyManager;
 import com.minecolonies.api.util.constant.Constants;
 import com.minecolonies.coremod.Network;
 import com.minecolonies.coremod.colony.buildings.views.AbstractBuildingView;

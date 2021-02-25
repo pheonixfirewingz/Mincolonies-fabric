@@ -2,7 +2,6 @@ package com.minecolonies.coremod.colony.jobs.registry;
 
 import com.minecolonies.api.colony.ICitizenData;
 import com.minecolonies.api.colony.ICitizenDataView;
-import com.minecolonies.api.colony.IColonyView;
 import com.minecolonies.api.colony.jobs.IJob;
 import com.minecolonies.api.colony.jobs.IJobView;
 import com.minecolonies.api.colony.jobs.ModJobs;

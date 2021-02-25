@@ -1,6 +1,5 @@
 package com.minecolonies.coremod.network.messages.server.colony.building;
 
-import com.minecolonies.api.colony.IColony;
 import com.minecolonies.api.colony.buildings.IBuilding;
 import com.minecolonies.api.crafting.ItemStorage;
 import com.minecolonies.api.util.InventoryUtils;

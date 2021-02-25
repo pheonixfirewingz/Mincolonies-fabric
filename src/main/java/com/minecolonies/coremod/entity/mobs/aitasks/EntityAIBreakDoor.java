@@ -1,7 +1,6 @@
 package com.minecolonies.coremod.entity.mobs.aitasks;
 
 import com.minecolonies.api.blocks.decorative.AbstractBlockGate;
-import com.minecolonies.api.colony.IColony;
 import com.minecolonies.api.entity.mobs.AbstractEntityMinecoloniesMob;
 import com.minecolonies.coremod.research.AdditionModifierResearchEffect;
 import net.minecraft.block.BlockState;

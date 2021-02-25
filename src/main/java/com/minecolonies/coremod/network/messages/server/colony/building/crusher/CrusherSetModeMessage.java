@@ -1,6 +1,5 @@
 package com.minecolonies.coremod.network.messages.server.colony.building.crusher;
 
-import com.minecolonies.api.colony.IColony;
 import com.minecolonies.api.crafting.ItemStorage;
 import com.minecolonies.coremod.colony.buildings.workerbuildings.BuildingCrusher;
 import com.minecolonies.coremod.network.messages.server.AbstractBuildingServerMessage;

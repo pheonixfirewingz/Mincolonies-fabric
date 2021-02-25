@@ -1,6 +1,5 @@
 package com.minecolonies.api.colony.colonyEvents;
 
-import com.minecolonies.api.colony.IColony;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;

@@ -1,6 +1,5 @@
 package com.minecolonies.coremod.colony.buildings.views;
 
-import com.minecolonies.api.colony.IColonyView;
 import com.minecolonies.coremod.colony.buildings.AbstractBuildingWorker;
 import com.minecolonies.coremod.colony.buildings.utils.BuildingBuilderResource;
 import net.minecraft.item.ItemStack;

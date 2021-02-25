@@ -2,9 +2,7 @@ package com.minecolonies.coremod.colony.managers;
 
 import com.ldtteam.structurize.util.LanguageHandler;
 import com.minecolonies.api.colony.ICitizenData;
-import com.minecolonies.api.colony.ICitizenDataManager;
 import com.minecolonies.api.colony.ICivilianData;
-import com.minecolonies.api.colony.IColony;
 import com.minecolonies.api.colony.buildings.IBuilding;
 import com.minecolonies.api.colony.managers.interfaces.ICitizenManager;
 import com.minecolonies.api.entity.ModEntities;

@@ -2,8 +2,6 @@ package com.minecolonies.coremod.colony;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
-import com.minecolonies.api.colony.IColony;
-import com.minecolonies.api.colony.IColonyManager;
 import com.minecolonies.api.util.Log;
 import com.minecolonies.api.util.NBTUtils;
 import net.minecraft.nbt.CompoundNBT;

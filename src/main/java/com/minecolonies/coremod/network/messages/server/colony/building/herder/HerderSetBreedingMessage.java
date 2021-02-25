@@ -1,6 +1,5 @@
 package com.minecolonies.coremod.network.messages.server.colony.building.herder;
 
-import com.minecolonies.api.colony.IColony;
 import com.minecolonies.coremod.colony.buildings.AbstractBuildingHerder;
 import com.minecolonies.coremod.network.messages.server.AbstractBuildingServerMessage;
 import net.minecraft.network.PacketBuffer;

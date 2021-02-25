@@ -1,6 +1,5 @@
 package com.minecolonies.coremod.network.messages.server.colony;
 
-import com.minecolonies.api.colony.IColony;
 import com.minecolonies.api.colony.buildings.views.IBuildingView;
 import com.minecolonies.coremod.network.messages.server.AbstractColonyServerMessage;
 import net.minecraft.network.PacketBuffer;

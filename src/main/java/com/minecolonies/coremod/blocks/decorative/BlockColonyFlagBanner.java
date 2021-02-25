@@ -1,25 +1,15 @@
 package com.minecolonies.coremod.blocks.decorative;
 
-import com.google.common.collect.Maps;
-import com.minecolonies.api.blocks.decorative.AbstractColonyFlagBanner;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.DyeColor;
-import net.minecraft.state.IntegerProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.Rotation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.IWorldReader;
+import com.minecolonies.api.colony.*;
+import com.minecolonies.api.tileentities.TileEntityColonyFlag;
+import net.minecraft.block.*;
+import net.minecraft.client.sound.*;
+import net.minecraft.entity.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.item.*;
+import net.minecraft.state.property.*;
+import net.minecraft.util.*;
+import net.minecraft.util.shape.*;
 
 import java.util.Map;
 
@@ -27,15 +17,17 @@ import java.util.Map;
  * A custom banner block to construct the associated tile entity that will render the colony flag.
  * This is the floor version. For the wall version: {@link BlockColonyFlagWallBanner}
  */
-public class BlockColonyFlagBanner extends AbstractColonyFlagBanner<BlockColonyFlagBanner>
+public class BlockColonyFlagBanner extends AbstractBannerBlock implements BlockEntityProvider
 {
-    public static final IntegerProperty ROTATION = BlockStateProperties.ROTATION_0_15;
-    private static final VoxelShape SHAPE = Block.makeCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 16.0D, 12.0D);
+    public static final IntProperty ROTATION = BlockStateProperties.ROTATION_0_15;
+    private static final VoxelShape SHAPE = VoxelShape.cuboid(4.0D, 0.0D, 4.0D, 12.0D, 16.0D, 12.0D);
 
     public BlockColonyFlagBanner()
     {
-        super();
-        setRegistryName(REGISTRY_NAME);
+        super(DyeColor.WHITE,
+                Settings.of(Material.WOOD).strength(1F).sounds()
+                        .doesNotBlockMovement()
+                        .sound(SoundType.WOOD));
 
         this.setDefaultState(this.stateContainer.getBaseState().with(ROTATION, Integer.valueOf(0)));
     }
@@ -82,5 +74,32 @@ public class BlockColonyFlagBanner extends AbstractColonyFlagBanner<BlockColonyF
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
         builder.add(ROTATION);
+    }
+
+    @Override
+    public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack)
+    {
+        if(worldIn.isClient()) return;
+
+        TileEntity te = worldIn.getTileEntity(pos);
+        if(te instanceof TileEntityColonyFlag)
+        {
+            IColony colony = IColonyManager.getInstance().getIColony(worldIn, pos);
+
+            // Allow the player to place their own beyond the colony
+            if(colony == null && placer instanceof PlayerEntity)
+                IColonyManager.getInstance().getIColonyByOwner(worldIn, (PlayerEntity) placer);
+
+            if(colony != null)
+                ((TileEntityColonyFlag) te).colonyId = colony.getID();
+        }
+
+    }
+
+    @Override
+    public ItemStack getItem(IBlockReader worldIn, BlockPos pos, BlockState state)
+    {
+        TileEntity tileentity = worldIn.getTileEntity(pos);
+        return tileentity instanceof TileEntityColonyFlag ? ((TileEntityColonyFlag) tileentity).getItem() : super.getItem(worldIn, pos, state);
     }
 }

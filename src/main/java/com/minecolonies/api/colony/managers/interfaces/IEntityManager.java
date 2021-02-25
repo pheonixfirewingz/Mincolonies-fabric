@@ -1,7 +1,6 @@
 package com.minecolonies.api.colony.managers.interfaces;
 
 import com.minecolonies.api.colony.ICivilianData;
-import com.minecolonies.api.colony.IColony;
 import com.minecolonies.api.entity.citizen.AbstractCivilianEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.nbt.CompoundNBT;

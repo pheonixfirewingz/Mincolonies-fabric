@@ -2,7 +2,6 @@ package com.minecolonies.coremod.client.gui.containers;
 
 import com.google.common.collect.ImmutableList;
 import com.ldtteam.structurize.util.LanguageHandler;
-import com.minecolonies.api.colony.IColonyManager;
 import com.minecolonies.api.inventory.container.ContainerCraftingFurnace;
 import com.minecolonies.api.util.ItemStackUtils;
 import com.minecolonies.api.util.constant.Constants;

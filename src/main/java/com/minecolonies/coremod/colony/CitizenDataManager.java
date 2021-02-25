@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 
 import static com.minecolonies.api.util.constant.NbtTagConstants.TAG_ID;
 
-public class CitizenDataManager implements ICitizenDataManager
+public class CitizenDataManager
 {
     @Override
     public ICitizenData createFromNBT(@NotNull final CompoundNBT compound, final IColony colony)

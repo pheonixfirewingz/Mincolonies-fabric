@@ -3,8 +3,6 @@ package com.minecolonies.coremod.client.gui;
 import com.ldtteam.blockout.controls.ButtonImage;
 import com.ldtteam.blockout.controls.Text;
 import com.ldtteam.structurize.util.LanguageHandler;
-import com.minecolonies.api.colony.IColony;
-import com.minecolonies.api.colony.IColonyManager;
 import com.minecolonies.api.colony.IColonyTagCapability;
 import com.minecolonies.api.util.BlockPosUtil;
 import com.minecolonies.coremod.Network;

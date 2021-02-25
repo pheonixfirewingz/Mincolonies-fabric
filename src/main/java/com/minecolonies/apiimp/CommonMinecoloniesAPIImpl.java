@@ -2,8 +2,6 @@ package com.minecolonies.apiimp;
 
 import com.minecolonies.api.IMinecoloniesAPI;
 import com.minecolonies.api.client.render.modeltype.registry.IModelTypeRegistry;
-import com.minecolonies.api.colony.ICitizenDataManager;
-import com.minecolonies.api.colony.IColonyManager;
 import com.minecolonies.api.colony.buildings.registry.BuildingEntry;
 import com.minecolonies.api.colony.buildings.registry.IBuildingDataManager;
 import com.minecolonies.api.colony.colonyEvents.registry.ColonyEventDescriptionTypeRegistryEntry;

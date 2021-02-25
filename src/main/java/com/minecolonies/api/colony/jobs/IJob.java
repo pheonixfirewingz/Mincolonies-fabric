@@ -2,7 +2,6 @@ package com.minecolonies.api.colony.jobs;
 
 import com.minecolonies.api.client.render.modeltype.IModelType;
 import com.minecolonies.api.colony.ICitizenData;
-import com.minecolonies.api.colony.IColony;
 import com.minecolonies.api.colony.jobs.registry.JobEntry;
 import com.minecolonies.api.colony.requestsystem.token.IToken;
 import com.minecolonies.api.entity.citizen.AbstractEntityCitizen;

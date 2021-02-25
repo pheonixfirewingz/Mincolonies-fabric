@@ -1,7 +1,6 @@
 package com.minecolonies.coremod.client.gui;
 
 import com.minecolonies.api.colony.ICitizenDataView;
-import com.minecolonies.api.colony.IColonyView;
 import com.minecolonies.api.entity.citizen.Skill;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.Style;

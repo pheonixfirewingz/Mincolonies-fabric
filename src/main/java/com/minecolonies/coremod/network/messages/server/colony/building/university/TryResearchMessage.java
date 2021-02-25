@@ -1,6 +1,5 @@
 package com.minecolonies.coremod.network.messages.server.colony.building.university;
 
-import com.minecolonies.api.colony.IColony;
 import com.minecolonies.api.colony.buildings.views.IBuildingView;
 import com.minecolonies.api.crafting.ItemStorage;
 import com.minecolonies.api.research.IGlobalResearch;

@@ -3,7 +3,6 @@ package com.minecolonies.api.colony.jobs.registry;
 import com.minecolonies.api.IMinecoloniesAPI;
 import com.minecolonies.api.colony.ICitizenData;
 import com.minecolonies.api.colony.ICitizenDataView;
-import com.minecolonies.api.colony.IColonyView;
 import com.minecolonies.api.colony.jobs.IJob;
 import com.minecolonies.api.colony.jobs.IJobView;
 import net.minecraft.nbt.CompoundNBT;

@@ -1,7 +1,6 @@
 package com.minecolonies.coremod.commands.generalcommands;
 
 import com.ldtteam.structurize.util.LanguageHandler;
-import com.minecolonies.api.colony.IColony;
 import com.minecolonies.coremod.colony.IColonyManagerCapability;
 import com.minecolonies.coremod.commands.commandTypes.IMCCommand;
 import com.minecolonies.coremod.commands.commandTypes.IMCOPCommand;

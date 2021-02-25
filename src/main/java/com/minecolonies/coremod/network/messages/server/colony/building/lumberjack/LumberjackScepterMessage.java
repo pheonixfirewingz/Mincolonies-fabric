@@ -1,6 +1,5 @@
 package com.minecolonies.coremod.network.messages.server.colony.building.lumberjack;
 
-import com.minecolonies.api.colony.IColony;
 import com.minecolonies.api.colony.buildings.views.IBuildingView;
 import com.minecolonies.api.items.ModItems;
 import com.minecolonies.api.util.BlockPosUtil;

@@ -1,6 +1,5 @@
 package com.minecolonies.api.entity.pathfinding;
 
-import com.minecolonies.api.colony.IColony;
 import com.minecolonies.api.crafting.ItemStorage;
 import com.minecolonies.api.util.Tuple;
 import net.minecraft.entity.Entity;

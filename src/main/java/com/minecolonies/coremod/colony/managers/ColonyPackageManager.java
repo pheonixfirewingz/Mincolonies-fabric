@@ -2,7 +2,6 @@ package com.minecolonies.coremod.colony.managers;
 
 import com.ldtteam.structurize.management.Structures;
 import com.minecolonies.api.colony.managers.interfaces.IColonyPackageManager;
-import com.minecolonies.api.colony.workorders.IWorkManager;
 import com.minecolonies.api.colony.workorders.IWorkOrder;
 import com.minecolonies.coremod.Network;
 import com.minecolonies.coremod.colony.Colony;
@@ -25,7 +24,6 @@ import java.util.List;
 import java.util.Set;
 
 import static com.minecolonies.api.util.constant.ColonyConstants.UPDATE_STATE_INTERVAL;
-import static com.minecolonies.api.util.constant.ColonyConstants.UPDATE_SUBSCRIBERS_INTERVAL;
 import static com.minecolonies.api.util.constant.Constants.TICKS_HOUR;
 
 public class ColonyPackageManager implements IColonyPackageManager

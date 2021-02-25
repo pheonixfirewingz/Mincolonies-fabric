@@ -4,7 +4,6 @@ import com.ldtteam.blockout.controls.Button;
 import com.ldtteam.blockout.controls.ButtonHandler;
 import com.ldtteam.blockout.controls.Image;
 import com.ldtteam.blockout.views.Window;
-import com.minecolonies.api.colony.IColonyView;
 import com.minecolonies.api.util.constant.Constants;
 import com.minecolonies.coremod.Network;
 import com.minecolonies.coremod.colony.ColonyView;

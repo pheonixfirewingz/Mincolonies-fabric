@@ -1,4 +1,4 @@
-package com.minecolonies.api.blocks;
+package com.minecolonies.coremod.blocks.abstracts;
 
 import com.ldtteam.structurize.blocks.interfaces.IAnchorBlock;
 import com.ldtteam.structurize.util.LanguageHandler;
@@ -35,7 +35,7 @@ import org.jetbrains.annotations.*;
  * All AbstractBlockHut[something] should extend this class.
  */
 @SuppressWarnings("PMD.ExcessiveImports")
-public abstract class AbstractBlockHut<B extends AbstractBlockHut<B>> extends AbstractBlockMinecolonies<B> implements IBuilderUndestroyable, IAnchorBlock
+public abstract class AbstractBlockHut<B extends AbstractBlockHut<B>> extends Block implements IBuilderUndestroyable, IAnchorBlock
 {
 	/**
 	 * Hardness factor of the pvp mode.

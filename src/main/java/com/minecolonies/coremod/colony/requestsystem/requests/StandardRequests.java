@@ -2,8 +2,6 @@ package com.minecolonies.coremod.colony.requestsystem.requests;
 
 import com.google.common.collect.ImmutableList;
 import com.minecolonies.api.colony.ICitizenDataView;
-import com.minecolonies.api.colony.IColonyManager;
-import com.minecolonies.api.colony.IColonyView;
 import com.minecolonies.api.colony.buildings.IBuildingWorkerView;
 import com.minecolonies.api.colony.buildings.views.IBuildingView;
 import com.minecolonies.api.colony.requestsystem.request.RequestState;

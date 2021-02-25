@@ -1,6 +1,5 @@
 package com.minecolonies.coremod.network.messages.client.colony;
 
-import com.minecolonies.api.colony.IColonyManager;
 import com.minecolonies.api.colony.workorders.IWorkOrder;
 import com.minecolonies.api.colony.workorders.WorkOrderView;
 import com.minecolonies.api.network.IMessage;

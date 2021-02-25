@@ -1,12 +1,11 @@
-package com.minecolonies.api.blocks.types;
+package com.minecolonies.coremod.blocks.types;
 
-import com.minecolonies.api.blocks.AbstractBlockMinecoloniesRack;
 import net.minecraft.util.*;
 
 /**
- * Defines the types of Racks that the {@link AbstractBlockMinecoloniesRack} supports.
+ * Defines the types of Racks that the  supports.
  */
-public enum RackType implements IStringSerializable
+public enum RackType implements StringIdentifiable
 {
 	DEFAULT(0, "blockrackemptysingle", "emptysingle"),
 	FULL(1, "blockrackfullsingle", "fullsingle"),
@@ -67,8 +66,7 @@ public enum RackType implements IStringSerializable
 		return this.unlocalizedName;
 	}
 
-	@Override
-	public String getString()
+	@Override public String asString()
 	{
 		return getName();
 	}

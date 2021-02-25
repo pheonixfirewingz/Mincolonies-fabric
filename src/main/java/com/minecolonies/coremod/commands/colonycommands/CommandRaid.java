@@ -2,8 +2,6 @@ package com.minecolonies.coremod.commands.colonycommands;
 
 import com.ldtteam.structurize.util.LanguageHandler;
 import com.minecolonies.api.IMinecoloniesAPI;
-import com.minecolonies.api.colony.IColony;
-import com.minecolonies.api.colony.IColonyManager;
 import com.minecolonies.api.colony.colonyEvents.registry.ColonyEventTypeRegistryEntry;
 import com.minecolonies.coremod.colony.colonyEvents.raidEvents.norsemenevent.NorsemenShipRaidEvent;
 import com.minecolonies.coremod.colony.colonyEvents.raidEvents.pirateEvent.PirateGroundRaidEvent;

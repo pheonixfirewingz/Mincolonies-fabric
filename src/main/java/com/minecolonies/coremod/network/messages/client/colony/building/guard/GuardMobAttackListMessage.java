@@ -1,7 +1,5 @@
 package com.minecolonies.coremod.network.messages.client.colony.building.guard;
 
-import com.minecolonies.api.colony.IColonyManager;
-import com.minecolonies.api.colony.IColonyView;
 import com.minecolonies.api.colony.buildings.views.MobEntryView;
 import com.minecolonies.api.network.IMessage;
 import com.minecolonies.coremod.colony.buildings.AbstractBuildingGuards;

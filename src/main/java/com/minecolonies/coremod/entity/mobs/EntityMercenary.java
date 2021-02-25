@@ -1,8 +1,6 @@
 package com.minecolonies.coremod.entity.mobs;
 
 import com.ldtteam.structurize.util.LanguageHandler;
-import com.minecolonies.api.colony.IColony;
-import com.minecolonies.api.colony.IColonyManager;
 import com.minecolonies.api.colony.IColonyRelated;
 import com.minecolonies.api.entity.CustomGoalSelector;
 import com.minecolonies.api.entity.ModEntities;

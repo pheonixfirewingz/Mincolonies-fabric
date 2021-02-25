@@ -1,6 +1,5 @@
 package com.minecolonies.coremod.network.messages.client.colony;
 
-import com.minecolonies.api.colony.IColonyManager;
 import com.minecolonies.api.network.IMessage;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.RegistryKey;

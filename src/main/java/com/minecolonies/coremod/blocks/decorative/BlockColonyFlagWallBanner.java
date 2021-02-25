@@ -3,7 +3,12 @@ package com.minecolonies.coremod.blocks.decorative;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.minecolonies.api.blocks.decorative.AbstractColonyFlagBanner;
+import com.minecolonies.api.colony.*;
+import com.minecolonies.api.tileentities.TileEntityColonyFlag;
 import net.minecraft.block.*;
+import net.minecraft.entity.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.item.*;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.DyeColor;
 import net.minecraft.state.DirectionProperty;
@@ -14,6 +19,7 @@ import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.world.*;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
@@ -24,7 +30,7 @@ import java.util.Map;
  * A custom banner block to construct the associated tile entity that will render the colony flag.
  * This is the wall version. For the floor version: {@link BlockColonyFlagBanner}
  */
-public class BlockColonyFlagWallBanner extends AbstractColonyFlagBanner<BlockColonyFlagWallBanner>
+public class BlockColonyFlagWallBanner extends AbstractBannerBlock implements BlockEntityProvider
 {
     public static final DirectionProperty          HORIZONTAL_FACING = HorizontalBlock.HORIZONTAL_FACING;
     private static final Map<Direction, VoxelShape> BANNER_SHAPES     = Maps.newEnumMap(ImmutableMap.of(
@@ -35,7 +41,11 @@ public class BlockColonyFlagWallBanner extends AbstractColonyFlagBanner<BlockCol
 
     public BlockColonyFlagWallBanner()
     {
-        super();
+        super(DyeColor.WHITE,
+                Properties.create(Material.WOOD)
+                        .doesNotBlockMovement()
+                        .hardnessAndResistance(1F)
+                        .sound(SoundType.WOOD));
         setRegistryName(REGISTRY_NAME_WALL);
 
         this.setDefaultState(this.stateContainer.getBaseState().with(HORIZONTAL_FACING, Direction.NORTH));
@@ -98,4 +108,31 @@ public class BlockColonyFlagWallBanner extends AbstractColonyFlagBanner<BlockCol
 
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) { builder.add(HORIZONTAL_FACING); }
+
+    @Override
+    public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack)
+    {
+        if(worldIn.isRemote) return;
+
+        TileEntity te = worldIn.getTileEntity(pos);
+        if(te instanceof TileEntityColonyFlag)
+        {
+            IColony colony = IColonyManager.getInstance().getIColony(worldIn, pos);
+
+            // Allow the player to place their own beyond the colony
+            if(colony == null && placer instanceof PlayerEntity)
+                IColonyManager.getInstance().getIColonyByOwner(worldIn, (PlayerEntity) placer);
+
+            if(colony != null)
+                ((TileEntityColonyFlag) te).colonyId = colony.getID();
+        }
+
+    }
+
+    @Override
+    public ItemStack getItem(IBlockReader worldIn, BlockPos pos, BlockState state)
+    {
+        TileEntity tileentity = worldIn.getTileEntity(pos);
+        return tileentity instanceof TileEntityColonyFlag ? ((TileEntityColonyFlag) tileentity).getItem() : super.getItem(worldIn, pos, state);
+    }
 }

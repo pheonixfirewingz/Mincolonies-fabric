@@ -2,8 +2,6 @@ package com.minecolonies.coremod.network.messages.server;
 
 import com.ldtteam.structures.blueprints.v1.Blueprint;
 import com.ldtteam.structurize.util.PlacementSettings;
-import com.minecolonies.api.colony.IColony;
-import com.minecolonies.api.colony.IColonyManager;
 import com.minecolonies.api.colony.permissions.Action;
 import com.minecolonies.api.colony.workorders.IWorkOrder;
 import com.minecolonies.api.network.IMessage;

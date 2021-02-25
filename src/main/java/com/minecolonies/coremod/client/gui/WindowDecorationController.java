@@ -5,8 +5,6 @@ import com.ldtteam.blockout.controls.Text;
 import com.ldtteam.blockout.controls.TextField;
 import com.ldtteam.structurize.util.LanguageHandler;
 import com.ldtteam.structurize.util.PlacementSettings;
-import com.minecolonies.api.colony.IColonyManager;
-import com.minecolonies.api.colony.IColonyView;
 import com.minecolonies.api.colony.workorders.WorkOrderType;
 import com.minecolonies.api.colony.workorders.WorkOrderView;
 import com.minecolonies.api.util.LoadOnlyStructureHandler;

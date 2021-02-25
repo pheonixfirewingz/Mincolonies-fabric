@@ -9,7 +9,6 @@ import com.ldtteam.blockout.views.Box;
 import com.ldtteam.blockout.views.ScrollingList;
 import com.ldtteam.blockout.views.Window;
 import com.ldtteam.structurize.util.LanguageHandler;
-import com.minecolonies.api.colony.IColonyView;
 import com.minecolonies.api.crafting.IRecipeStorage;
 import com.minecolonies.api.util.constant.Constants;
 import com.minecolonies.api.util.constant.TranslationConstants;

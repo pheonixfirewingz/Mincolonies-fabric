@@ -1,8 +1,6 @@
 package com.minecolonies.coremod.placementhandlers;
 
 import com.ldtteam.structurize.placement.handlers.placement.IPlacementHandler;
-import com.minecolonies.api.colony.IColony;
-import com.minecolonies.api.colony.IColonyManager;
 import com.minecolonies.coremod.blocks.schematic.BlockWaypoint;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

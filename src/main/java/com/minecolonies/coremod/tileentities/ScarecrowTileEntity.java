@@ -1,9 +1,6 @@
 package com.minecolonies.coremod.tileentities;
 
 import com.ldtteam.structurize.blocks.ModBlocks;
-import com.minecolonies.api.colony.IColony;
-import com.minecolonies.api.colony.IColonyManager;
-import com.minecolonies.api.colony.IColonyView;
 import com.minecolonies.api.inventory.container.ContainerField;
 import com.minecolonies.api.tileentities.AbstractScarecrowTileEntity;
 import com.minecolonies.api.tileentities.ScareCrowType;

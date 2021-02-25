@@ -1,8 +1,6 @@
 package com.minecolonies.coremod.blocks;
 
 import com.minecolonies.api.blocks.huts.AbstractBlockMinecoloniesDefault;
-import com.minecolonies.api.colony.IColony;
-import com.minecolonies.api.colony.IColonyManager;
 import com.minecolonies.coremod.tileentities.ScarecrowTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
