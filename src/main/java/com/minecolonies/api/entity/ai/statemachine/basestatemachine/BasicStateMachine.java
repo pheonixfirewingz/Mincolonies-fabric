@@ -1,17 +1,11 @@
 package com.minecolonies.api.entity.ai.statemachine.basestatemachine;
 
-import com.minecolonies.api.entity.ai.statemachine.states.IState;
-import com.minecolonies.api.entity.ai.statemachine.states.IStateEventType;
-import com.minecolonies.api.entity.ai.statemachine.transitions.IStateMachineEvent;
-import com.minecolonies.api.entity.ai.statemachine.transitions.IStateMachineOneTimeEvent;
-import com.minecolonies.api.entity.ai.statemachine.transitions.IStateMachineTransition;
+import com.minecolonies.api.entity.ai.statemachine.states.*;
+import com.minecolonies.api.entity.ai.statemachine.transitions.*;
 import com.minecolonies.api.util.Log;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Consumer;
 
 /**

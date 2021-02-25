@@ -2,14 +2,12 @@ package com.minecolonies.coremod.colony.managers;
 
 import com.ldtteam.structurize.util.LanguageHandler;
 import com.ldtteam.structurize.util.PlacementSettings;
-import com.minecolonies.api.colony.ICitizenData;
 import com.minecolonies.api.colony.IColonyTagCapability;
 import com.minecolonies.api.colony.buildings.IBuilding;
 import com.minecolonies.api.colony.buildings.IRSComponent;
 import com.minecolonies.api.colony.buildings.registry.IBuildingDataManager;
 import com.minecolonies.api.colony.buildings.workerbuildings.ITownHall;
 import com.minecolonies.api.colony.buildings.workerbuildings.IWareHouse;
-import com.minecolonies.api.colony.managers.interfaces.IBuildingManager;
 import com.minecolonies.api.entity.citizen.AbstractEntityCitizen;
 import com.minecolonies.api.tileentities.AbstractScarecrowTileEntity;
 import com.minecolonies.api.tileentities.AbstractTileEntityColonyBuilding;
@@ -47,7 +45,7 @@ import java.util.function.Predicate;
 import static com.minecolonies.api.util.constant.NbtTagConstants.*;
 import static com.minecolonies.coremod.MineColonies.CLOSE_COLONY_CAP;
 
-public class BuildingManager implements IBuildingManager
+public class BuildingManager
 {
     /**
      * List of building in the colony.
@@ -104,7 +102,7 @@ public class BuildingManager implements IBuildingManager
         this.colony = colony;
     }
 
-    @Override
+    
     public void read(@NotNull final CompoundNBT compound)
     {
         buildings.clear();
@@ -166,7 +164,7 @@ public class BuildingManager implements IBuildingManager
         }
     }
 
-    @Override
+    
     public void write(@NotNull final CompoundNBT compound)
     {
         //  Buildings
@@ -189,14 +187,14 @@ public class BuildingManager implements IBuildingManager
         compound.put(TAG_NEW_FIELDS, fieldTagList);
     }
 
-    @Override
+    
     public void clearDirty()
     {
         isBuildingsDirty = false;
         buildings.values().forEach(IBuilding::clearDirty);
     }
 
-    @Override
+    
     public void sendPackets(final Set<ServerPlayerEntity> closeSubscribers, final Set<ServerPlayerEntity> newSubscribers)
     {
         sendBuildingPackets(closeSubscribers, newSubscribers);
@@ -210,7 +208,7 @@ public class BuildingManager implements IBuildingManager
      *
      * @param colony the colony which is being ticked.
      */
-    @Override
+    
     public void onColonyTick(final IColony colony)
     {
         //  Tick Buildings
@@ -223,13 +221,13 @@ public class BuildingManager implements IBuildingManager
         }
     }
 
-    @Override
+    
     public void markBuildingsDirty()
     {
         isBuildingsDirty = true;
     }
 
-    @Override
+    
     public void cleanUpBuildings(@NotNull final IColony colony)
     {
         @Nullable final List<IBuilding> removedBuildings = new ArrayList<>();
@@ -284,7 +282,7 @@ public class BuildingManager implements IBuildingManager
      * @param buildingId ID (coordinates) of the building to get.
      * @return AbstractBuilding belonging to the given ID.
      */
-    @Override
+    
     public IBuilding getBuilding(final BlockPos buildingId)
     {
         if (buildingId != null)
@@ -295,7 +293,7 @@ public class BuildingManager implements IBuildingManager
     }
 
     @Nullable
-    @Override
+    
     public IWareHouse getClosestWarehouseInColony(final BlockPos pos)
     {
         IWareHouse wareHouse = null;
@@ -316,53 +314,53 @@ public class BuildingManager implements IBuildingManager
         return wareHouse;
     }
 
-    @Override
+    
     public boolean isWithinBuildingZone(final int chunkX, final int chunkZ)
     {
         return chunkX <= maxChunkX && chunkX >= minChunkX && chunkZ <= maxChunkZ && chunkZ >= minChunkZ;
     }
 
     @NotNull
-    @Override
+    
     public Map<BlockPos, IBuilding> getBuildings()
     {
         return Collections.unmodifiableMap(buildings);
     }
 
     @Nullable
-    @Override
+    
     public ITownHall getTownHall()
     {
         return townHall;
     }
 
-    @Override
+    
     public boolean hasWarehouse()
     {
         return !wareHouses.isEmpty();
     }
 
-    @Override
+    
     public boolean hasTownHall()
     {
         return townHall != null;
     }
 
     @NotNull
-    @Override
+    
     public List<BlockPos> getFields()
     {
         return Collections.unmodifiableList(fields);
     }
 
-    @Override
+    
     public void addNewField(final AbstractScarecrowTileEntity tileEntity, final BlockPos pos, final World world)
     {
         addField(pos);
         markFieldsDirty();
     }
 
-    @Override
+    
     public <B extends IBuilding> B getBuilding(final BlockPos buildingId, @NotNull final Class<B> type)
     {
         try
@@ -376,7 +374,7 @@ public class BuildingManager implements IBuildingManager
         }
     }
 
-    @Override
+    
     public ScarecrowTileEntity getFreeField(final int owner, final World world)
     {
         for (@NotNull final BlockPos pos : fields)
@@ -390,7 +388,7 @@ public class BuildingManager implements IBuildingManager
         return null;
     }
 
-    @Override
+    
     public IBuilding addNewBuilding(@NotNull final AbstractTileEntityColonyBuilding tileEntity, final World world)
     {
         tileEntity.setColony(colony);
@@ -444,7 +442,7 @@ public class BuildingManager implements IBuildingManager
         return null;
     }
 
-    @Override
+    
     public void removeBuilding(@NotNull final IBuilding building, final Set<ServerPlayerEntity> subscribers)
     {
         if (buildings.remove(building.getID()) != null)
@@ -480,7 +478,7 @@ public class BuildingManager implements IBuildingManager
         colony.getCitizenManager().calculateMaxCitizens();
     }
 
-    @Override
+    
     public void removeField(final BlockPos pos)
     {
         this.markFieldsDirty();
@@ -488,7 +486,7 @@ public class BuildingManager implements IBuildingManager
         colony.markDirty();
     }
 
-    @Override
+    
     public BlockPos getBestRestaurant(final AbstractEntityCitizen citizen)
     {
         double distance = Double.MAX_VALUE;
@@ -508,7 +506,7 @@ public class BuildingManager implements IBuildingManager
         return goodCook;
     }
 
-    @Override
+    
     public BlockPos getBestHospital(final AbstractEntityCitizen citizen)
     {
         double distance = Double.MAX_VALUE;
@@ -528,7 +526,7 @@ public class BuildingManager implements IBuildingManager
         return goodHospital;
     }
 
-    @Override
+    
     public BlockPos getRandomBuilding(Predicate<IBuilding> filterPredicate)
     {
         final List<IBuilding> allowedBuildings = new ArrayList<>();
@@ -555,7 +553,7 @@ public class BuildingManager implements IBuildingManager
      * @param building the building to check.
      * @return false if no guard tower close, true in other cases
      */
-    @Override
+    
     public boolean hasGuardBuildingNear(final IBuilding building)
     {
         if (building == null)
@@ -583,7 +581,7 @@ public class BuildingManager implements IBuildingManager
         return false;
     }
 
-    @Override
+    
     public void guardBuildingChangedAt(final IBuilding guardBuilding, final int newLevel)
     {
         for (final IBuilding building : colony.getBuildingManager().getBuildings().values())
@@ -603,19 +601,19 @@ public class BuildingManager implements IBuildingManager
         }
     }
 
-    @Override
+    
     public void setTownHall(@Nullable final ITownHall building)
     {
         this.townHall = building;
     }
 
-    @Override
+    
     public List<IWareHouse> getWareHouses()
     {
         return wareHouses;
     }
 
-    @Override
+    
     public void removeWareHouse(final IWareHouse wareHouse)
     {
         wareHouses.remove(wareHouse);
@@ -717,7 +715,7 @@ public class BuildingManager implements IBuildingManager
         colony.markDirty();
     }
 
-    @Override
+    
     public boolean canPlaceAt(final Block block, final BlockPos pos, final PlayerEntity player)
     {
         if (block instanceof BlockHutWareHouse)

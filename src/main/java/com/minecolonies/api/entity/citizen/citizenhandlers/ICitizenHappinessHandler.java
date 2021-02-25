@@ -1,8 +1,7 @@
 package com.minecolonies.api.entity.citizen.citizenhandlers;
 
-import com.minecolonies.api.colony.ICitizenData;
 import com.minecolonies.api.entity.citizen.happiness.IHappinessModifier;
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.*;
 
 import java.util.List;
 

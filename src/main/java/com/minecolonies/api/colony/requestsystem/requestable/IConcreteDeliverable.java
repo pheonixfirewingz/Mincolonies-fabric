@@ -1,6 +1,6 @@
 package com.minecolonies.api.colony.requestsystem.requestable;
 
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 
 import java.util.List;
 

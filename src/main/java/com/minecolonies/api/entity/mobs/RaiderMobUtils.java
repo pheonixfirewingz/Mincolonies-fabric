@@ -2,31 +2,21 @@ package com.minecolonies.api.entity.mobs;
 
 import com.google.common.collect.Multimap;
 import com.minecolonies.api.IMinecoloniesAPI;
-import com.minecolonies.api.entity.mobs.barbarians.IChiefBarbarianEntity;
-import com.minecolonies.api.entity.mobs.barbarians.IMeleeBarbarianEntity;
+import com.minecolonies.api.entity.mobs.barbarians.*;
 import com.minecolonies.api.entity.mobs.egyptians.IPharaoEntity;
-import com.minecolonies.api.entity.mobs.pirates.ICaptainPirateEntity;
-import com.minecolonies.api.entity.mobs.pirates.IPirateEntity;
-import com.minecolonies.api.entity.mobs.vikings.IMeleeNorsemenEntity;
-import com.minecolonies.api.entity.mobs.vikings.INorsemenChiefEntity;
+import com.minecolonies.api.entity.mobs.pirates.*;
+import com.minecolonies.api.entity.mobs.vikings.*;
 import com.minecolonies.api.items.ModItems;
-import com.minecolonies.api.util.BlockPosUtil;
-import com.minecolonies.api.util.CompatibilityUtils;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ai.attributes.Attribute;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.attributes.RangedAttribute;
-import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.World;
+import com.minecolonies.api.util.*;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.attributes.*;
+import net.minecraft.entity.ai.goal.*;
+import net.minecraft.inventory.*;
+import net.minecraft.item.*;
+import net.minecraft.util.math.*;
+import net.minecraft.world.*;
 
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 import static com.minecolonies.api.util.constant.RaiderConstants.*;
 

@@ -1,7 +1,6 @@
 package com.minecolonies.coremod.commands.citizencommands;
 
 import com.ldtteam.structurize.util.LanguageHandler;
-import com.minecolonies.api.colony.ICitizenData;
 import com.minecolonies.api.entity.citizen.AbstractEntityCitizen;
 import com.minecolonies.coremod.commands.commandTypes.IMCColonyOfficerCommand;
 import com.minecolonies.coremod.commands.commandTypes.IMCCommand;

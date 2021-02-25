@@ -1,7 +1,7 @@
 package com.minecolonies.api.client.render.modeltype;
 
 import com.minecolonies.api.entity.mobs.vikings.AbstractEntityNorsemen;
-import net.minecraft.client.renderer.entity.model.BipedModel;
+import net.minecraft.client.renderer.entity.model.*;
 
 /**
  * Norsemen model.

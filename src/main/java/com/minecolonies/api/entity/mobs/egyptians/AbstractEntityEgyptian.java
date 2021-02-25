@@ -1,18 +1,11 @@
 package com.minecolonies.api.entity.mobs.egyptians;
 
-import com.minecolonies.api.entity.mobs.AbstractEntityMinecoloniesMob;
-import com.minecolonies.api.entity.mobs.RaiderType;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.World;
+import com.minecolonies.api.entity.mobs.*;
+import net.minecraft.entity.*;
+import net.minecraft.util.*;
+import net.minecraft.world.*;
 
-import javax.annotation.Nullable;
-
-import static com.minecolonies.api.util.constant.RaiderConstants.ONE;
-import static com.minecolonies.api.util.constant.RaiderConstants.OUT_OF_ONE_HUNDRED;
+import static com.minecolonies.api.util.constant.RaiderConstants.*;
 
 /**
  * Abstract for all egyptian entities.

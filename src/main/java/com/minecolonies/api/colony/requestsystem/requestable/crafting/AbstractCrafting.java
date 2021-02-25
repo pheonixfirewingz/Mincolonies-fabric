@@ -2,7 +2,7 @@ package com.minecolonies.api.colony.requestsystem.requestable.crafting;
 
 import com.minecolonies.api.colony.requestsystem.requestable.IRequestable;
 import com.minecolonies.api.util.ItemStackUtils;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;

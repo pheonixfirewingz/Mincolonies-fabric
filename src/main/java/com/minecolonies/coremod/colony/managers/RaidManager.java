@@ -2,7 +2,6 @@ package com.minecolonies.coremod.colony.managers;
 
 import com.ldtteam.structurize.util.LanguageHandler;
 import com.minecolonies.api.MinecoloniesAPIProxy;
-import com.minecolonies.api.colony.ICitizenData;
 import com.minecolonies.api.colony.buildings.IBuilding;
 import com.minecolonies.api.colony.colonyEvents.EventStatus;
 import com.minecolonies.api.colony.colonyEvents.IColonyEvent;
@@ -44,7 +43,7 @@ import static com.minecolonies.api.util.constant.NbtTagConstants.TAG_RAIDABLE;
 /**
  * Handles spawning hostile raid events.
  */
-public class RaidManager implements IRaiderManager
+public class RaidManager
 {
     /**
      * Spawn modifier to decrease the spawn-rate.
@@ -166,50 +165,50 @@ public class RaidManager implements IRaiderManager
         this.colony = colony;
     }
 
-    @Override
+    
     public boolean canHaveRaiderEvents()
     {
         return this.haveBarbEvents;
     }
 
-    @Override
+    
     public boolean willRaidTonight()
     {
         return this.raidTonight;
     }
 
-    @Override
+    
     public void setCanHaveRaiderEvents(final boolean canHave)
     {
         this.haveBarbEvents = canHave;
     }
 
-    @Override
+    
     public void addRaiderSpawnPoint(final BlockPos pos)
     {
         lastSpawnPoints.add(pos);
     }
 
-    @Override
+    
     public void setRaidNextNight(final boolean willRaid)
     {
         this.raidTonight = willRaid;
     }
 
-    @Override
+    
     public void setRaidNextNight(final boolean willRaid, final String raidType)
     {
         this.raidTonight = true;
         this.nextForcedType = raidType;
     }
 
-    @Override
+    
     public boolean areSpiesEnabled()
     {
         return spiesEnabled;
     }
 
-    @Override
+    
     public void setSpiesEnabled(final boolean enabled)
     {
         if (spiesEnabled != enabled)
@@ -219,13 +218,13 @@ public class RaidManager implements IRaiderManager
         spiesEnabled = enabled;
     }
 
-    @Override
+    
     public void raiderEvent()
     {
         raiderEvent("");
     }
 
-    @Override
+    
     public void raiderEvent(final String raidType)
     {
         if (colony.getWorld() == null || !canRaid() || raidType == null)
@@ -345,7 +344,7 @@ public class RaidManager implements IRaiderManager
      *
      * @return Returns the random blockPos
      */
-    @Override
+    
     public BlockPos calculateSpawnLocation()
     {
         List<IBuilding> loadedBuildings = new ArrayList<>();
@@ -528,7 +527,7 @@ public class RaidManager implements IRaiderManager
         return true;
     }
 
-    @Override
+    
     public List<BlockPos> getLastSpawnPoints()
     {
         return new ArrayList<>(lastSpawnPoints);
@@ -539,7 +538,7 @@ public class RaidManager implements IRaiderManager
      *
      * @return the amount of barbarians.
      */
-    @Override
+    
     public int calculateRaiderAmount(final int raidLevel)
     {
         return 1 + Math.min(MineColonies.getConfig().getServer().maxBarbarianSize.get(),
@@ -547,7 +546,7 @@ public class RaidManager implements IRaiderManager
             colony.getWorld().rand.nextDouble() * 0.5d) + 0.75)));
     }
 
-    @Override
+    
     public boolean isRaided()
     {
         for (final IColonyEvent event : colony.getEventManager().getEvents().values())
@@ -560,7 +559,7 @@ public class RaidManager implements IRaiderManager
         return false;
     }
 
-    @Override
+    
     public void onNightFall()
     {
         if (!isRaided())
@@ -598,13 +597,13 @@ public class RaidManager implements IRaiderManager
         }
     }
 
-    @Override
+    
     public int getNightsSinceLastRaid()
     {
         return nightsSinceLastRaid;
     }
 
-    @Override
+    
     public void setNightsSinceLastRaid(final int nightsSinceLastRaid)
     {
         this.nightsSinceLastRaid = nightsSinceLastRaid;
@@ -615,7 +614,7 @@ public class RaidManager implements IRaiderManager
      *
      * @return whether a raid is possible
      */
-    @Override
+    
     public boolean canRaid()
     {
         return !WorldUtil.isPeaceful(colony.getWorld())
@@ -687,7 +686,7 @@ public class RaidManager implements IRaiderManager
                                                                                                                                  .getServer().minimumNumberOfNightsBetweenRaids.get());
     }
 
-    @Override
+    
     @NotNull
     public BlockPos getRandomBuilding()
     {
@@ -712,14 +711,14 @@ public class RaidManager implements IRaiderManager
         return lastBuilding;
     }
 
-    @Override
+    
     public double getRaidDifficultyModifier()
     {
         return ((raidDifficulty / (double) 10) + MIN_DIFFICULTY_MODIFIER) * (MinecoloniesAPIProxy.getInstance().getConfig().getServer().barbarianHordeDifficulty.get()
                                                                        / (double) DEFAULT_BARBARIAN_DIFFICULTY) * (colony.getWorld().getDifficulty().getId() / 2d);
     }
 
-    @Override
+    
     public void onLostCitizen(final ICitizenData citizen)
     {
         if (!isRaided())
@@ -745,7 +744,7 @@ public class RaidManager implements IRaiderManager
         }
     }
 
-    @Override
+    
     public void write(final CompoundNBT compound)
     {
         compound.putBoolean(TAG_RAIDABLE, canHaveRaiderEvents());
@@ -754,7 +753,7 @@ public class RaidManager implements IRaiderManager
         compound.putInt(TAG_LOST_CITIZENS, lostCitizens);
     }
 
-    @Override
+    
     public void read(final CompoundNBT compound)
     {
         if (compound.keySet().contains(TAG_RAIDABLE))
@@ -775,7 +774,7 @@ public class RaidManager implements IRaiderManager
         lostCitizens = compound.getInt(TAG_LOST_CITIZENS);
     }
 
-    @Override
+    
     public int getLostCitizen()
     {
         return lostCitizens;

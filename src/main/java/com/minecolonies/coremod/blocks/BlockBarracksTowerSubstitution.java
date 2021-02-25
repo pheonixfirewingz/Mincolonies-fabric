@@ -1,23 +1,13 @@
 package com.minecolonies.coremod.blocks;
 
-import com.minecolonies.api.blocks.AbstractBlockMinecolonies;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.HorizontalBlock;
-import net.minecraft.block.material.Material;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.state.DirectionProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.Rotation;
+import net.minecraft.block.*;
+import net.minecraft.state.property.*;
+import net.minecraft.util.math.*;
 import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nullable;
 
 import static com.minecolonies.api.util.constant.Suppression.DEPRECATION;
 
-public class BlockBarracksTowerSubstitution extends AbstractBlockMinecolonies<BlockBarracksTowerSubstitution>
+public class BlockBarracksTowerSubstitution extends Block
 {
 
     /**
@@ -31,11 +21,6 @@ public class BlockBarracksTowerSubstitution extends AbstractBlockMinecolonies<Bl
     private static final float BLOCK_HARDNESS = 0.0F;
 
     /**
-     * This blocks name.
-     */
-    private static final String BLOCK_NAME = "blockbarrackstowersubstitution";
-
-    /**
      * The resistance this block has.
      */
     private static final float RESISTANCE = 1F;
@@ -45,8 +30,7 @@ public class BlockBarracksTowerSubstitution extends AbstractBlockMinecolonies<Bl
      */
     public BlockBarracksTowerSubstitution()
     {
-        super(Properties.create(Material.WOOD).hardnessAndResistance(BLOCK_HARDNESS, RESISTANCE));
-        setRegistryName(BLOCK_NAME);
+        super(Settings.of(Material.WOOD).strength(BLOCK_HARDNESS, RESISTANCE));
         this.setDefaultState(this.getDefaultState().with(FACING, Direction.NORTH));
     }
 

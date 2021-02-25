@@ -1,6 +1,5 @@
 package com.minecolonies.coremod.entity.ai.citizen.student;
 
-import com.minecolonies.api.colony.ICitizenData;
 import com.minecolonies.api.entity.ai.statemachine.AITarget;
 import com.minecolonies.api.entity.ai.statemachine.states.IAIState;
 import com.minecolonies.api.entity.ai.util.StudyItem;

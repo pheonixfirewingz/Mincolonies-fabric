@@ -1,17 +1,11 @@
 package com.minecolonies.api.inventory.api;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.IntNBT;
-import net.minecraft.nbt.ListNBT;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraftforge.common.util.Constants;
-import net.minecraftforge.common.util.INBTSerializable;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.IItemHandlerModifiable;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.item.*;
+import net.minecraft.nbt.*;
+import net.minecraft.util.text.*;
+import net.minecraftforge.common.util.*;
+import net.minecraftforge.items.*;
+import org.jetbrains.annotations.*;
 
 import javax.annotation.Nonnull;
 import java.util.Arrays;

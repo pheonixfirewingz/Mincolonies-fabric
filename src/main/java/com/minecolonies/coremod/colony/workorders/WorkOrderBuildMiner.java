@@ -1,6 +1,5 @@
 package com.minecolonies.coremod.colony.workorders;
 
-import com.minecolonies.api.colony.ICitizenData;
 import com.minecolonies.api.util.BlockPosUtil;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.math.BlockPos;

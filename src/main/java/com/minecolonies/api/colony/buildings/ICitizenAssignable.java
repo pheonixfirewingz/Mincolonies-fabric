@@ -1,13 +1,10 @@
 package com.minecolonies.api.colony.buildings;
 
-import com.minecolonies.api.colony.ICitizenData;
 import com.minecolonies.api.entity.citizen.AbstractEntityCitizen;
 import net.minecraftforge.event.TickEvent;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.*;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public interface ICitizenAssignable extends ISchematicProvider
 {

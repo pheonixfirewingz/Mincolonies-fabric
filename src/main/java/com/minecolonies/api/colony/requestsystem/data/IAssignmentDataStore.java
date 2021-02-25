@@ -1,10 +1,8 @@
 package com.minecolonies.api.colony.requestsystem.data;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.*;
 
-import java.util.Collection;
-import java.util.Map;
+import java.util.*;
 
 /**
  * A Key-Value-MultiMap Store that handles assignments from a Value to a Key. Allows multiple values to be assigned to a Key.

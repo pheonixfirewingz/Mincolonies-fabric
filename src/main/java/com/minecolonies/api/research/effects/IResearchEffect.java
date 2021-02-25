@@ -1,6 +1,6 @@
 package com.minecolonies.api.research.effects;
 
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.util.text.*;
 import org.jetbrains.annotations.NotNull;
 
 /**

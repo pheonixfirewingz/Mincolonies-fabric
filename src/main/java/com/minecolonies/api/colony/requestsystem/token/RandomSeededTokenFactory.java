@@ -3,8 +3,7 @@ package com.minecolonies.api.colony.requestsystem.token;
 import com.google.common.reflect.TypeToken;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 
 public class RandomSeededTokenFactory extends AbstractTokenFactory<Integer>
 {

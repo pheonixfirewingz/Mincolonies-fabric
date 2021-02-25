@@ -1,19 +1,18 @@
 package com.minecolonies.coremod.colony;
 
-import com.minecolonies.api.colony.IVisitorViewData;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketBuffer;
+import net.minecraft.network.PacketByteBuf;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * View data for visitors
  */
-public class VisitorDataView extends CitizenDataView implements IVisitorViewData
+public class VisitorDataView extends CitizenDataView
 {
     /**
      * The related colony view
      */
-    private final IColonyView colony;
+    private final ColonyView colony;
 
     /**
      * The recruitment costs
@@ -26,26 +25,24 @@ public class VisitorDataView extends CitizenDataView implements IVisitorViewData
      * @param id     ID of the Citizen.
      * @param colony Colony the Citizen belongs to.
      */
-    public VisitorDataView(final int id, final IColonyView colony)
+    public VisitorDataView(final int id, final ColonyView colony)
     {
         super(id);
         this.colony = colony;
     }
 
-    @Override
-    public void deserialize(@NotNull final PacketBuffer buf)
+
+    public void deserialize(@NotNull final PacketByteBuf buf)
     {
         super.deserialize(buf);
         recruitmentCosts = buf.readItemStack();
     }
 
-    @Override
-    public IColonyView getColonyView()
+    public ColonyView getColonyView()
     {
         return colony;
     }
 
-    @Override
     public ItemStack getRecruitCost()
     {
         return recruitmentCosts;

@@ -1,14 +1,11 @@
 package com.minecolonies.api.colony.permissions;
 
 import com.mojang.authlib.GameProfile;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.world.World;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.entity.player.*;
+import net.minecraft.world.*;
+import org.jetbrains.annotations.*;
 
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Permission interface.

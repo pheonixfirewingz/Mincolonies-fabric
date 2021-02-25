@@ -2,11 +2,9 @@ package com.minecolonies.api.entity.ai.statemachine.basestatemachine;
 
 import com.minecolonies.api.entity.ai.statemachine.states.IState;
 import com.minecolonies.api.entity.ai.statemachine.transitions.IStateMachineTransition;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.*;
 
-import java.util.function.BooleanSupplier;
-import java.util.function.Supplier;
+import java.util.function.*;
 
 /**
  * Basic Transition class for statemachines. Consists of a state the transition applies in, a statesupplier which determines its next state and a condition which has to be true to

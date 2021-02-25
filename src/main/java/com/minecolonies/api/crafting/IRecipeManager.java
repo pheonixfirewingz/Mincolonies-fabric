@@ -2,7 +2,7 @@ package com.minecolonies.api.crafting;
 
 import com.google.common.collect.ImmutableMap;
 import com.minecolonies.api.colony.requestsystem.token.IToken;
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.*;
 import org.jetbrains.annotations.NotNull;
 
 /**

@@ -1,7 +1,7 @@
 package com.minecolonies.api.network;
 
 import io.netty.buffer.ByteBuf;
-import net.minecraft.network.PacketBuffer;
+import net.minecraft.network.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;

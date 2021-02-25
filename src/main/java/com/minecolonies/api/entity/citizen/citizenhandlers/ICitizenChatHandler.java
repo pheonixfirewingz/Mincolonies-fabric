@@ -1,6 +1,6 @@
 package com.minecolonies.api.entity.citizen.citizenhandlers;
 
-import net.minecraft.util.DamageSource;
+import net.minecraft.util.*;
 
 public interface ICitizenChatHandler
 {

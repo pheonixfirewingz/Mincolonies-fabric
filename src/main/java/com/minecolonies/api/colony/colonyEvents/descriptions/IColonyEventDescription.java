@@ -1,9 +1,9 @@
 package com.minecolonies.api.colony.colonyEvents.descriptions;
 
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.nbt.*;
+import net.minecraft.network.*;
+import net.minecraft.util.*;
+import net.minecraft.util.math.*;
 import net.minecraftforge.common.util.INBTSerializable;
 
 /**

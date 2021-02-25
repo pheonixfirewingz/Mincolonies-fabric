@@ -4,7 +4,6 @@ import com.ldtteam.structurize.management.StructureName;
 import com.ldtteam.structurize.util.LanguageHandler;
 import com.ldtteam.structurize.util.PlacementSettings;
 import com.minecolonies.api.advancements.AdvancementTriggers;
-import com.minecolonies.api.colony.ICitizenData;
 import com.minecolonies.api.colony.IColonyTagCapability;
 import com.minecolonies.api.colony.workorders.IWorkOrder;
 import com.minecolonies.api.util.LoadOnlyStructureHandler;

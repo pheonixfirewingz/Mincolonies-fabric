@@ -3,9 +3,8 @@ package com.minecolonies.api.colony.interactionhandling.registry;
 import com.minecolonies.api.IMinecoloniesAPI;
 import com.minecolonies.api.colony.ICitizen;
 import com.minecolonies.api.colony.interactionhandling.IInteractionResponseHandler;
-import net.minecraft.nbt.CompoundNBT;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.nbt.*;
+import org.jetbrains.annotations.*;
 
 /**
  * The data manager of the interaction handler.

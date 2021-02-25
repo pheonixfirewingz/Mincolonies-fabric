@@ -4,8 +4,6 @@ import com.google.common.collect.Lists;
 import com.minecolonies.api.colony.buildings.IBuilding;
 import net.minecraft.block.*;
 import net.minecraft.entity.*;
-import net.minecraft.util.RegistryKey;
-import net.minecraft.util.*;
 import net.minecraft.util.math.*;
 import net.minecraft.util.registry.*;
 import net.minecraft.world.*;
@@ -31,7 +29,7 @@ public class WorldUtil
 	 * @param pos   position to check
 	 * @return true if block is accessible/loaded
 	 */
-	public static boolean isBlockLoaded(final IWorld world, final BlockPos pos)
+	public static boolean isBlockLoaded(final World world, final BlockPos pos)
 	{
 		return isChunkLoaded(world, pos.getX() >> 4, pos.getZ() >> 4);
 	}
@@ -44,7 +42,7 @@ public class WorldUtil
 	 * @param z     chunk position
 	 * @return true if loaded
 	 */
-	public static boolean isChunkLoaded(final IWorld world, final int x, final int z)
+	public static boolean isChunkLoaded(final World world, final int x, final int z)
 	{
 		return world.getChunk(x, z, ChunkStatus.FULL, false) != null;
 	}
@@ -72,7 +70,7 @@ public class WorldUtil
 	 * @param pos   chunk position
 	 * @return true if loaded
 	 */
-	public static boolean isChunkLoaded(final IWorld world, final ChunkPos pos)
+	public static boolean isChunkLoaded(final World world, final ChunkPos pos)
 	{
 		return isChunkLoaded(world, pos.x, pos.z);
 	}
@@ -84,7 +82,7 @@ public class WorldUtil
 	 * @param pos   position to check
 	 * @return true if block is accessible/loaded
 	 */
-	public static boolean isEntityBlockLoaded(final IWorld world, final BlockPos pos)
+	public static boolean isEntityBlockLoaded(final World world, final BlockPos pos)
 	{
 		return isEntityChunkLoaded(world, pos.getX() >> 4, pos.getZ() >> 4);
 	}
@@ -97,7 +95,7 @@ public class WorldUtil
 	 * @param z     chunk position
 	 * @return true if loaded
 	 */
-	public static boolean isEntityChunkLoaded(final IWorld world, final int x, final int z)
+	public static boolean isEntityChunkLoaded(final World world, final int x, final int z)
 	{
 		return isEntityChunkLoaded(world, new ChunkPos(x, z));
 	}
@@ -109,7 +107,7 @@ public class WorldUtil
 	 * @param pos   chunk position
 	 * @return true if loaded
 	 */
-	public static boolean isEntityChunkLoaded(final IWorld world, final ChunkPos pos)
+	public static boolean isEntityChunkLoaded(final World world, final ChunkPos pos)
 	{
 		return world.getChunkProvider().isChunkLoaded(pos);
 	}
@@ -215,7 +213,7 @@ public class WorldUtil
 	 * @param pos   position to set
 	 * @param state state to set
 	 */
-	public static boolean setBlockState(final IWorld world, final BlockPos pos, final BlockState state)
+	public static boolean setBlockState(final World world, final BlockPos pos, final BlockState state)
 	{
 		if(world.isRemote())
 		{
@@ -233,7 +231,7 @@ public class WorldUtil
 	 * @param state state to set
 	 * @param flags flags to use
 	 */
-	public static boolean setBlockState(final IWorld world, final BlockPos pos, final BlockState state, int flags)
+	public static boolean setBlockState(final World world, final BlockPos pos, final BlockState state, int flags)
 	{
 		if(world.isRemote())
 		{

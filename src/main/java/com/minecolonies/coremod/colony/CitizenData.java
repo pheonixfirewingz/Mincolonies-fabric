@@ -2,7 +2,7 @@ package com.minecolonies.coremod.colony;
 
 import com.ldtteam.structurize.util.LanguageHandler;
 import com.minecolonies.api.MinecoloniesAPIProxy;
-import com.minecolonies.api.colony.ICitizenData;
+import com.minecolonies.api.colony.*;
 import com.minecolonies.api.colony.buildings.IBuilding;
 import com.minecolonies.api.colony.buildings.IBuildingWorker;
 import com.minecolonies.api.colony.interactionhandling.ChatPriority;
@@ -31,19 +31,9 @@ import com.minecolonies.coremod.research.AdditionModifierResearchEffect;
 import com.minecolonies.coremod.research.MultiplierModifierResearchEffect;
 import com.minecolonies.coremod.util.AttributeModifierUtils;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.INBT;
-import net.minecraft.nbt.ListNBT;
-import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.util.Constants;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -52,6 +42,7 @@ import java.lang.ref.WeakReference;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static com.minecolonies.api.colony.ICitizenData.MAX_SATURATION;
 import static com.minecolonies.api.entity.citizen.AbstractEntityCitizen.*;
 import static com.minecolonies.api.research.util.ResearchConstants.HEALTH;
 import static com.minecolonies.api.research.util.ResearchConstants.WALKING;
@@ -62,7 +53,7 @@ import static com.minecolonies.api.util.constant.NbtTagConstants.*;
  * Extra data for Citizens.
  */
 @SuppressWarnings({Suppression.BIG_CLASS, "PMD.ExcessiveClassLength"})
-public class CitizenData implements ICitizenData
+public class CitizenData implements ICivilianData
 {
     /**
      * The max health.
@@ -78,6 +69,7 @@ public class CitizenData implements ICitizenData
      * Minimum saturation of a citizen.
      */
     private static final int MIN_SATURATION = 0;
+    private static final int MAX_SATURATION = 20;
 
     /**
      * Possible texture suffixes.
@@ -92,7 +84,7 @@ public class CitizenData implements ICitizenData
     /**
      * The colony the citizen belongs to.
      */
-    private final IColony colony;
+    private final Colony colony;
 
     /**
      * Inventory of the citizen.
@@ -238,7 +230,7 @@ public class CitizenData implements ICitizenData
      * @param id     ID of the Citizen.
      * @param colony Colony the Citizen belongs to.
      */
-    public CitizenData(final int id, final IColony colony)
+    public CitizenData(final int id, final Colony colony)
     {
         this.id = id;
         this.colony = colony;
@@ -345,7 +337,7 @@ public class CitizenData implements ICitizenData
     }
 
     @Override
-    public IColony getColony()
+    public Colony getColony()
     {
         return colony;
     }
@@ -393,7 +385,7 @@ public class CitizenData implements ICitizenData
         citizen.setIsChild(isChild());
         citizen.setCustomName(new StringTextComponent(getName()));
 
-        citizen.getAttribute(Attributes.MAX_HEALTH).setBaseValue(BASE_MAX_HEALTH);
+        citizen.getAttribute(MAX_HEALTH).setBaseValue(BASE_MAX_HEALTH);
 
         citizen.setFemale(isFemale());
         citizen.setTextureId(getTextureId());
@@ -1171,7 +1163,7 @@ public class CitizenData implements ICitizenData
      * @param nbt    nbt compound to read from
      * @return new CitizenData
      */
-    public static CitizenData loadFromNBT(final IColony colony, final CompoundNBT nbt)
+    public static CitizenData loadFromNBT(final Colony colony, final CompoundNBT nbt)
     {
         final CitizenData data = new CitizenData(nbt.getInt(TAG_ID), colony);
         data.deserializeNBT(nbt);

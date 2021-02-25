@@ -1,7 +1,6 @@
 package com.minecolonies.api.colony.requestsystem.location;
 
-import com.minecolonies.api.colony.requestsystem.factory.IFactory;
-import com.minecolonies.api.colony.requestsystem.factory.IFactoryController;
+import com.minecolonies.api.colony.requestsystem.factory.*;
 import org.jetbrains.annotations.NotNull;
 
 /**

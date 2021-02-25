@@ -1,20 +1,13 @@
 package com.minecolonies.coremod.colony.jobs;
 
 import com.minecolonies.api.client.render.modeltype.BipedModelType;
-import com.minecolonies.api.colony.ICitizenData;
 import com.minecolonies.api.colony.jobs.ModJobs;
 import com.minecolonies.api.colony.jobs.registry.JobEntry;
-import com.minecolonies.coremod.colony.CitizenData;
 import com.minecolonies.coremod.entity.ai.citizen.herders.EntityAIWorkChickenHerder;
-import com.minecolonies.coremod.entity.citizen.EntityCitizen;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Random;
-
-import static com.minecolonies.api.util.constant.Constants.ONE_HUNDRED_PERCENT;
 
 /**
  * The Chicken Herder job

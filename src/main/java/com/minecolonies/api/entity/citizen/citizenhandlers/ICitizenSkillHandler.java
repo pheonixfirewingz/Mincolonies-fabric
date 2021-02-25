@@ -1,14 +1,12 @@
 package com.minecolonies.api.entity.citizen.citizenhandlers;
 
-import com.minecolonies.api.colony.ICitizenData;
 import com.minecolonies.api.colony.buildings.views.IBuildingView;
 import com.minecolonies.api.entity.citizen.Skill;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.Tuple;
+import net.minecraft.nbt.*;
+import net.minecraft.util.*;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 /**
  * The interface for the citizen skill handler.

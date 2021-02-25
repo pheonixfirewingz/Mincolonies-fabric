@@ -1,10 +1,10 @@
 package com.minecolonies.api.colony.buildings.views;
 
 import com.minecolonies.api.IMinecoloniesAPI;
-import net.minecraft.entity.EntityType;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.entity.*;
+import net.minecraft.nbt.*;
+import net.minecraft.network.*;
+import net.minecraft.util.*;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 

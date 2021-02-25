@@ -1,10 +1,9 @@
 package com.minecolonies.api.sounds;
 
 import com.minecolonies.api.entity.mobs.RaiderType;
-import net.minecraft.util.SoundEvent;
+import net.minecraft.util.*;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Asher on 12/6/17.

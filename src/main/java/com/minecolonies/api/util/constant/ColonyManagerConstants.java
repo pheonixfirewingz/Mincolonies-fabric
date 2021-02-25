@@ -1,7 +1,5 @@
 package com.minecolonies.api.util.constant;
 
-import net.minecraft.util.*;
-
 /**
  * All colony manager related constants.
  */

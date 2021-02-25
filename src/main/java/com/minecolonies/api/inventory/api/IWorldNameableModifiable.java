@@ -1,6 +1,6 @@
 package com.minecolonies.api.inventory.api;
 
-import net.minecraft.util.INameable;
+import net.minecraft.util.*;
 import org.jetbrains.annotations.Nullable;
 
 /**

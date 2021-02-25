@@ -1,12 +1,10 @@
 package com.minecolonies.api.entity.ai.statemachine.basestatemachine;
 
-import com.minecolonies.api.entity.ai.statemachine.states.IAIState;
-import com.minecolonies.api.entity.ai.statemachine.states.IStateEventType;
+import com.minecolonies.api.entity.ai.statemachine.states.*;
 import com.minecolonies.api.entity.ai.statemachine.transitions.IStateMachineEvent;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.function.BooleanSupplier;
-import java.util.function.Supplier;
+import java.util.function.*;
 
 /**
  * Basic event for statemachines, consists of a condition and a statesupplier to transition the statemachine into. Events are always executed before any state transitions happen.

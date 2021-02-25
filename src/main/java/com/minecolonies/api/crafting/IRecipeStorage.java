@@ -1,19 +1,16 @@
 package com.minecolonies.api.crafting;
 
 import com.minecolonies.api.colony.requestsystem.token.IToken;
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
-import net.minecraft.loot.LootContext;
-import net.minecraft.loot.LootParameterSets;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.block.*;
+import net.minecraft.item.*;
+import net.minecraft.loot.*;
+import net.minecraft.util.*;
+import net.minecraft.world.*;
+import net.minecraft.world.server.*;
 import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Predicate;
 
 /**

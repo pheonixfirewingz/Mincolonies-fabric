@@ -5,10 +5,10 @@ import com.minecolonies.api.colony.buildings.IBuilding;
 import com.minecolonies.api.colony.buildings.views.IBuildingView;
 import com.minecolonies.api.tileentities.AbstractTileEntityColonyBuilding;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.nbt.*;
+import net.minecraft.network.*;
+import net.minecraft.util.*;
+import net.minecraft.util.math.*;
 
 /**
  * Helper manager to analyse and process the registry for {@link BuildingEntry}.

@@ -1,6 +1,6 @@
 package com.minecolonies.api.research;
 
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.util.text.*;
 
 /**
  * Interface of research requirements.

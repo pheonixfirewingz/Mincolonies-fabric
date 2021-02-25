@@ -1,10 +1,8 @@
 package com.minecolonies.api.entity;
 
 import com.google.common.collect.Sets;
-import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.entity.ai.goal.GoalSelector;
-import net.minecraft.entity.ai.goal.PrioritizedGoal;
-import net.minecraft.profiler.IProfiler;
+import net.minecraft.entity.ai.goal.*;
+import net.minecraft.profiler.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;

@@ -1,17 +1,13 @@
 package com.minecolonies.api.sounds;
 
-import com.minecolonies.api.colony.jobs.registry.IJobRegistry;
-import com.minecolonies.api.colony.jobs.registry.JobEntry;
+import com.minecolonies.api.colony.jobs.registry.*;
 import com.minecolonies.api.entity.mobs.RaiderType;
 import com.minecolonies.api.util.Tuple;
 import com.minecolonies.api.util.constant.Constants;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
+import net.minecraft.util.*;
 import net.minecraftforge.registries.IForgeRegistry;
 
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Registering of sound events for our colony.

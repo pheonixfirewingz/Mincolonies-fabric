@@ -1,10 +1,8 @@
 package com.minecolonies.api.colony.colonyEvents;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * A colony event which spawns and uses entities

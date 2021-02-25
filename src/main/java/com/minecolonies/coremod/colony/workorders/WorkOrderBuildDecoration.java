@@ -3,7 +3,6 @@ package com.minecolonies.coremod.colony.workorders;
 import com.ldtteam.structurize.management.StructureName;
 import com.ldtteam.structurize.util.LanguageHandler;
 import com.minecolonies.api.advancements.AdvancementTriggers;
-import com.minecolonies.api.colony.ICitizenData;
 import com.minecolonies.api.colony.workorders.WorkOrderType;
 import com.minecolonies.api.util.Log;
 import com.minecolonies.coremod.colony.Colony;

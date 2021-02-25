@@ -2,10 +2,9 @@ package com.minecolonies.api.entity.pathfinding.registry;
 
 import com.minecolonies.api.IMinecoloniesAPI;
 import com.minecolonies.api.entity.pathfinding.AbstractAdvancedPathNavigate;
-import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.*;
 
-import java.util.function.Function;
-import java.util.function.Predicate;
+import java.util.function.*;
 
 public interface IPathNavigateRegistry
 {

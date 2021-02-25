@@ -12,6 +12,7 @@ import com.minecolonies.api.colony.managers.interfaces.IEventStructureManager;
 import com.minecolonies.api.util.BlockPosUtil;
 import com.minecolonies.api.util.CreativeBuildingStructureHandler;
 import com.minecolonies.api.util.Log;
+import com.minecolonies.coremod.colony.Colony;
 import com.minecolonies.coremod.util.CreativeRaiderStructureHandler;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
@@ -36,7 +37,7 @@ import static com.minecolonies.api.util.constant.NbtTagConstants.*;
 /**
  * Manager for event structures
  */
-public class EventStructureManager implements IEventStructureManager
+public class EventStructureManager
 {
     /**
      * NBT Tags
@@ -61,9 +62,9 @@ public class EventStructureManager implements IEventStructureManager
     /**
      * The colony this manager belongs to
      */
-    private final IColony colony;
+    private final Colony colony;
 
-    public EventStructureManager(final EventManager eventManager, final IColony colony)
+    public EventStructureManager(final EventManager eventManager, final Colony colony)
     {
         this.eventManager = eventManager;
         this.colony = colony;
@@ -75,7 +76,7 @@ public class EventStructureManager implements IEventStructureManager
      * @param structure the structure to spawn.
      * @param eventID   the id of the event.
      */
-    @Override
+    
     public boolean spawnTemporaryStructure(
       final Blueprint structure,
       final String schematicPath,
@@ -144,7 +145,7 @@ public class EventStructureManager implements IEventStructureManager
         return true;
     }
 
-    @Override
+    
     public void loadBackupForEvent(final int eventID)
     {
         final Iterator<Map.Entry<BlockPos, Integer>> iterator = backupSchematics.entrySet().iterator();
@@ -190,7 +191,7 @@ public class EventStructureManager implements IEventStructureManager
         }
     }
 
-    @Override
+    
     public void readFromNBT(@NotNull final CompoundNBT compound)
     {
         if (compound.contains(TAG_EVENT_STRUCTURE_MANAGER))
@@ -217,7 +218,7 @@ public class EventStructureManager implements IEventStructureManager
         }
     }
 
-    @Override
+    
     public void writeToNBT(@NotNull final CompoundNBT compound)
     {
         final CompoundNBT structureManagerCompound = new CompoundNBT();

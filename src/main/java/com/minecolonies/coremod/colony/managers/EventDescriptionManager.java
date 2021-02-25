@@ -22,7 +22,7 @@ import static com.minecolonies.api.util.constant.NbtTagConstants.TAG_NAME;
 /**
  * Manager for all colony related events.
  */
-public class EventDescriptionManager implements IEventDescriptionManager
+public class EventDescriptionManager
 {
     /**
      * NBT tags
@@ -44,7 +44,7 @@ public class EventDescriptionManager implements IEventDescriptionManager
         this.colony = colony;
     }
 
-    @Override
+    
     public void addEventDescription(IColonyEventDescription colonyEventDescription)
     {
         if (eventDescs.size() >= MAX_COLONY_EVENTS)
@@ -62,13 +62,13 @@ public class EventDescriptionManager implements IEventDescriptionManager
         }
     }
 
-    @Override
+    
     public List<IColonyEventDescription> getEventDescriptions()
     {
         return eventDescs;
     }
 
-    @Override
+    
     public void deserializeNBT(@NotNull final CompoundNBT eventManagerNBT)
     {
         final ListNBT eventDescListNBT = eventManagerNBT.getList(TAG_EVENT_DESC_LIST, Constants.NBT.TAG_COMPOUND);
@@ -89,7 +89,7 @@ public class EventDescriptionManager implements IEventDescriptionManager
         }
     }
 
-    @Override
+    
     public CompoundNBT serializeNBT()
     {
         final CompoundNBT eventManagerNBT = new CompoundNBT();

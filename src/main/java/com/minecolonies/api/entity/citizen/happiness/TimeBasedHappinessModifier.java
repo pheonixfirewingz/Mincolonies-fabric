@@ -1,7 +1,7 @@
 package com.minecolonies.api.entity.citizen.happiness;
 
 import com.minecolonies.api.util.Tuple;
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.*;
 
 import java.util.function.DoubleSupplier;
 

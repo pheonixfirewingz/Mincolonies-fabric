@@ -4,7 +4,7 @@ import com.minecolonies.api.colony.requestsystem.manager.IRequestManager;
 import com.minecolonies.api.colony.requestsystem.requestable.IRetryable;
 import com.minecolonies.api.colony.requestsystem.resolver.IQueuedRequestResolver;
 import com.minecolonies.api.colony.requestsystem.token.IToken;
-import net.minecraft.tileentity.ITickableTileEntity;
+import net.minecraft.tileentity.*;
 import org.jetbrains.annotations.Nullable;
 
 public interface IRetryingRequestResolver extends IQueuedRequestResolver<IRetryable>, ITickableTileEntity

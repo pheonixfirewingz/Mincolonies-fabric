@@ -1,8 +1,6 @@
 package com.minecolonies.api.research.factories;
 
-import com.minecolonies.api.colony.requestsystem.factory.FactoryVoidInput;
-import com.minecolonies.api.colony.requestsystem.factory.IFactory;
-import com.minecolonies.api.colony.requestsystem.factory.IFactoryController;
+import com.minecolonies.api.colony.requestsystem.factory.*;
 import com.minecolonies.api.research.effects.IResearchEffect;
 import org.jetbrains.annotations.NotNull;
 

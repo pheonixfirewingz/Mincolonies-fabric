@@ -1,13 +1,11 @@
 package com.minecolonies.api.crafting;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.common.collect.ImmutableList;
-
 import com.minecolonies.api.util.ItemStackUtils;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.item.*;
+import net.minecraft.util.*;
+
+import java.util.*;
 
 /**
  * The Classic Recipe type

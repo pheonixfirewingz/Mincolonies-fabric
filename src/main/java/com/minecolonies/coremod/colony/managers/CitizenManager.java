@@ -1,10 +1,8 @@
 package com.minecolonies.coremod.colony.managers;
 
 import com.ldtteam.structurize.util.LanguageHandler;
-import com.minecolonies.api.colony.ICitizenData;
 import com.minecolonies.api.colony.ICivilianData;
 import com.minecolonies.api.colony.buildings.IBuilding;
-import com.minecolonies.api.colony.managers.interfaces.ICitizenManager;
 import com.minecolonies.api.entity.ModEntities;
 import com.minecolonies.api.entity.citizen.AbstractCivilianEntity;
 import com.minecolonies.api.entity.citizen.AbstractEntityCitizen;
@@ -42,7 +40,7 @@ import static com.minecolonies.api.util.constant.Constants.*;
 import static com.minecolonies.api.util.constant.NbtTagConstants.TAG_CITIZENS;
 import static com.minecolonies.api.util.constant.TranslationConstants.ALL_CITIZENS_ARE_SLEEPING;
 
-public class CitizenManager implements ICitizenManager
+public class CitizenManager
 {
     /**
      * Map of citizens with ID,CitizenData
@@ -100,7 +98,7 @@ public class CitizenManager implements ICitizenManager
         this.colony = colony;
     }
 
-    @Override
+    
     public void registerCivilian(final AbstractCivilianEntity entity)
     {
         if (entity.getCivilianID() == 0 || citizens.get(entity.getCivilianID()) == null)
@@ -137,7 +135,7 @@ public class CitizenManager implements ICitizenManager
         entity.remove();
     }
 
-    @Override
+    
     public void unregisterCivilian(final AbstractCivilianEntity entity)
     {
         final ICitizenData data = citizens.get(entity.getCivilianID());
@@ -159,7 +157,7 @@ public class CitizenManager implements ICitizenManager
         }
     }
 
-    @Override
+    
     public void read(@NotNull final CompoundNBT compound)
     {
         citizens.clear();
@@ -185,14 +183,14 @@ public class CitizenManager implements ICitizenManager
         return data;
     }
 
-    @Override
+    
     public void write(@NotNull final CompoundNBT compoundNBT)
     {
         @NotNull final ListNBT citizenTagList = citizens.values().stream().map(citizen -> citizen.serializeNBT()).collect(NBTUtils.toListNBT());
         compoundNBT.put(TAG_CITIZENS, citizenTagList);
     }
 
-    @Override
+    
     public void sendPackets(
       @NotNull final Set<ServerPlayerEntity> closeSubscribers,
       @NotNull final Set<ServerPlayerEntity> newSubscribers)
@@ -218,7 +216,7 @@ public class CitizenManager implements ICitizenManager
         }
     }
 
-    @Override
+    
     public ICitizenData spawnOrCreateCivilian(@Nullable final ICivilianData data, final World world, final BlockPos spawnPos, final boolean force)
     {
         if (!colony.getBuildingManager().hasTownHall() || (!colony.canMoveIn() && !force))
@@ -306,7 +304,7 @@ public class CitizenManager implements ICitizenManager
         return citizenData;
     }
 
-    @Override
+    
     public ICitizenData createAndRegisterCivilianData()
     {
         //This ensures that citizen IDs are getting reused.
@@ -327,7 +325,7 @@ public class CitizenManager implements ICitizenManager
         return citizenData;
     }
 
-    @Override
+    
     public void removeCivilian(@NotNull final ICivilianData citizen)
     {
         if (!(citizen instanceof ICitizenData))
@@ -356,7 +354,7 @@ public class CitizenManager implements ICitizenManager
         colony.markDirty();
     }
 
-    @Override
+    
     public ICitizenData getJoblessCitizen()
     {
         for (@NotNull final ICitizenData citizen : citizens.values())
@@ -370,7 +368,7 @@ public class CitizenManager implements ICitizenManager
         return null;
     }
 
-    @Override
+    
     public void calculateMaxCitizens()
     {
         int newMaxCitizens = 0;
@@ -411,45 +409,45 @@ public class CitizenManager implements ICitizenManager
     }
 
     @NotNull
-    @Override
+    
     public Map<Integer, ICivilianData> getCivilianDataMap()
     {
         return Collections.unmodifiableMap(citizens);
     }
 
-    @Override
+    
     public void markDirty()
     {
         colony.markDirty();
         isCitizensDirty = true;
     }
 
-    @Override
+    
     public ICitizenData getCivilian(final int citizenId)
     {
         return citizens.get(citizenId);
     }
 
-    @Override
+    
     public void clearDirty()
     {
         isCitizensDirty = false;
         citizens.values().forEach(ICitizenData::clearDirty);
     }
 
-    @Override
+    
     public List<ICitizenData> getCitizens()
     {
         return new ArrayList<>(citizens.values());
     }
 
-    @Override
+    
     public int getMaxCitizens()
     {
         return (int) Math.min(maxCitizens, Math.min(maxCitizensFromResearch(), MineColonies.getConfig().getServer().maxCitizenPerColony.get()));
     }
 
-    @Override
+    
     public int getPotentialMaxCitizens()
     {
         return (int) Math.min(potentialMaxCitizens, Math.min(maxCitizensFromResearch(), MineColonies.getConfig().getServer().maxCitizenPerColony.get()));
@@ -481,22 +479,22 @@ public class CitizenManager implements ICitizenManager
      *
      * @return The current amount of citizens in the colony.
      */
-    @Override
+    
     public int getCurrentCitizenCount() { return citizens.size(); }
 
-    @Override
+    
     public void setMaxCitizens(final int newMaxCitizens)
     {
         this.maxCitizens = newMaxCitizens;
     }
 
-    @Override
+    
     public void setPotentialMaxCitizens(final int newPotentialMax)
     {
         this.potentialMaxCitizens = newPotentialMax;
     }
 
-    @Override
+    
     public void updateModifier(final String id)
     {
         for (final ICitizenData citizenData : citizens.values())
@@ -505,7 +503,7 @@ public class CitizenManager implements ICitizenManager
         }
     }
 
-    @Override
+    
     public void checkCitizensForHappiness()
     {
         for (final ICitizenData citizenData : citizens.values())
@@ -514,7 +512,7 @@ public class CitizenManager implements ICitizenManager
         }
     }
 
-    @Override
+    
     public void tickCitizenData()
     {
         this.getCitizens().forEach(ICitizenData::tick);
@@ -525,7 +523,7 @@ public class CitizenManager implements ICitizenManager
      *
      * @param colony the colony being ticked.
      */
-    @Override
+    
     public void onColonyTick(final IColony colony)
     {
         if (colony.hasTownHall())
@@ -565,7 +563,7 @@ public class CitizenManager implements ICitizenManager
         }
     }
 
-    @Override
+    
     public void updateCitizenMourn(final boolean mourn)
     {
         for (final ICitizenData citizen : getCitizens())
@@ -577,19 +575,19 @@ public class CitizenManager implements ICitizenManager
         }
     }
 
-    @Override
+    
     public ICitizenData getRandomCitizen()
     {
         return (ICitizenData) citizens.values().toArray()[random.nextInt(citizens.values().size())];
     }
 
-    @Override
+    
     public void updateCitizenSleep(final boolean sleep)
     {
         this.areCitizensSleeping = sleep;
     }
 
-    @Override
+    
     public void onCitizenSleep()
     {
         for (final ICitizenData citizenData : citizens.values())

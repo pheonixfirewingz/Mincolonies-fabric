@@ -3,7 +3,6 @@ package com.minecolonies.coremod.colony.buildings.workerbuildings;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.ldtteam.blockout.views.Window;
-import com.minecolonies.api.colony.ICitizenData;
 import com.minecolonies.api.colony.buildings.*;
 import com.minecolonies.api.colony.buildings.registry.BuildingEntry;
 import com.minecolonies.api.colony.jobs.IJob;

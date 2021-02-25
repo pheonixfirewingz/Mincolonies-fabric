@@ -1,12 +1,11 @@
 package com.minecolonies.api.colony.permissions;
 
 import com.minecolonies.api.network.PacketUtils;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.network.*;
+import net.minecraft.util.math.*;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Permission event class, used to store events happening in the colony.

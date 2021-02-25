@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Research manager of the colony.
  */
-public class ResearchManager implements IResearchManager
+public class ResearchManager
 {
     /**
      * The research tree of the colony.
@@ -22,25 +22,25 @@ public class ResearchManager implements IResearchManager
      */
     private final IResearchEffectManager effects = new ResearchEffectManager();
 
-    @Override
+    
     public void readFromNBT(@NotNull final CompoundNBT compound)
     {
         tree.readFromNBT(compound, effects);
     }
 
-    @Override
+    
     public void writeToNBT(@NotNull final CompoundNBT compound)
     {
         tree.writeToNBT(compound);
     }
 
-    @Override
+    
     public LocalResearchTree getResearchTree()
     {
         return this.tree;
     }
 
-    @Override
+    
     public IResearchEffectManager getResearchEffects()
     {
         return this.effects;

@@ -2,12 +2,11 @@ package com.minecolonies.api.client.render.modeltype;
 
 import com.minecolonies.api.entity.citizen.AbstractEntityCitizen;
 import com.minecolonies.api.util.constant.Constants;
-import net.minecraft.client.Minecraft;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.*;
+import net.minecraft.util.*;
 import org.jetbrains.annotations.NotNull;
 
-import static com.minecolonies.api.entity.citizen.AbstractEntityCitizen.DATA_STYLE;
-import static com.minecolonies.api.entity.citizen.AbstractEntityCitizen.DATA_TEXTURE_SUFFIX;
+import static com.minecolonies.api.entity.citizen.AbstractEntityCitizen.*;
 
 public interface ISimpleModelType extends IModelType
 {

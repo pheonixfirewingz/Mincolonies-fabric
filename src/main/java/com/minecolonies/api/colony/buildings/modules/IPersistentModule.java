@@ -1,7 +1,7 @@
 package com.minecolonies.api.colony.buildings.modules;
 
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.PacketBuffer;
+import net.minecraft.nbt.*;
+import net.minecraft.network.*;
 
 /**
  * Interface for all building modules that store additional data.

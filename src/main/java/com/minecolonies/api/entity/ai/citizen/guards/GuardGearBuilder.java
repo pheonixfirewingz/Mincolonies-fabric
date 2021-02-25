@@ -1,11 +1,10 @@
 package com.minecolonies.api.entity.ai.citizen.guards;
 
 import com.minecolonies.api.util.constant.ToolType;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.util.Tuple;
+import net.minecraft.inventory.*;
+import net.minecraft.util.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public final class GuardGearBuilder
 {

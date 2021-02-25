@@ -1,12 +1,10 @@
 package com.minecolonies.api.colony;
 
-import com.minecolonies.api.util.BlockPosUtil;
-import com.minecolonies.api.util.NBTUtils;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.INBT;
+import com.minecolonies.api.util.*;
+import net.minecraft.nbt.*;
 import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.chunk.Chunk;
+import net.minecraft.util.math.*;
+import net.minecraft.world.chunk.*;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.Constants;
 import org.jetbrains.annotations.NotNull;

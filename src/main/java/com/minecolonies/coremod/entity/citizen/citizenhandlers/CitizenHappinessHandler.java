@@ -1,6 +1,5 @@
 package com.minecolonies.coremod.entity.citizen.citizenhandlers;
 
-import com.minecolonies.api.colony.ICitizenData;
 import com.minecolonies.api.colony.interactionhandling.ChatPriority;
 import com.minecolonies.api.colony.interactionhandling.InteractionValidatorRegistry;
 import com.minecolonies.api.entity.citizen.citizenhandlers.ICitizenHappinessHandler;

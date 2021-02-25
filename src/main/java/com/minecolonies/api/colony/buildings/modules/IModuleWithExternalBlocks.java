@@ -1,8 +1,8 @@
 package com.minecolonies.api.colony.buildings.modules;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.block.*;
+import net.minecraft.util.math.*;
+import net.minecraft.world.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;

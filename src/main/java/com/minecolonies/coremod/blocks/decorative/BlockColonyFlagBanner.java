@@ -22,6 +22,7 @@ public class BlockColonyFlagBanner extends AbstractBannerBlock implements BlockE
     public static final IntProperty ROTATION = BlockStateProperties.ROTATION_0_15;
     private static final VoxelShape SHAPE = VoxelShape.cuboid(4.0D, 0.0D, 4.0D, 12.0D, 16.0D, 12.0D);
 
+
     public BlockColonyFlagBanner()
     {
         super(DyeColor.WHITE,

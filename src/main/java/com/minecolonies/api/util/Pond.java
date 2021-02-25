@@ -3,7 +3,6 @@ package com.minecolonies.api.util;
 import com.minecolonies.api.entity.pathfinding.WaterPathResult;
 import net.minecraft.block.*;
 import net.minecraft.util.math.*;
-import net.minecraft.world.*;
 import org.jetbrains.annotations.NotNull;
 
 /**

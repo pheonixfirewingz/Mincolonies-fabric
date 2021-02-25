@@ -1,7 +1,5 @@
 package com.minecolonies.api.util.constant;
 
-import net.minecraft.util.*;
-
 /**
  * Constants used by the Guard AIs.
  */
