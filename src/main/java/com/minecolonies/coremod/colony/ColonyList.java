@@ -19,15 +19,15 @@ import static com.minecolonies.api.util.constant.Suppression.UNCHECKED;
 /**
  * Data structure for storing colonies, optimized for performance.
  *
- * @param <T> Type of IColony (Colony or ColonyView)
+ * @param <T> Type of Colony (Colony or ColonyView)
  * @author Colton
  */
-public final class ColonyList<T extends IColony> implements Iterable<T>
+public final class ColonyList<T extends Colony> implements Iterable<T>
 {
     @VisibleForTesting
     static final  int           INITIAL_SIZE = 16;
     private final List<Integer> nullIndices  = new ArrayList<>();
-    private       IColony[]     list         = new IColony[INITIAL_SIZE];
+    private       Colony[]     list         = new Colony[INITIAL_SIZE];
     private       int           topID        = 0;
 
     private int size = 0;
@@ -71,7 +71,7 @@ public final class ColonyList<T extends IColony> implements Iterable<T>
 
     private void expandList()
     {
-        final IColony[] newList = new IColony[list.length * 2];
+        final Colony[] newList = new Colony[list.length * 2];
         System.arraycopy(list, 0, newList, 0, list.length);
         list = newList;
     }

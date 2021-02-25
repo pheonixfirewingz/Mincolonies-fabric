@@ -43,7 +43,7 @@ public class VisitorData extends CitizenData
         super(id, colony);
     }
 
-    @Override
+    
     public CompoundTag serializeNBT()
     {
         CompoundTag compoundNBT = super.serializeNBT();
@@ -54,7 +54,7 @@ public class VisitorData extends CitizenData
         return compoundNBT;
     }
 
-    @Override
+    
     public void deserializeNBT(final CompoundTag nbtTagCompound)
     {
         super.deserializeNBT(nbtTagCompound);
@@ -62,13 +62,13 @@ public class VisitorData extends CitizenData
         recruitCost = ItemStack.read(nbtTagCompound.getCompound(TAG_RECRUIT_COST));
     }
 
-    @Override
+    
     public void setRecruitCosts(final ItemStack item)
     {
         this.recruitCost = item;
     }
 
-    @Override
+    
     public ItemStack getRecruitCost()
     {
         return recruitCost;
@@ -88,26 +88,26 @@ public class VisitorData extends CitizenData
         return data;
     }
 
-    @Override
+    
     public void serializeViewNetworkData(@NotNull final PacketByteBuf buf)
     {
         super.serializeViewNetworkData(buf);
         buf.writeItemStack(recruitCost);
     }
 
-    @Override
+    
     public BlockPos getSittingPosition()
     {
         return sittingPosition;
     }
 
-    @Override
+    
     public void setSittingPosition(final BlockPos pos)
     {
         this.sittingPosition = pos;
     }
 
-    @Override
+    
     public void updateEntityIfNecessary()
     {
         if (getEntity().isPresent())
@@ -137,7 +137,7 @@ public class VisitorData extends CitizenData
         }
     }
 
-    @Override
+    
     public void applyResearchEffects()
     {
         // no research effects for now

@@ -1,6 +1,7 @@
 package com.minecolonies.api.entity.citizen.citizenhandlers;
 
 import com.minecolonies.api.colony.buildings.*;
+import com.minecolonies.coremod.colony.Colony;
 import org.jetbrains.annotations.Nullable;
 
 public interface ICitizenColonyHandler
@@ -42,7 +43,7 @@ public interface ICitizenColonyHandler
      * @return the colony of the citizen or null.
      */
     @Nullable
-    IColony getColony();
+    Colony getColony();
 
     /**
      * Getter for the colony id.

@@ -13,7 +13,6 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.Constants;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Objects;
 
@@ -23,7 +22,7 @@ import static com.minecolonies.api.util.constant.NbtTagConstants.TAG_COLONY_MANA
 /**
  * Capability for the colony tag for chunks
  */
-public interface IColonyManagerCapability
+public interface ColonyManagerCapability
 {
     /**
      * Create a colony and return it.
@@ -32,7 +31,7 @@ public interface IColonyManagerCapability
      * @param pos the position of the colony.
      * @return the created colony.
      */
-    IColony createColony(@NotNull final World w, @NotNull final BlockPos pos);
+    Colony createColony(@NotNull final World w, @NotNull final BlockPos pos);
 
     /**
      * Delete a colony with a certain id.
@@ -48,21 +47,21 @@ public interface IColonyManagerCapability
      * @return the colony or null.
      */
     @Nullable
-    IColony getColony(final int id);
+    Colony getColony(final int id);
 
     /**
      * Get a list of all colonies.
      *
      * @return a complete list.
      */
-    List<IColony> getColonies();
+    List<Colony> getColonies();
 
     /**
      * add a new colony to the capability.
      *
      * @param colony the colony to add.
      */
-    void addColony(IColony colony);
+    void addColony(Colony colony);
 
     /**
      * Get the top most id of all colonies.
@@ -74,16 +73,16 @@ public interface IColonyManagerCapability
     /**
      * The implementation of the colonyTagCapability.
      */
-    class Impl implements IColonyManagerCapability
+    class Impl implements ColonyManagerCapability
     {
         /**
          * The list of all colonies.
          */
         @NotNull
-        private final ColonyList<IColony> colonies = new ColonyList<>();
+        private final ColonyList<Colony> colonies = new ColonyList<>();
 
         @Override
-        public IColony createColony(@NotNull final World w, @NotNull final BlockPos pos)
+        public Colony createColony(@NotNull final World w, @NotNull final BlockPos pos)
         {
             return colonies.create(w, pos);
         }
@@ -95,19 +94,19 @@ public interface IColonyManagerCapability
         }
 
         @Override
-        public IColony getColony(final int id)
+        public Colony getColony(final int id)
         {
             return colonies.get(id);
         }
 
         @Override
-        public List<IColony> getColonies()
+        public List<Colony> getColonies()
         {
             return colonies.getCopyAsList();
         }
 
         @Override
-        public void addColony(final IColony colony)
+        public void addColony(final Colony colony)
         {
             colonies.add(colony);
         }
@@ -122,23 +121,23 @@ public interface IColonyManagerCapability
     /**
      * The storage class of the capability.
      */
-    class Storage implements Capability.IStorage<IColonyManagerCapability>
+    class Storage implements Capability.IStorage<ColonyManagerCapability>
     {
 
         @Override
-        public INBT writeNBT(@NotNull final Capability<IColonyManagerCapability> capability, @NotNull final IColonyManagerCapability instance, @Nullable final Direction side)
+        public INBT writeNBT(@NotNull final Capability<ColonyManagerCapability> capability, @NotNull final ColonyManagerCapability instance, @Nullable final Direction side)
         {
             final CompoundNBT compound = new CompoundNBT();
-            compound.put(TAG_COLONIES, instance.getColonies().stream().map(IColony::getColonyTag).filter(Objects::nonNull).collect(NBTUtils.toListNBT()));
+            compound.put(TAG_COLONIES, instance.getColonies().stream().map(Colony::getColonyTag).filter(Objects::nonNull).collect(NBTUtils.toListNBT()));
             final CompoundNBT managerCompound = new CompoundNBT();
-            IColonyManager.getInstance().write(managerCompound);
+            ColonyManager.getInstance().write(managerCompound);
             compound.put(TAG_COLONY_MANAGER, managerCompound);
             return compound;
         }
 
         @Override
         public void readNBT(
-          @NotNull final Capability<IColonyManagerCapability> capability, @NotNull final IColonyManagerCapability instance,
+          @NotNull final Capability<ColonyManagerCapability> capability, @NotNull final ColonyManagerCapability instance,
           @Nullable final Direction side, @NotNull final INBT nbt)
         {
             if (nbt instanceof CompoundNBT)
@@ -146,10 +145,10 @@ public interface IColonyManagerCapability
                 final CompoundNBT compound = (CompoundNBT) nbt;
 
                 // Load all colonies from Nbt
-                Multimap<BlockPos, IColony> tempColonies = ArrayListMultimap.create();
+                Multimap<BlockPos, Colony> tempColonies = ArrayListMultimap.create();
                 for (final INBT tag : compound.getList(TAG_COLONIES, Constants.NBT.TAG_COMPOUND))
                 {
-                    final IColony colony = Colony.loadColony((CompoundNBT) tag, null);
+                    final Colony colony = Colony.loadColony((CompoundNBT) tag, null);
                     if (colony != null)
                     {
                         tempColonies.put(colony.getCenter(), colony);
@@ -164,7 +163,7 @@ public interface IColonyManagerCapability
                     if (tempColonies.get(pos).size() > 1)
                     {
                         Log.getLogger().warn("Detected duplicate colonies which are at the same position:");
-                        for (final IColony colony : tempColonies.get(pos))
+                        for (final Colony colony : tempColonies.get(pos))
                         {
                             Log.getLogger()
                               .warn(
@@ -179,7 +178,7 @@ public interface IColonyManagerCapability
 
                 if (compound.keySet().contains(TAG_COLONY_MANAGER))
                 {
-                    IColonyManager.getInstance().read(compound.getCompound(TAG_COLONY_MANAGER));
+                    ColonyManager.getInstance().read(compound.getCompound(TAG_COLONY_MANAGER));
                 }
             }
         }
