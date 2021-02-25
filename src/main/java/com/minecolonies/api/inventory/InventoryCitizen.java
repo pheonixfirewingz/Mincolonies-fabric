@@ -1,6 +1,5 @@
 package com.minecolonies.api.inventory;
 
-import com.minecolonies.api.colony.ICitizenData;
 import com.minecolonies.api.research.effects.AbstractResearchEffect;
 import com.minecolonies.api.util.ItemStackUtils;
 import net.minecraft.entity.LivingEntity;

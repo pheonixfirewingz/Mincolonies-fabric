@@ -1,7 +1,7 @@
 package com.minecolonies.api.entity.citizen.citizenhandlers;
 
 import com.minecolonies.api.entity.citizen.AbstractEntityCitizen;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.*;
 import org.jetbrains.annotations.NotNull;
 
 /**

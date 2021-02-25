@@ -3,12 +3,10 @@ package com.minecolonies.coremod.blocks.abstracts;
 import com.ldtteam.structurize.blocks.interfaces.IAnchorBlock;
 import com.ldtteam.structurize.util.LanguageHandler;
 import com.minecolonies.api.MinecoloniesAPIProxy;
-import com.minecolonies.api.colony.*;
 import com.minecolonies.api.colony.buildings.registry.BuildingEntry;
 import com.minecolonies.api.colony.buildings.views.IBuildingView;
 import com.minecolonies.api.colony.permissions.Action;
 import com.minecolonies.api.entity.ai.citizen.builder.IBuilderUndestroyable;
-import com.minecolonies.api.items.ItemBlockHut;
 import com.minecolonies.api.research.effects.AbstractResearchEffect;
 import com.minecolonies.api.tileentities.*;
 import net.minecraft.block.*;
@@ -16,7 +14,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.*;
 import net.minecraft.entity.player.*;
 import net.minecraft.item.*;
-import net.minecraft.state.*;
 import net.minecraft.tileentity.*;
 import net.minecraft.util.Direction;
 import net.minecraft.util.*;
@@ -93,9 +90,9 @@ public abstract class AbstractBlockHut<B extends AbstractBlockHut<B>> extends Bl
 	 *
 	 * @param properties custom properties.
 	 */
-	public AbstractBlockHut(final Properties properties)
+	public AbstractBlockHut(final Settings properties)
 	{
-		super(properties.notSolid());
+		super(properties.nonOpaque());
 		setRegistryName(getName());
 		this.setDefaultState(this.getDefaultState().with(FACING, Direction.NORTH));
 	}

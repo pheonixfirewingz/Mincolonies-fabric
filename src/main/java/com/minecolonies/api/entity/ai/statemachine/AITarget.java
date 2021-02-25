@@ -2,11 +2,9 @@ package com.minecolonies.api.entity.ai.statemachine;
 
 import com.minecolonies.api.entity.ai.statemachine.states.IAIState;
 import com.minecolonies.api.entity.ai.statemachine.tickratestatemachine.TickingTransition;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.*;
 
-import java.util.function.BooleanSupplier;
-import java.util.function.Supplier;
+import java.util.function.*;
 
 /**
  * A simple target the AI tries to accomplish. It has a state matcher, so it only gets executed on matching state. It has a tester function to make more checks to tell if execution

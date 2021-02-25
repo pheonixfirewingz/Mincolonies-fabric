@@ -1,6 +1,6 @@
 package com.minecolonies.api.entity.citizen.happiness;
 
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.*;
 
 import static com.minecolonies.api.util.constant.NbtTagConstants.TAG_VALUE;
 

@@ -3,19 +3,15 @@ package com.minecolonies.api.colony.requestsystem.requestable;
 import com.google.common.reflect.TypeToken;
 import com.minecolonies.api.colony.requestsystem.factory.IFactoryController;
 import com.minecolonies.api.compatibility.Compatibility;
-import com.minecolonies.api.util.ItemStackUtils;
-import com.minecolonies.api.util.ReflectionUtils;
-import com.minecolonies.api.util.constant.IToolType;
-import com.minecolonies.api.util.constant.ToolType;
-import com.minecolonies.api.util.constant.TypeConstants;
-import net.minecraft.inventory.EquipmentSlotType;
+import com.minecolonies.api.util.*;
+import com.minecolonies.api.util.constant.*;
+import net.minecraft.inventory.*;
 import net.minecraft.item.*;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.PacketBuffer;
+import net.minecraft.nbt.*;
+import net.minecraft.network.*;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**

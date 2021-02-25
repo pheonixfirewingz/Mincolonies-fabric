@@ -1,14 +1,10 @@
 package com.minecolonies.api.colony.jobs.registry;
 
 import com.minecolonies.api.IMinecoloniesAPI;
-import com.minecolonies.api.colony.ICitizenData;
-import com.minecolonies.api.colony.ICitizenDataView;
-import com.minecolonies.api.colony.jobs.IJob;
-import com.minecolonies.api.colony.jobs.IJobView;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.PacketBuffer;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import com.minecolonies.api.colony.jobs.*;
+import net.minecraft.nbt.*;
+import net.minecraft.network.*;
+import org.jetbrains.annotations.*;
 
 public interface IJobDataManager
 {

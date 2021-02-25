@@ -1,7 +1,7 @@
 package com.minecolonies.api.colony.buildings.modules;
 
 import com.minecolonies.api.colony.buildings.IBuilding;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.*;
 
 /**
  * Module interface for all building based events.

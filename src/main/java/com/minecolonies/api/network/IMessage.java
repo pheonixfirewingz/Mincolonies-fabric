@@ -1,6 +1,6 @@
 package com.minecolonies.api.network;
 
-import net.minecraft.network.PacketBuffer;
+import net.minecraft.network.*;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.network.NetworkEvent;
 import org.jetbrains.annotations.Nullable;

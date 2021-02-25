@@ -1,7 +1,7 @@
 package com.minecolonies.api.entity.citizen.citizenhandlers;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
+import net.minecraft.block.*;
+import net.minecraft.item.*;
 
 public interface ICitizenInventoryHandler
 {

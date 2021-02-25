@@ -1,15 +1,11 @@
 package com.minecolonies.api.colony.interactionhandling;
 
-import com.minecolonies.api.colony.ICitizenData;
 import com.minecolonies.api.colony.requestsystem.token.IToken;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.util.math.*;
+import net.minecraft.util.text.*;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.BiPredicate;
-import java.util.function.Predicate;
+import java.util.*;
+import java.util.function.*;
 
 /**
  * Utility class to store all validator predicates for the chat handling.

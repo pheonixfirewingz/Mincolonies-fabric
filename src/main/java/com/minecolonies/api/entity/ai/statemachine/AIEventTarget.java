@@ -1,12 +1,10 @@
 package com.minecolonies.api.entity.ai.statemachine;
 
-import com.minecolonies.api.entity.ai.statemachine.states.AIBlockingEventType;
-import com.minecolonies.api.entity.ai.statemachine.states.IAIState;
+import com.minecolonies.api.entity.ai.statemachine.states.*;
 import com.minecolonies.api.entity.ai.statemachine.tickratestatemachine.TickingEvent;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.function.BooleanSupplier;
-import java.util.function.Supplier;
+import java.util.function.*;
 
 /**
  * Special AI Targets which are used for preState cecks and limits. They are checked before normal AITargets always

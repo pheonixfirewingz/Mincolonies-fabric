@@ -1,7 +1,5 @@
 package com.minecolonies.api.util;
 
-import net.minecraft.client.*;
-
 /**
  * Debug utility class.
  */

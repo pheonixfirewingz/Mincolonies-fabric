@@ -2,8 +2,7 @@ package com.minecolonies.api.colony.requestsystem.data;
 
 import com.minecolonies.api.colony.requestsystem.token.IToken;
 
-import java.util.LinkedList;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Specific datastore for couriers.

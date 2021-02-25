@@ -1,8 +1,6 @@
 package com.minecolonies.api.util;
 
 import com.minecolonies.api.colony.IColonyTagCapability;
-import net.minecraft.nbt.*;
-import net.minecraft.util.*;
 import net.minecraft.util.math.*;
 import net.minecraft.world.chunk.*;
 import net.minecraftforge.common.util.Constants;

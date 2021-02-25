@@ -28,7 +28,7 @@ import static com.minecolonies.api.util.constant.NbtTagConstants.TAG_NAME;
 /**
  * Manager for all colony related events.
  */
-public class EventManager implements IEventManager
+public class EventManager
 {
     /**
      * NBT tags
@@ -63,7 +63,7 @@ public class EventManager implements IEventManager
         structureManager = new EventStructureManager(this, colony);
     }
 
-    @Override
+    
     public void addEvent(final IColonyEvent colonyEvent)
     {
         if (colonyEvent.getID() == 0)
@@ -80,7 +80,7 @@ public class EventManager implements IEventManager
      *
      * @return the next event Id.
      */
-    @Override
+    
     public int getAndTakeNextEventID()
     {
         if (currentEventID > Integer.MAX_VALUE - 100)
@@ -99,7 +99,7 @@ public class EventManager implements IEventManager
      * @param entity  the entity to register.
      * @param eventID the event id to register it to.
      */
-    @Override
+    
     public void registerEntity(@NotNull final Entity entity, final int eventID)
     {
         final IColonyEvent event = events.get(eventID);
@@ -117,7 +117,7 @@ public class EventManager implements IEventManager
      * @param entity  the entity.
      * @param eventID the id of th eevent.
      */
-    @Override
+    
     public void unregisterEntity(@NotNull final Entity entity, final int eventID)
     {
         final IColonyEvent event = events.get(eventID);
@@ -133,7 +133,7 @@ public class EventManager implements IEventManager
      * @param entity  the entity.
      * @param eventID the id of the event.
      */
-    @Override
+    
     public void onEntityDeath(final LivingEntity entity, final int eventID)
     {
         final IColonyEvent event = events.get(eventID);
@@ -143,7 +143,7 @@ public class EventManager implements IEventManager
         }
     }
 
-    @Override
+    
     public void onTileEntityBreak(final int eventID, final TileEntity te)
     {
         final IColonyEvent event = events.get(eventID);
@@ -153,7 +153,7 @@ public class EventManager implements IEventManager
         }
     }
 
-    @Override
+    
     public void onNightFall()
     {
         for (final IColonyEvent event : events.values())
@@ -168,7 +168,7 @@ public class EventManager implements IEventManager
      * @param ID the id of the event.
      * @return the event or null.
      */
-    @Override
+    
     public IColonyEvent getEventByID(final int ID)
     {
         return events.get(ID);
@@ -179,7 +179,7 @@ public class EventManager implements IEventManager
      *
      * @param colony the colony being ticked.
      */
-    @Override
+    
     public void onColonyTick(@NotNull final IColony colony)
     {
         final Iterator<IColonyEvent> iterator = events.values().iterator();
@@ -210,13 +210,13 @@ public class EventManager implements IEventManager
         }
     }
 
-    @Override
+    
     public Map<Integer, IColonyEvent> getEvents()
     {
         return events;
     }
 
-    @Override
+    
     public void readFromNBT(@NotNull final CompoundNBT compound)
     {
         if (compound.contains(TAG_EVENT_MANAGER))
@@ -244,7 +244,7 @@ public class EventManager implements IEventManager
         }
     }
 
-    @Override
+    
     public void writeToNBT(@NotNull final CompoundNBT compound)
     {
         final CompoundNBT eventManagerNBT = new CompoundNBT();
@@ -262,7 +262,7 @@ public class EventManager implements IEventManager
         structureManager.writeToNBT(compound);
     }
 
-    @Override
+    
     public IEventStructureManager getStructureManager()
     {
         return structureManager;

@@ -1,6 +1,6 @@
 package com.minecolonies.api.entity.pathfinding;
 
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.*;
 
 /**
  * Contains the result of the path job to find water.

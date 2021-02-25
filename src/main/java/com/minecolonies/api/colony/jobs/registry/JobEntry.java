@@ -1,16 +1,11 @@
 package com.minecolonies.api.colony.jobs.registry;
 
-import com.minecolonies.api.colony.ICitizenData;
-import com.minecolonies.api.colony.ICitizenDataView;
-import com.minecolonies.api.colony.jobs.IJob;
-import com.minecolonies.api.colony.jobs.IJobView;
-import net.minecraft.util.ResourceLocation;
+import com.minecolonies.api.colony.jobs.*;
+import net.minecraft.util.*;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 import org.apache.commons.lang3.Validate;
 
-import java.util.function.BiFunction;
-import java.util.function.Function;
-import java.util.function.Supplier;
+import java.util.function.*;
 
 /**
  * Entry for the {@link IJob} registry.

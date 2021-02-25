@@ -1,6 +1,5 @@
 package com.minecolonies.coremod.proxy;
 
-import com.minecolonies.api.colony.ICitizenDataView;
 import com.minecolonies.coremod.colony.CitizenDataView;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;

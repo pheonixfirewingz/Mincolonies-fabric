@@ -3,7 +3,6 @@ package com.minecolonies.api.util;
 import net.minecraft.block.*;
 import net.minecraft.item.*;
 import net.minecraft.tags.*;
-import net.minecraft.util.*;
 
 /**
  * Class for specific minecraft tag utilities.

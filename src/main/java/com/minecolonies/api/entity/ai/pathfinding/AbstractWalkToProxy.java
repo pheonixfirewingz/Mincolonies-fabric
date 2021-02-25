@@ -1,14 +1,11 @@
 package com.minecolonies.api.entity.ai.pathfinding;
 
-import com.minecolonies.api.util.BlockPosUtil;
-import com.minecolonies.api.util.EntityUtils;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.util.math.BlockPos;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import com.minecolonies.api.util.*;
+import net.minecraft.entity.*;
+import net.minecraft.util.math.*;
+import org.jetbrains.annotations.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Abstract class for the walkToProxy.

@@ -1,13 +1,11 @@
 package com.minecolonies.coremod.colony;
 
-import com.minecolonies.api.colony.IVisitorData;
 import com.minecolonies.api.util.BlockPosUtil;
 import com.minecolonies.api.util.WorldUtil;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.PacketBuffer;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.*;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.NotNull;
 
@@ -17,7 +15,7 @@ import static com.minecolonies.api.util.constant.SchematicTagConstants.TAG_SITTI
 /**
  * Data for visitors
  */
-public class VisitorData extends CitizenData implements IVisitorData
+public class VisitorData extends CitizenData
 {
     /**
      * Recruit nbt tag
@@ -40,16 +38,16 @@ public class VisitorData extends CitizenData implements IVisitorData
      * @param id     ID of the Citizen.
      * @param colony Colony the Citizen belongs to.
      */
-    public VisitorData(final int id, final IColony colony)
+    public VisitorData(final int id, final Colony colony)
     {
         super(id, colony);
     }
 
     @Override
-    public CompoundNBT serializeNBT()
+    public CompoundTag serializeNBT()
     {
-        CompoundNBT compoundNBT = super.serializeNBT();
-        CompoundNBT item = new CompoundNBT();
+        CompoundTag compoundNBT = super.serializeNBT();
+        CompoundTag item = new CompoundTag();
         recruitCost.write(item);
         compoundNBT.put(TAG_RECRUIT_COST, item);
         BlockPosUtil.write(compoundNBT, TAG_SITTING, sittingPosition);
@@ -57,7 +55,7 @@ public class VisitorData extends CitizenData implements IVisitorData
     }
 
     @Override
-    public void deserializeNBT(final CompoundNBT nbtTagCompound)
+    public void deserializeNBT(final CompoundTag nbtTagCompound)
     {
         super.deserializeNBT(nbtTagCompound);
         sittingPosition = BlockPosUtil.read(nbtTagCompound, TAG_SITTING);
@@ -83,7 +81,7 @@ public class VisitorData extends CitizenData implements IVisitorData
      * @param nbt    nbt compound to read from
      * @return new CitizenData
      */
-    public static IVisitorData loadVisitorFromNBT(final IColony colony, final CompoundNBT nbt)
+    public static VisitorData loadVisitorFromNBT(final Colony colony, final CompoundTag nbt)
     {
         final IVisitorData data = new VisitorData(nbt.getInt(TAG_ID), colony);
         data.deserializeNBT(nbt);
@@ -91,7 +89,7 @@ public class VisitorData extends CitizenData implements IVisitorData
     }
 
     @Override
-    public void serializeViewNetworkData(@NotNull final PacketBuffer buf)
+    public void serializeViewNetworkData(@NotNull final PacketByteBuf buf)
     {
         super.serializeViewNetworkData(buf);
         buf.writeItemStack(recruitCost);

@@ -1,6 +1,6 @@
 package com.minecolonies.api.entity.pathfinding;
 
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.*;
 
 /**
  * Custom result of the class which contains a random position.

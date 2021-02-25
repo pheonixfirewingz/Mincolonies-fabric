@@ -1,7 +1,7 @@
 package com.minecolonies.coremod.colony;
 
 import com.minecolonies.api.MinecoloniesAPIProxy;
-import com.minecolonies.api.colony.ICitizenDataView;
+import com.minecolonies.api.colony.ICitizen;
 import com.minecolonies.api.colony.interactionhandling.ChatPriority;
 import com.minecolonies.api.colony.interactionhandling.IInteractionResponseHandler;
 import com.minecolonies.api.colony.jobs.IJobView;
@@ -15,13 +15,12 @@ import com.minecolonies.coremod.colony.interactionhandling.ServerCitizenInteract
 import com.minecolonies.coremod.entity.citizen.citizenhandlers.CitizenHappinessHandler;
 import com.minecolonies.coremod.entity.citizen.citizenhandlers.CitizenSkillHandler;
 import net.minecraft.client.Minecraft;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.ListNBT;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.Hand;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.text.*;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -37,19 +36,19 @@ import static com.minecolonies.api.util.constant.NbtTagConstants.TAG_OFFHAND_HEL
  * The CitizenDataView is the client-side representation of a CitizenData. Views contain the CitizenData's data that is relevant to a Client, in a more client-friendly form.
  * Mutable operations on a View result in a message to the server to perform the operation.
  */
-public class CitizenDataView implements ICitizenDataView
+public class CitizenDataView implements ICitizen
 {
     private static final String TAG_HELD_ITEM_SLOT = "HeldItemSlot";
 
     /**
      * The resource location for the blocking overlay.
      */
-    private static final ResourceLocation BLOCKING_RESOURCE = new ResourceLocation(Constants.MOD_ID, "textures/icons/blocking.png");
+    private static final Identifier BLOCKING_RESOURCE = new Identifier(Constants.MOD_ID, "textures/icons/blocking.png");
 
     /**
      * The resource location for the pending overlay.
      */
-    private static final ResourceLocation PENDING_RESOURCE = new ResourceLocation(Constants.MOD_ID, "textures/icons/warning.png");
+    private static final Identifier PENDING_RESOURCE = new Identifier(Constants.MOD_ID, "textures/icons/warning.png");
 
     /**
      * Attributes.
@@ -103,7 +102,7 @@ public class CitizenDataView implements ICitizenDataView
     /**
      * The citizen chat options on the server side.
      */
-    private final Map<ITextComponent, IInteractionResponseHandler> citizenChatOptions = new LinkedHashMap<>();
+    private final Map<Text, IInteractionResponseHandler> citizenChatOptions = new LinkedHashMap<>();
 
     /**
      * List of primary interactions (sorted by priority).
@@ -182,20 +181,20 @@ public class CitizenDataView implements ICitizenDataView
         this.paused = p;
     }
 
-    @Override
+    
     public String getJob()
     {
         return job;
     }
 
-    @Override
+    
     @Nullable
     public BlockPos getHomeBuilding()
     {
         return homeBuilding;
     }
 
-    @Override
+    
     @Nullable
     public BlockPos getWorkBuilding()
     {
@@ -205,50 +204,50 @@ public class CitizenDataView implements ICitizenDataView
     /**
      * DEPRECATED
      */
-    @Override
+    
     public void setWorkBuilding(@Nullable final BlockPos bp)
     {
         this.workBuilding = bp;
     }
 
-    @Override
+    
     public int getColonyId()
     {
         return colonyId;
     }
 
-    @Override
+    
     public double getHappiness()
     {
         return happiness;
     }
 
-    @Override
+    
     public double getSaturation()
     {
         return saturation;
     }
 
-    @Override
+    
     public double getHealth()
     {
         return health;
     }
 
-    @Override
+    
     public double getMaxHealth()
     {
         return maxHealth;
     }
 
-    @Override
+    
     public BlockPos getPosition()
     {
         return position;
     }
 
-    @Override
-    public void deserialize(@NotNull final PacketBuffer buf)
+    
+    public void deserialize(@NotNull final PacketByteBuf buf)
     {
         name = buf.readString(32767);
         female = buf.readBoolean();
@@ -272,10 +271,10 @@ public class CitizenDataView implements ICitizenDataView
 
         colonyId = buf.readInt();
 
-        final CompoundNBT compound = buf.readCompoundTag();
+        final CompoundTag compound = buf.readCompoundTag();
         inventory = new InventoryCitizen(this.name, true);
-        final ListNBT ListNBT = compound.getList("inventory", 10);
-        this.inventory.read(ListNBT);
+        final ListTag ListTag = compound.getList("inventory", 10);
+        this.inventory.read(ListTag);
         this.inventory.setHeldItem(Hand.MAIN_HAND, compound.getInt(TAG_HELD_ITEM_SLOT));
         this.inventory.setHeldItem(Hand.OFF_HAND, compound.getInt(TAG_OFFHAND_HELD_ITEM_SLOT));
 
@@ -285,7 +284,7 @@ public class CitizenDataView implements ICitizenDataView
         final int size = buf.readInt();
         for (int i = 0; i < size; i++)
         {
-            final CompoundNBT compoundNBT = buf.readCompoundTag();
+            final CompoundTag compoundNBT = buf.readCompoundTag();
             final ServerCitizenInteraction handler =
               (ServerCitizenInteraction) MinecoloniesAPIProxy.getInstance().getInteractionResponseHandlerDataManager().createFrom(this, compoundNBT);
             citizenChatOptions.put(handler.getInquiry(), handler);
@@ -300,12 +299,12 @@ public class CitizenDataView implements ICitizenDataView
 
         if (buf.readBoolean())
         {
-            final IColonyView colonyView = IColonyManager.getInstance().getColonyView(colonyId, Minecraft.getInstance().world.getDimensionKey());
+            final ColonyView colonyView = ColonyManager.getInstance().getColonyView(colonyId, Minecraft.getInstance().world.getDimensionKey());
             jobView = IJobDataManager.getInstance().createViewFrom(colonyView, this, buf);
         }
     }
 
-    @Override
+    
     public IJobView getJobView()
     {
         return this.jobView;
@@ -317,20 +316,20 @@ public class CitizenDataView implements ICitizenDataView
         return inventory;
     }
 
-    @Override
+    
     public List<IInteractionResponseHandler> getOrderedInteractions()
     {
         return sortedInteractions;
     }
 
-    @Override
+    
     @Nullable
-    public IInteractionResponseHandler getSpecificInteraction(@NotNull final ITextComponent component)
+    public IInteractionResponseHandler getSpecificInteraction(@NotNull final Text component)
     {
         return citizenChatOptions.getOrDefault(component, null);
     }
 
-    @Override
+    
     public boolean hasBlockingInteractions()
     {
         if (sortedInteractions.isEmpty())
@@ -347,7 +346,7 @@ public class CitizenDataView implements ICitizenDataView
         return false;
     }
 
-    @Override
+    
     public boolean hasPendingInteractions()
     {
         if (sortedInteractions.isEmpty())
@@ -364,27 +363,27 @@ public class CitizenDataView implements ICitizenDataView
         return false;
     }
 
-    @Override
+    
     public ICitizenSkillHandler getCitizenSkillHandler()
     {
         return citizenSkillHandler;
     }
 
-    @Override
+    
     public ICitizenHappinessHandler getHappinessHandler()
     {
         return citizenHappinessHandler;
     }
 
-    @Override
-    public ResourceLocation getInteractionIcon()
+    
+    public Identifier getInteractionIcon()
     {
         if (sortedInteractions == null || sortedInteractions.isEmpty())
         {
             return null;
         }
 
-        ResourceLocation icon = sortedInteractions.get(0).getInteractionIcon();
+       Identifier icon = sortedInteractions.get(0).getInteractionIcon();
         if (icon == null)
         {
             if (hasBlockingInteractions())
@@ -400,7 +399,7 @@ public class CitizenDataView implements ICitizenDataView
         return icon;
     }
 
-    @Override
+    
     public VisibleCitizenStatus getVisibleStatus()
     {
         return statusIcon;

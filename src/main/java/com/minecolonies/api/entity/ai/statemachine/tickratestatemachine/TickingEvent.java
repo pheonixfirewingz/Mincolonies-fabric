@@ -1,12 +1,10 @@
 package com.minecolonies.api.entity.ai.statemachine.tickratestatemachine;
 
-import com.minecolonies.api.entity.ai.statemachine.states.IState;
-import com.minecolonies.api.entity.ai.statemachine.states.IStateEventType;
+import com.minecolonies.api.entity.ai.statemachine.states.*;
 import com.minecolonies.api.entity.ai.statemachine.transitions.IStateMachineEvent;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.function.BooleanSupplier;
-import java.util.function.Supplier;
+import java.util.function.*;
 
 /**
  * Event with a tickrate for a statemachine using a tickrate.

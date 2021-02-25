@@ -1,7 +1,5 @@
 package com.minecolonies.coremod.network.messages.server.colony.citizen;
 
-import com.minecolonies.api.colony.ICitizenData;
-import com.minecolonies.api.colony.ICitizenDataView;
 import com.minecolonies.api.entity.citizen.AbstractEntityCitizen;
 import com.minecolonies.api.entity.citizen.Skill;
 import com.minecolonies.api.util.Log;

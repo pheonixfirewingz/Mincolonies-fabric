@@ -1,9 +1,8 @@
 package com.minecolonies.api.colony.interactionhandling.registry;
 
 import com.minecolonies.api.colony.ICitizen;
-import com.minecolonies.api.colony.ICitizenData;
 import com.minecolonies.api.colony.interactionhandling.IInteractionResponseHandler;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.*;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 import org.apache.commons.lang3.Validate;
 

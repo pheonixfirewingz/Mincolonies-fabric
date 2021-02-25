@@ -9,7 +9,6 @@ import com.minecolonies.api.colony.*;
 import com.minecolonies.api.colony.buildings.IBuilding;
 import com.minecolonies.api.colony.buildings.IGuardBuilding;
 import com.minecolonies.api.colony.permissions.Action;
-import com.minecolonies.api.items.ItemBlockHut;
 import com.minecolonies.api.util.Log;
 import com.minecolonies.api.util.WorldUtil;
 import com.minecolonies.api.util.constant.Constants;
@@ -17,7 +16,7 @@ import com.minecolonies.coremod.Network;
 import com.minecolonies.coremod.blocks.BlockScarecrow;
 import com.minecolonies.coremod.blocks.huts.BlockHutTownHall;
 import com.minecolonies.coremod.client.render.RenderBipedCitizen;
-import com.minecolonies.coremod.colony.ColonyManager;
+import com.minecolonies.coremod.colony.*;
 import com.minecolonies.coremod.colony.jobs.AbstractJobGuard;
 import com.minecolonies.coremod.commands.EntryPoint;
 import com.minecolonies.coremod.entity.citizen.EntityCitizen;
@@ -684,7 +683,7 @@ public class EventHandler
 
     private static boolean onBlockHutPlaced(final World world, @NotNull final PlayerEntity player, final BlockPos pos, final Block block)
     {
-        final IColony colony = IColonyManager.getInstance().getIColony(world, pos);
+        final Colony colony = ColonyManager.getInstance().getIColony(world, pos);
 
         if (colony == null)
         {
@@ -694,7 +693,7 @@ public class EventHandler
             }
 
             //  Not in a colony
-            if (IColonyManager.getInstance().getIColonyByOwner(world, player) == null)
+            if (ColonyManager.getInstance().getIColonyByOwner(world, player) == null)
             {
                 LanguageHandler.sendPlayerMessage(player, "tile.blockhut.messagenotownhall");
             }

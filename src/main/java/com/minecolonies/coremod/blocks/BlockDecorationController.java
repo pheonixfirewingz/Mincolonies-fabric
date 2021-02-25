@@ -1,43 +1,23 @@
 package com.minecolonies.coremod.blocks;
 
-import com.ldtteam.structurize.blocks.interfaces.IAnchorBlock;
-import com.minecolonies.api.blocks.AbstractBlockMinecoloniesHorizontal;
 import com.minecolonies.api.entity.ai.citizen.builder.IBuilderUndestroyable;
 import com.minecolonies.coremod.tileentities.TileEntityDecorationController;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.material.Material;
+import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.state.property.*;
 import net.minecraft.util.*;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.world.IBlockReader;
+import net.minecraft.util.math.*;
+import net.minecraft.util.shape.*;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nullable;
-
 /**
  * Creates a decoration placerholder block.
  */
-public class BlockDecorationController extends AbstractBlockMinecoloniesHorizontal<BlockDecorationController> implements IBuilderUndestroyable, IAnchorBlock
+public class BlockDecorationController extends Block implements IBuilderUndestroyable, IAnchorBlock
 {
     /**
      * The hardness this block has.
      */
     private static final float BLOCK_HARDNESS = 5F;
-
-    /**
-     * This blocks name.
-     */
-    private static final String BLOCK_NAME = "decorationcontroller";
 
     /**
      * The resistance this block has.
@@ -47,24 +27,24 @@ public class BlockDecorationController extends AbstractBlockMinecoloniesHorizont
     /**
      * If the block is mirrored.
      */
-    public static BooleanProperty MIRROR = BooleanProperty.create("mirror");
+    public static BooleanProperty MIRROR = BooleanProperty.of("mirror");
+    public static final DirectionProperty HORIZONTAL_FACING = HorizontalBlock.HORIZONTAL_FACING;
 
     /**
      * The bounding boxes.
      */
-    protected static final VoxelShape AABB_SOUTH = VoxelShapes.create(0.25D, 0.314D, 0.97D, 0.75D, 0.86D, 1.0D);
-    protected static final VoxelShape AABB_NORTH = VoxelShapes.create(0.25D, 0.314D, 0.0D, 0.75D, 0.86D, 0.3D);
-    protected static final VoxelShape AABB_EAST  = VoxelShapes.create(0.97D, 0.314D, 0.25D, 1.0D, 0.86D, 0.75D);
-    protected static final VoxelShape AABB_WEST  = VoxelShapes.create(0.0D, 0.314D, 0.25D, 0.3D, 0.86D, 0.75D);
+    protected static final VoxelShape AABB_SOUTH = VoxelShapes.cuboid(0.25D, 0.314D, 0.97D, 0.75D, 0.86D, 1.0D);
+    protected static final VoxelShape AABB_NORTH = VoxelShapes.cuboid(0.25D, 0.314D, 0.0D, 0.75D, 0.86D, 0.3D);
+    protected static final VoxelShape AABB_EAST  = VoxelShapes.cuboid(0.97D, 0.314D, 0.25D, 1.0D, 0.86D, 0.75D);
+    protected static final VoxelShape AABB_WEST  = VoxelShapes.cuboid(0.0D, 0.314D, 0.25D, 0.3D, 0.86D, 0.75D);
 
     /**
      * Constructor for the placerholder.
      */
     public BlockDecorationController()
     {
-        super(Properties.create(Material.WOOD).hardnessAndResistance(BLOCK_HARDNESS, RESISTANCE).doesNotBlockMovement());
+        super(Settings.of(Material.WOOD).strength(BLOCK_HARDNESS, RESISTANCE).doesNotBlockMovement());
         this.setDefaultState(this.getDefaultState().with(HORIZONTAL_FACING, Direction.NORTH).with(MIRROR, false));
-        setRegistryName(BLOCK_NAME);
     }
 
     @Override
@@ -119,7 +99,7 @@ public class BlockDecorationController extends AbstractBlockMinecoloniesHorizont
 
     @Nullable
     @Override
-    public TileEntity createTileEntity(final BlockState state, final IBlockReader world)
+    public TileEntity cuboidTileEntity(final BlockState state, final IBlockReader world)
     {
         return new TileEntityDecorationController();
     }
@@ -130,21 +110,22 @@ public class BlockDecorationController extends AbstractBlockMinecoloniesHorizont
     {
         return super.getStateForPlacement(context).with(HORIZONTAL_FACING, context.getPlacementHorizontalFacing());
     }
+    /**
+     * Convert the BlockState into the correct metadata value.
+     *
+     * @deprecated (Remove this as soon as minecraft offers anything better).
+     */
+    @Override public BlockState rotate(BlockState state, BlockRotation rotation)
+    {
+        return state.with(HORIZONTAL_FACING, rotation.rotate(state.get(HORIZONTAL_FACING)));
+    }
 
     /**
-     * @deprecated
+     * @deprecated (Remove this as soon as minecraft offers anything better).
      */
-    @NotNull
-    @Override
-    public BlockState rotate(@NotNull BlockState state, Rotation rot)
+    @Override public BlockState mirror(BlockState state, BlockMirror mirror)
     {
-        return state.with(HORIZONTAL_FACING, rot.rotate(state.get(HORIZONTAL_FACING)));
+        return state.with(MIRROR, mirror != BlockMirror.NONE);
     }
-
-    @NotNull
-    @Override
-    public BlockState mirror(@NotNull BlockState state, Mirror mirrorIn)
-    {
-        return state.with(MIRROR, mirrorIn != Mirror.NONE);
-    }
+    
 }

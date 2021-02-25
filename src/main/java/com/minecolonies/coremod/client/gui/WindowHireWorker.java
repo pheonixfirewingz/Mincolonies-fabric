@@ -7,7 +7,6 @@ import com.ldtteam.blockout.controls.Text;
 import com.ldtteam.blockout.controls.AbstractTextBuilder.TextBuilder;
 import com.ldtteam.blockout.views.ScrollingList;
 import com.ldtteam.structurize.util.LanguageHandler;
-import com.minecolonies.api.colony.ICitizenDataView;
 import com.minecolonies.api.colony.buildings.HiringMode;
 import com.minecolonies.api.colony.buildings.IBuildingCanBeHiredFrom;
 import com.minecolonies.api.entity.citizen.Skill;

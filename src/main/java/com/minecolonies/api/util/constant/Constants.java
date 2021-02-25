@@ -1,7 +1,5 @@
 package com.minecolonies.api.util.constant;
 
-import net.minecraft.potion.*;
-
 /**
  * Some constants needed for the whole mod.
  */

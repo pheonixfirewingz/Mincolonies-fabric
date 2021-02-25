@@ -2,8 +2,8 @@ package com.minecolonies.api.colony.requestsystem.factory;
 
 import com.google.common.reflect.TypeToken;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.PacketByteBuf;
+import net.minecraft.nbt.*;
+import net.minecraft.network.*;
 import org.jetbrains.annotations.NotNull;
 
 /**

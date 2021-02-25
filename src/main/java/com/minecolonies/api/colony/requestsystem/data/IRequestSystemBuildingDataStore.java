@@ -3,8 +3,7 @@ package com.minecolonies.api.colony.requestsystem.data;
 import com.google.common.reflect.TypeToken;
 import com.minecolonies.api.colony.requestsystem.token.IToken;
 
-import java.util.Collection;
-import java.util.Map;
+import java.util.*;
 
 public interface IRequestSystemBuildingDataStore extends IDataStore
 {

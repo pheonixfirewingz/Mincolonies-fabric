@@ -1,6 +1,5 @@
 package com.minecolonies.coremod.entity.citizen.citizenhandlers;
 
-import com.minecolonies.api.colony.ICitizenData;
 import com.minecolonies.api.colony.buildings.IBuilding;
 import com.minecolonies.api.entity.citizen.AbstractEntityCitizen;
 import com.minecolonies.api.entity.citizen.Skill;

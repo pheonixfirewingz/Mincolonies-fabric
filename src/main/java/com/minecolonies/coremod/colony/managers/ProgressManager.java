@@ -30,7 +30,7 @@ import static com.minecolonies.api.util.constant.NbtTagConstants.*;
 /**
  * The Progress manager which tracks the colony progress to send help messages to the player.
  */
-public class ProgressManager implements IProgressManager
+public class ProgressManager
 {
     /**
      * The progress events which have been broadcasted to the colony already.
@@ -57,7 +57,7 @@ public class ProgressManager implements IProgressManager
         this.colony = colony;
     }
 
-    @Override
+    
     public void progressBuildingPlacement(final Block block)
     {
         if (block == ModBlocks.blockHutTownHall)
@@ -70,7 +70,7 @@ public class ProgressManager implements IProgressManager
         }
     }
 
-    @Override
+    
     public void progressCitizenSpawn(final int total, final int employed)
     {
         if (total == 1)
@@ -111,7 +111,7 @@ public class ProgressManager implements IProgressManager
         }
     }
 
-    @Override
+    
     public void progressWorkOrderPlacement(final IWorkOrder workOrder)
     {
         if (workOrder instanceof WorkOrderBuildBuilding && ((WorkOrderBuildBuilding) workOrder).getStructureName().contains("Builder"))
@@ -120,7 +120,7 @@ public class ProgressManager implements IProgressManager
         }
     }
 
-    @Override
+    
     public void progressBuildBuilding(final IBuilding building, final int totalLevels, final int totalHousing)
     {
         if (building instanceof BuildingBuilder)
@@ -149,7 +149,7 @@ public class ProgressManager implements IProgressManager
         }
     }
 
-    @Override
+    
     public void progressEmploy(final int employed)
     {
         if (employed == 4)
@@ -158,13 +158,13 @@ public class ProgressManager implements IProgressManager
         }
     }
 
-    @Override
+    
     public void progressEmploymentModeChange()
     {
         trigger(MANUAL_EMPLOYMENT_ON);
     }
 
-    @Override
+    
     public void trigger(final ColonyProgressType type)
     {
         if (!printProgress)
@@ -180,20 +180,20 @@ public class ProgressManager implements IProgressManager
         }
     }
 
-    @Override
+    
     public void togglePrintProgress()
     {
         printProgress = !printProgress;
         colony.markDirty();
     }
 
-    @Override
+    
     public boolean isPrintingProgress()
     {
         return printProgress;
     }
 
-    @Override
+    
     public void read(@NotNull final CompoundNBT compound)
     {
         notifiedProgress.clear();
@@ -205,7 +205,7 @@ public class ProgressManager implements IProgressManager
         printProgress = progressCompound.getBoolean(TAG_PRINT_PROGRESS);
     }
 
-    @Override
+    
     public void write(@NotNull final CompoundNBT compound)
     {
         final CompoundNBT progressCompound = new CompoundNBT();

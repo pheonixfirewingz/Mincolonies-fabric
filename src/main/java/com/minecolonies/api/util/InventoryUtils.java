@@ -9,7 +9,6 @@ import net.minecraft.block.*;
 import net.minecraft.entity.item.*;
 import net.minecraft.item.*;
 import net.minecraft.tileentity.*;
-import net.minecraft.util.Direction;
 import net.minecraft.util.math.*;
 import net.minecraft.world.*;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;

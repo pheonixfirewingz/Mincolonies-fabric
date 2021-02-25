@@ -1,6 +1,5 @@
 package com.minecolonies.coremod.items;
-
-import cf.pheonixfirewingz.minecolonies.utils.MineColoniesItemSettings;
+import com.minecolonies.coremod.util.MineColoniesItemSettings;
 import net.minecraft.item.*;
 
 public class ModItem extends Item

@@ -1,7 +1,7 @@
 package com.minecolonies.api.research;
 
 import com.minecolonies.api.research.effects.IResearchEffectManager;
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.*;
 import org.jetbrains.annotations.NotNull;
 
 /**

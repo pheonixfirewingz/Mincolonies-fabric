@@ -1,7 +1,6 @@
 package com.minecolonies.api.entity.ai.statemachine.transitions;
 
-import com.minecolonies.api.entity.ai.statemachine.states.IState;
-import com.minecolonies.api.entity.ai.statemachine.states.IStateEventType;
+import com.minecolonies.api.entity.ai.statemachine.states.*;
 
 /**
  * Event transition type for Statemachines

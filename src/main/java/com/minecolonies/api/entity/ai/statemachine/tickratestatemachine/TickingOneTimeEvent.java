@@ -1,12 +1,10 @@
 package com.minecolonies.api.entity.ai.statemachine.tickratestatemachine;
 
-import com.minecolonies.api.entity.ai.statemachine.states.IState;
-import com.minecolonies.api.entity.ai.statemachine.states.IStateEventType;
+import com.minecolonies.api.entity.ai.statemachine.states.*;
 import com.minecolonies.api.entity.ai.statemachine.transitions.IStateMachineOneTimeEvent;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.function.BooleanSupplier;
-import java.util.function.Supplier;
+import java.util.function.*;
 
 /**
  * One time event that can be checked at the given tickrate, one time events are removed after causing a state transition. (Even when transitioning into the same state again)

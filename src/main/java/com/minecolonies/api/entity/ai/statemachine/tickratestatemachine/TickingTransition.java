@@ -4,11 +4,9 @@ import com.minecolonies.api.entity.ai.statemachine.basestatemachine.BasicTransit
 import com.minecolonies.api.entity.ai.statemachine.states.IState;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.function.BooleanSupplier;
-import java.util.function.Supplier;
+import java.util.function.*;
 
-import static com.minecolonies.api.entity.ai.statemachine.tickratestatemachine.TickRateConstants.MAX_TICKRATE;
-import static com.minecolonies.api.entity.ai.statemachine.tickratestatemachine.TickRateConstants.MAX_TICKRATE_VARIANT;
+import static com.minecolonies.api.entity.ai.statemachine.tickratestatemachine.TickRateConstants.*;
 
 /**
  * Transition with tickrate logic, allows to define an intended tickrate at which this transition will be checked.

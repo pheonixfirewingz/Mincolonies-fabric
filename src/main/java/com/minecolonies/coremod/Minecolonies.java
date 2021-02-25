@@ -1,13 +1,6 @@
 package com.minecolonies.coremod;
 
 import com.minecolonies.apiimp.CommonMinecoloniesAPIImpl;
-import com.minecolonies.coremod.colony.*;
-import com.minecolonies.coremod.colony.buildings.registry.GuardTypeDataManager;
-import com.minecolonies.coremod.colony.interactionhandling.registry.InteractionResponseHandlerManager;
-import com.minecolonies.coremod.colony.jobs.registry.JobDataManager;
-import com.minecolonies.coremod.entity.ai.registry.MobAIRegistry;
-import com.minecolonies.coremod.entity.pathfinding.registry.PathNavigateRegistry;
-import com.minecolonies.coremod.research.GlobalResearchTree;
 import com.minecolonies.coremod.util.ModIdentifier;
 import net.fabricmc.api.ModInitializer;
 

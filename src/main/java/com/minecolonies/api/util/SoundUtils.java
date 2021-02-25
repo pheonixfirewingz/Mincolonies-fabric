@@ -1,10 +1,8 @@
 package com.minecolonies.api.util;
 
-import com.minecolonies.api.colony.ICitizenData;
 import com.minecolonies.api.sounds.EventType;
 import net.minecraft.entity.player.*;
 import net.minecraft.network.play.server.*;
-import net.minecraft.util.*;
 import net.minecraft.util.math.*;
 import net.minecraft.world.*;
 import net.minecraftforge.event.world.NoteBlockEvent.Note;

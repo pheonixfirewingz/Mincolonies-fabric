@@ -1,18 +1,15 @@
 package com.minecolonies.api.crafting;
 
-import com.minecolonies.api.colony.requestsystem.factory.IFactory;
-import com.minecolonies.api.colony.requestsystem.factory.IFactoryController;
+import com.minecolonies.api.colony.requestsystem.factory.*;
 import com.minecolonies.api.colony.requestsystem.token.IToken;
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.block.*;
+import net.minecraft.item.*;
+import net.minecraft.util.*;
+import org.jetbrains.annotations.*;
 
 import java.util.List;
 
-import static com.minecolonies.api.util.constant.Constants.MAX_PARAMS_IRECIPESTORAGE;
-import static com.minecolonies.api.util.constant.Constants.MIN_PARAMS_IRECIPESTORAGE;
+import static com.minecolonies.api.util.constant.Constants.*;
 
 /**
  * Interface for the IRecipeStorageFactory which is responsible for creating and maintaining RecipeStorage objects.

@@ -1,10 +1,8 @@
 package com.minecolonies.api.colony.buildings;
 
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.Tuple;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.nbt.*;
+import net.minecraft.util.*;
+import net.minecraft.util.math.*;
 import net.minecraftforge.common.util.INBTSerializable;
 
 public interface ISchematicProvider extends INBTSerializable<CompoundNBT>

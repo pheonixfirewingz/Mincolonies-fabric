@@ -2,8 +2,6 @@ package com.minecolonies.coremod.colony.interactionhandling;
 
 import com.ldtteam.blockout.views.Window;
 import com.minecolonies.api.colony.ICitizen;
-import com.minecolonies.api.colony.ICitizenData;
-import com.minecolonies.api.colony.ICitizenDataView;
 import com.minecolonies.api.colony.interactionhandling.AbstractInteractionResponseHandler;
 import com.minecolonies.api.colony.interactionhandling.IChatPriority;
 import com.minecolonies.api.colony.interactionhandling.InteractionValidatorRegistry;

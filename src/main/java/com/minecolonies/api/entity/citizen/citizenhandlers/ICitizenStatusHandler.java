@@ -1,7 +1,7 @@
 package com.minecolonies.api.entity.citizen.citizenhandlers;
 
 import com.minecolonies.api.entity.ai.Status;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.*;
 
 public interface ICitizenStatusHandler
 {

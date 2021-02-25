@@ -1,9 +1,6 @@
 package com.minecolonies.coremod.colony.managers;
 
-import com.minecolonies.api.colony.ICitizenData;
 import com.minecolonies.api.colony.ICivilianData;
-import com.minecolonies.api.colony.IVisitorData;
-import com.minecolonies.api.colony.managers.interfaces.IVisitorManager;
 import com.minecolonies.api.entity.ModEntities;
 import com.minecolonies.api.entity.citizen.AbstractCivilianEntity;
 import com.minecolonies.api.entity.citizen.AbstractEntityCitizen;
@@ -29,7 +26,7 @@ import static com.minecolonies.api.util.constant.PathingConstants.HALF_A_BLOCK;
 /**
  * Manages all visiting entities to the colony
  */
-public class VisitorManager implements IVisitorManager
+public class VisitorManager
 {
     /**
      * NBT Tags
@@ -63,7 +60,7 @@ public class VisitorManager implements IVisitorManager
         this.colony = colony;
     }
 
-    @Override
+    
     public void registerCivilian(final AbstractCivilianEntity visitor)
     {
         if (visitor.getCivilianID() == 0 || visitorMap.get(visitor.getCivilianID()) == null)
@@ -98,7 +95,7 @@ public class VisitorManager implements IVisitorManager
         visitor.remove();
     }
 
-    @Override
+    
     public void unregisterCivilian(final AbstractCivilianEntity entity)
     {
         final ICitizenData data = visitorMap.get(entity.getCivilianID());
@@ -108,7 +105,7 @@ public class VisitorManager implements IVisitorManager
         }
     }
 
-    @Override
+    
     public void read(@NotNull final CompoundNBT compound)
     {
         if (compound.contains(TAG_VISIT_MANAGER))
@@ -126,7 +123,7 @@ public class VisitorManager implements IVisitorManager
         markDirty();
     }
 
-    @Override
+    
     public void write(@NotNull final CompoundNBT compoundNBT)
     {
         final CompoundNBT visitorManagerNBT = new CompoundNBT();
@@ -142,7 +139,7 @@ public class VisitorManager implements IVisitorManager
         compoundNBT.put(TAG_VISIT_MANAGER, visitorManagerNBT);
     }
 
-    @Override
+    
     public void sendPackets(
       @NotNull final Set<ServerPlayerEntity> closeSubscribers, @NotNull final Set<ServerPlayerEntity> newSubscribers)
     {
@@ -186,25 +183,25 @@ public class VisitorManager implements IVisitorManager
     }
 
     @NotNull
-    @Override
+    
     public Map<Integer, ICivilianData> getCivilianDataMap()
     {
         return Collections.unmodifiableMap(visitorMap);
     }
 
-    @Override
+    
     public IVisitorData getCivilian(final int citizenId)
     {
         return visitorMap.get(citizenId);
     }
 
-    @Override
+    
     public <T extends IVisitorData> T getVisitor(int citizenId)
     {
         return (T) visitorMap.get(citizenId);
     }
 
-    @Override
+    
     public IVisitorData spawnOrCreateCivilian(ICivilianData data, final World world, final BlockPos spawnPos, final boolean force)
     {
         if (!WorldUtil.isEntityBlockLoaded(world, spawnPos))
@@ -232,7 +229,7 @@ public class VisitorManager implements IVisitorManager
         return (IVisitorData) data;
     }
 
-    @Override
+    
     public IVisitorData createAndRegisterCivilianData()
     {
         markDirty();
@@ -242,7 +239,7 @@ public class VisitorManager implements IVisitorManager
         return data;
     }
 
-    @Override
+    
     public void removeCivilian(@NotNull final ICivilianData citizen)
     {
         final IVisitorData data = visitorMap.remove(citizen.getId());
@@ -252,19 +249,19 @@ public class VisitorManager implements IVisitorManager
         }
     }
 
-    @Override
+    
     public void markDirty()
     {
         this.isDirty = true;
     }
 
-    @Override
+    
     public void clearDirty()
     {
         this.isDirty = false;
     }
 
-    @Override
+    
     public void onColonyTick(final IColony colony)
     {
         if (colony.hasTownHall())

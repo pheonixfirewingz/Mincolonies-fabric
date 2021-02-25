@@ -1,6 +1,5 @@
 package com.minecolonies.coremod.entity.ai.minimal;
 
-import com.minecolonies.api.colony.ICitizenData;
 import com.minecolonies.api.colony.buildings.IBuilding;
 import com.minecolonies.api.entity.ai.DesiredActivity;
 import com.minecolonies.api.entity.ai.Status;

@@ -1,11 +1,9 @@
 package com.minecolonies.api.colony.requestsystem.request;
 
-import net.minecraft.nbt.IntNBT;
-import net.minecraft.network.PacketBuffer;
+import net.minecraft.nbt.*;
+import net.minecraft.network.*;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * Enum used to describe the state of a Request.

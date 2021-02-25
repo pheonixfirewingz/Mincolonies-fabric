@@ -1,10 +1,7 @@
 package com.minecolonies.api.colony.jobs;
 
 import com.minecolonies.api.colony.requestsystem.token.IToken;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.DamageSource;
-import net.minecraftforge.common.util.INBTSerializable;
+import net.minecraft.network.*;
 
 import java.util.Set;
 
