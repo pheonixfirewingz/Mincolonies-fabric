@@ -18,13 +18,13 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "cf.pheonixfirewingz.minecolonies.Minecolonies"
+      "com.minecolonies.coremod.Minecolonies"
     ],
     "client": [
-      "cf.pheonixfirewingz.minecolonies.client.MinecoloniesClient"
+      "com.minecolonies.coremod.client.MinecoloniesClient"
     ],
     "server": [
-      "cf.pheonixfirewingz.minecolonies.server.MinecoloniesServer"
+      "com.minecolonies.coremod.server.MinecoloniesServer"
     ]
   },
   "mixins": [
